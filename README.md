@@ -21,13 +21,17 @@ Dev Containers
 
 ### First approach to the project
 1. ##### open you docker desktop 
-2. ##### re-check that your docker container ready in docker deaktop
-3. ##### install node_module
+2. ##### run the shell script 
+```
+sh docker.sh # this command will docker-compose down then docker-compose up automatically
+```
+3. ##### re-check that your docker container ready in docker deaktop
+4. ##### install node_module
 ```
 npm install # for your local development 
 ```
-4. ##### try to make some runable change on your code !
-5. ##### test on localhost
+5. ##### try to make some runable change on your code !
+6. ##### test on localhost
 ```
 http://localhost:[PORT] # in this project PORT = 3000
 ```
