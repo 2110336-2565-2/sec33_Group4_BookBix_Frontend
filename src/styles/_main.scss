@@ -1,0 +1,8 @@
+//This scss file used for apply styles global and change some sass variables
+  .text-link,
+  text-link:hover {
+    color: inherit;
+    text-decoration: inherit;
+  }
+// Import at the bottom of the file
+@import 'bootstrap/scss/bootstrap';
