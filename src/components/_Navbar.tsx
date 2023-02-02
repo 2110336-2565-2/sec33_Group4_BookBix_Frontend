@@ -1,5 +1,5 @@
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export default function MyNavbar() {
   return (
@@ -27,5 +27,5 @@ export default function MyNavbar() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  )
 }

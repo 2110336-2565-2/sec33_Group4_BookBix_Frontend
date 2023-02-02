@@ -1,11 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
-import Navbar from './components/_Navbar';
-import Home from './screens/Home';
-import Profile from './screens/Profile';
-import Register from './screens/Register';
+import { Route, Routes } from 'react-router-dom'
+import Navbar from './components/_Navbar'
+import Home from './screens/Home'
+import Profile from './screens/Profile'
+import Register from './screens/Register'
 
 function App() {
-
   return (
     <>
       <Navbar />
