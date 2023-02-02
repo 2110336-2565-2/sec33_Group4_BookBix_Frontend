@@ -1,4 +1,4 @@
-# BookBix_Backend
+# BookBix_Frontend
 
 ### Development Setups
 
