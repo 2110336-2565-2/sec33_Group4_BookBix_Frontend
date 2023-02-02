@@ -23,6 +23,11 @@ export default function MyNavbar() {
                 Register
               </Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link className="text-link" to="/login">
+                Login
+              </Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

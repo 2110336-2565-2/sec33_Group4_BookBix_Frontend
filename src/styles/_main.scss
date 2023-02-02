@@ -1,8 +1,34 @@
+$tint-black: #2e2e2e;
+$red-magenta: #db5461;
+$salmon-orange: #eeac76;
+$base-white: #f1edee;
+
+$theme-colors: (
+  'dark': $tint-black,
+);
+html, body {
+  min-height: 100%;
+  height: 100%; 
+}
+#root {
+  min-height: 100%;
+  height: 100%;  
+}
 //This scss file used for apply styles global and change some sass variables
-  .text-link,
-  text-link:hover {
-    color: inherit;
-    text-decoration: inherit;
-  }
+.text-link,
+text-link:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+.login-field {
+  background-color: $red-magenta;
+  border-top-left-radius: 91px;
+  border-bottom-left-radius: 91px;
+}
+.fill {
+  min-height: 100%;
+  height: 100%;
+}
+
 // Import at the bottom of the file
 @import 'bootstrap/scss/bootstrap';
