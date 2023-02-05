@@ -6,7 +6,7 @@ $base-white: #f1edee;
 $theme-colors: (
   'dark': $tint-black,
 );
-@import url(https://fonts.googleapis.com/css?family=Poppins:wght@300;400;500;600;700;800;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300;400;500;600;700;800;900&display=swap);
 
 * {
@@ -19,8 +19,8 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif !important;
   font-weight: 500;
-  min-height: 100%;
-  height: 100%;
+  min-height: calc(100vh - 56px);
+  height: calc(100vh - 56px);
 }
 
 // h1, h2, h3, h4, h5 {
@@ -36,63 +36,8 @@ h5 font-size: 1.25rem;
 p font-size: 1rem;
 */
 #root {
-  min-height: 100%;
-  height: 100%;
-}
-
-.bookbix-logo {
-  font-family: 'MuseoModerno', sans-serif !important;
-  color: white;
-  padding: 10px;
-}
-
-.login-header {
-  color: white;
-  width: 450px;
-  span {
-    font-weight: 700;
-    color: #2e2e2e;
-  }
-}
-.login-form {
-  &-content {
-    display: flex;    
-    flex-direction: column;
-    gap: 20px;
-  }
-}
-.login-left {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 80%;
-  }
-}
-.login-right {
-  display: flex;
-  flex-direction: column;
-  // align-items: center;
-  justify-content: center;
-  background-color: $red-magenta;
-  border-top-left-radius: 91px;
-  border-bottom-left-radius: 91px;
-}
-.fill {
-  min-height: 100%;
-  height: 100%;
-}
-.form-group label:not(.chackboxLabel) {
-  display: inline-block;
-  // background-color: white;
-  color: white;
-}
-
-input[type='email'],
-input[type='password'] {
-  background: white;
-  border: 1px solid $base-white;
-  border-radius: 26px;
+  min-height: 100vh;
+  height: auto;
 }
 
 //This scss file used for apply styles global and change some sass variables

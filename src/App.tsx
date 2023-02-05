@@ -8,7 +8,7 @@ import Register from './screens/Register'
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
