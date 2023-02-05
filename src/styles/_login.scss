@@ -69,3 +69,13 @@ input[type='password'] {
     background: #2e2e2e;
   }
 }
+.switch-page-btn {
+  margin-bottom: 75px;
+  margin-right: 20px;
+  
+  .current-page-tag {
+    &.active {
+      background: white !important;
+    } 
+  }
+}
