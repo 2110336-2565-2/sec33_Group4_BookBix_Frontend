@@ -9,13 +9,15 @@ import ManageProfile from './screens/ManageProfile'
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<Navbar />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<ManageProfile />} />
+          <Route path="/profile-management" element={<ManageProfile />} />
+          <Route path="*" element={<Home />} />
+        </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile-management" element={<ManageProfile />} />
       </Routes>
     </>
   )
