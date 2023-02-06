@@ -1,4 +1,4 @@
-import login_costume from '../assets/login-costume.svg'
+import login_costume from '../assets/images/login-costume.svg'
 import {
   Form,
   Button,
