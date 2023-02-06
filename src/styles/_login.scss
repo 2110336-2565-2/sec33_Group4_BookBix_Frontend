@@ -1,0 +1,81 @@
+@use 'main';
+
+.bookbix-logo {
+  font-family: 'MuseoModerno', sans-serif !important;
+  color: white;
+  padding: 50px 50px 40px 40px;
+}
+.login-header {
+  display: inline-block;
+  color: white;
+  margin-bottom: 10%;
+  font-size: medium;
+  span {
+    font-weight: 700 !important;
+    color: #2e2e2e;
+  }
+}
+.login-form {
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+.login-left {
+  img {
+    margin-left: 50px;
+    margin-top: 15rem;
+    width: 80%;
+  }
+}
+.login-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: main.$red-magenta;
+  border-top-left-radius: 91px;
+  border-bottom-left-radius: 91px;
+}
+.fill {
+  min-height: 100vh;
+  height: 100%;
+}
+.form-group label:not(.chackboxLabel) {
+  display: inline-block;
+  // background-color: white;
+  font-size: medium;
+  color: white;
+  padding: 10px;
+}
+input[type='email'],
+input[type='password'] {
+  background: white;
+  border: 1px solid main.$base-white;
+  border-radius: 26px;
+}
+.login-btn {
+  border-radius: 63px;
+  color: black;
+  font-size: large;
+  font-weight: 700;
+  padding: 10px 60px;
+  border: 1px solid #ebc1c1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background: #2e2e2e;
+  }
+}
+.switch-page-btn {
+  margin-bottom: 75px;
+  margin-right: 20px;
+  
+  .current-page-tag {
+    &.active {
+      background: white !important;
+    } 
+  }
+}
