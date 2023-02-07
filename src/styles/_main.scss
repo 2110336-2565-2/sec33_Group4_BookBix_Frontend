@@ -56,7 +56,7 @@ p font-size: 1rem;
 }
 .login-form {
   &-content {
-    display: flex;    
+    display: flex;
     flex-direction: column;
     gap: 20px;
   }
@@ -78,6 +78,22 @@ p font-size: 1rem;
   border-top-left-radius: 91px;
   border-bottom-left-radius: 91px;
 }
+
+.profile-manage {
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+  background-color: $red-magenta;
+  border-top-left-radius: 91px;
+  border-bottom-left-radius: 91px;
+  border-top-right-radius: 91px;
+  border-bottom-right-radius: 91px;
+  img {
+    width: 80%;
+  }
+  height: 100%;
+}
+
 .fill {
   min-height: 100%;
   height: 100%;
