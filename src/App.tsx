@@ -9,7 +9,7 @@ import ManageProfile from './screens/ManageProfile'
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
