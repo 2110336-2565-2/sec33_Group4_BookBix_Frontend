@@ -3,7 +3,8 @@
 .bookbix-logo {
   font-family: 'MuseoModerno', sans-serif !important;
   color: white;
-  padding: 50px 50px 40px 40px;
+  position: relative;
+  padding: 30px 0 40px 40px;
 }
 .login-header {
   display: inline-block;
@@ -19,13 +20,13 @@
   &-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
 }
 .login-left {
+  position: relative;
+  height: 100%;
+  padding-left: 15%;
   img {
-    margin-left: 50px;
-    margin-top: 15rem;
     width: 80%;
   }
 }
@@ -72,10 +73,10 @@ input[type='password'] {
 .switch-page-btn {
   margin-bottom: 75px;
   margin-right: 20px;
-  
+
   .current-page-tag {
     &.active {
       background: white !important;
-    } 
+    }
   }
 }
