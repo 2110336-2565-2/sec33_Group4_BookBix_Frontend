@@ -3,7 +3,8 @@
 .bookbix-logo {
   font-family: 'MuseoModerno', sans-serif !important;
   color: white;
-  padding: 50px 50px 40px 40px;
+  position: absolute;
+  padding: 20px 50px 40px 40px;
 }
 .login-header {
   display: inline-block;
@@ -25,7 +26,7 @@
 .login-left {
   img {
     margin-left: 50px;
-    margin-top: 15rem;
+    margin-top: 22rem;
     width: 80%;
   }
 }
