@@ -30,7 +30,7 @@ sh docker.sh # this command will docker-compose down then docker-compose up auto
 ```
 npm install # for your local development 
 ```
-> noted: if you desire to put additional package from node_modules, you can do it! but remind yourself to run sh docker.sh again because you should ensure that devEnv in contaner should up to date with your desirw ! 
+> noted: if you desire to put additional package from node_modules, you can do it! but remind yourself to run sh docker.sh again because you should ensure that devEnv in contaner should up to date with your desire ! 
 
 5. ##### try to make some runable changes on your code !
 6. ##### test on localhost
