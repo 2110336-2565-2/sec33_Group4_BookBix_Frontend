@@ -41,9 +41,9 @@ const Login: React.FC = () => {
   return (
     <div className="container-fluid fill bg-dark">
       <div className="row fill">
-        <div className="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
+        <div className="col-md-6 d-none d-md-flex flex-column">
           <h1 className="text-start d-inline bookbix-logo">BookBix</h1>
-          <div className="login-left">
+          <div className="login-left d-flex">
             <img
               src={login_costume}
               className="img-fluid"
