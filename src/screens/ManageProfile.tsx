@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
-import photo from '../assets/react.svg'
+import photo from '../assets/images/react.svg'
 // page for update user info firstname, lastname, sex, birthday, email and profile picture
 export default function ManageProfile() {
   return (
