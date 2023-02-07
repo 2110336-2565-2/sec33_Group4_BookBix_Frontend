@@ -29,3 +29,12 @@ mongoscripts/*
 *.njsproj
 *.sln
 *.sw?
+
+# Database files
+/data/*
+
+# Build files
+/dist/*
+
+# Env
+.env
