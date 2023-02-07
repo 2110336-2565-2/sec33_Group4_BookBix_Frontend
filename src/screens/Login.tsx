@@ -42,7 +42,7 @@ const Login: React.FC = () => {
     <div className="container-fluid fill bg-dark">
       <div className="row fill">
         <div className="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
-          <h1 className="text-start d-inline bookbix-logo">Bookbix</h1>
+          <h1 className="text-start d-inline bookbix-logo">BookBix</h1>
           <div className="login-left">
             <img
               src={login_costume}
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
           </div>
           <div className="login-header">
             <h1>
-              Sign In to <span>Bookbix</span>
+              Sign In to <span>BookBix</span>
             </h1>
           </div>
           <Form className="login-form col-md-8" onSubmit={handleSubmit}>
