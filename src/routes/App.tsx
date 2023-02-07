@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
-import Navbar from './components/_Navbar'
-import Home from './screens/Home'
-import Login from './screens/Login'
-import Profile from './screens/Profile'
-import Register from './screens/Register'
-import ManageProfile from './screens/ManageProfile'
+import Navbar from '../components/_Navbar'
+import Home from '../screens/Home'
+import Login from '../screens/Login'
+import Profile from '../screens/Profile'
+import Register from '../screens/Register'
+import ManageProfile from '../screens/ManageProfile'
 
 function App() {
   return (
