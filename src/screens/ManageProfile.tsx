@@ -45,7 +45,7 @@ export default function ManageProfile() {
             </Form.Text>
           </Form.Group>
 
-          <Button type="submit" className="primary col-md-8 pb">
+          <Button variant="dark" type="submit" className="primary col-md-8 pb">
             Submit
           </Button>
         </Form>

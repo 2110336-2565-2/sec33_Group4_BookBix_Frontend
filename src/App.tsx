@@ -5,6 +5,7 @@ import Login from './screens/Login'
 import Profile from './screens/Profile'
 import Register from './screens/Register'
 import ManageProfile from './screens/ManageProfile'
+import ManageLocation from './screens/provider/ManageLocation'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile-management" element={<ManageProfile />} />
+        <Route path="/location-management" element={<ManageLocation />} />
       </Routes>
     </>
   )
