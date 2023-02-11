@@ -2,6 +2,20 @@ import React, { useState } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
+import '../assets/scss/_booklocation.scss'
+// import required modules
+import { EffectCoverflow, Pagination } from 'swiper'
+
+// import flatpickr
+import Flatpickr from 'react-flatpickr'
+import 'flatpickr/dist/themes/material_green.css'
+
 const mockdata = {
   _id: Object('000000000004000000000004'),
   name: 'Central Park',
@@ -25,11 +39,25 @@ const mockdata = {
       text: "One of the best parks I've ever been to. So much to do and see!",
     },
   ],
+  time: {
+    open_time: '9:00',
+    close_time: '18:00',
+  },
+  available_days: [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ],
 }
 
 const BookLocation: React.FC = () => {
   const { locationId } = useParams()
   const [location, setLocation] = useState<any>(mockdata)
+  const [date, setDate] = useState<Date[]>([new Date()])
 
   const fetchLocation = async () => {
     const response = await fetch(
@@ -44,29 +72,43 @@ const BookLocation: React.FC = () => {
         <h1>{location.name}</h1>
       </div>
       <div className="row">
-        {location.images.map((image: string) => {
-          return (
-            <div className="col-md-4 mh-100">
-              <img src={image} className=" rounded mx-auto d-block w-100" />
-            </div>
-          )
-        })}
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          pagination={true}
+          modules={[EffectCoverflow, Pagination]}
+          className="mySwiper"
+        >
+          {location.images.map((image: string, index: any) => {
+            return (
+              <SwiperSlide>
+                <img src={image} />
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
       </div>
-      <div className="row">
-        <div className="col-md-4">
-          <h2>Time slot</h2>
-          From
-          <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-              Select your start time
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">9:00</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">10:00</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">11:00</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          To
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-3">
+          <h2 className="text-center">Time slot</h2>
+          <p>From</p>
+          <Flatpickr
+            data-enable-time
+            value={date}
+            onChange={(date) => {
+              setDate(date)
+            }}
+          />
+          <p>To</p>
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
               Select your finish time
@@ -79,14 +121,14 @@ const BookLocation: React.FC = () => {
           </Dropdown>
         </div>
         <div className="col-md-4">
-          <h2>Location information</h2>
+          <h2 className="text-center">Location information</h2>
           <div className="bg-light bg-opacity-25">
             <p>{location.address}</p>
             <p>{location.description}</p>
           </div>
         </div>
-        <div className="col-md-4">
-          <h2>Reviews</h2>
+        <div className="col-md-3">
+          <h2 className="text-center">Reviews</h2>
           <div className="bg-light bg-opacity-25">
             {location.reviews.map((review: any) => {
               return (
