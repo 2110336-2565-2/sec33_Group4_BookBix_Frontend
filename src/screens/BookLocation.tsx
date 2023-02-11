@@ -12,9 +12,7 @@ import '../assets/scss/_booklocation.scss'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper'
 
-// import flatpickr
-import Flatpickr from 'react-flatpickr'
-import 'flatpickr/dist/themes/material_green.css'
+import DateTimePicker from '../components/DateTimePicker'
 
 const mockdata = {
   _id: Object('000000000004000000000004'),
@@ -40,7 +38,7 @@ const mockdata = {
     },
   ],
   time: {
-    open_time: '9:00',
+    open_time: '09:00',
     close_time: '18:00',
   },
   available_days: [
@@ -57,7 +55,11 @@ const mockdata = {
 const BookLocation: React.FC = () => {
   const { locationId } = useParams()
   const [location, setLocation] = useState<any>(mockdata)
-  const [date, setDate] = useState<Date[]>([new Date()])
+  const disableDate = [0,6] // < unavailable dates >
+  // <[[booked start time,booked end time, booked dates]]> must get from booked times in database
+  // mock data 
+  // [["13:00", "15:00", "2/13/2023"]]
+  const disableTime = [["13:00", "15:00", "2023-02-13"]]
 
   const fetchLocation = async () => {
     const response = await fetch(
@@ -101,24 +103,19 @@ const BookLocation: React.FC = () => {
         <div className="col-md-3">
           <h2 className="text-center">Time slot</h2>
           <p>From</p>
-          <Flatpickr
-            data-enable-time
-            value={date}
-            onChange={(date) => {
-              setDate(date)
-            }}
+          <DateTimePicker
+            disableDates={disableDate}
+            disableTime={disableTime}
+            minTime={location.time.open_time}
+            maxTime={location.time.close_time}
           />
           <p>To</p>
-          <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-              Select your finish time
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">9:00</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">10:00</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">11:00</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <DateTimePicker
+            disableDates={disableDate}
+            disableTime={disableTime}
+            minTime={location.time.open_time}
+            maxTime={location.time.close_time}
+          />
         </div>
         <div className="col-md-4">
           <h2 className="text-center">Location information</h2>
