@@ -14,6 +14,7 @@ import { EffectCoverflow, Pagination } from 'swiper'
 
 import DateTimePicker from '../components/DateTimePicker'
 import Review from '../components/Review'
+import { formatDate, formatTime } from '../utils/Time.utils'
 
 const mockdata = {
   _id: Object('000000000004000000000004'),
@@ -59,7 +60,10 @@ const mockdata = {
 
 const BookLocation: React.FC = () => {
   const { locationId } = useParams()
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null)
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null)
   const [location, setLocation] = useState<any>(mockdata)
+  const [error, setError] = useState<string | null>(null)
   const disableDate = [0, 6] // < unavailable dates >
   // <[[booked start time,booked end time, booked dates]]> must get from booked times in database
   // mock data
@@ -69,11 +73,54 @@ const BookLocation: React.FC = () => {
     ['09:00', '10:00', '2023-02-14'],
   ]
 
+  // fetch booking time slot from backend endpoint
+  const fetchBookingTimeSlot = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/locations/${locationId}/bookings`,
+    )
+  }
+  // fetch location data from backend endpoint
   const fetchLocation = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/locations/${locationId}`,
     )
     const data = await response.json()
+  }
+
+
+  // create handleSubmit function to send POST request with body of selected start date, end date, and location id 
+
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const startDate = formatDate(selectedStartDate)
+    const endDate = formatDate(selectedEndDate)
+    const startTime = formatTime(selectedStartDate)
+    const endTime = formatTime(selectedEndDate)
+    
+    try {
+      const response = await fetch(`${''}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ startDate, endDate, startTime, endTime, locationId }),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.message)
+        return
+      }
+      // Save the user information in local storage or in the state
+      localStorage.setItem('user', JSON.stringify(data.user))
+
+      // Redirect the user to the homepage
+      window.location.href = '/home'
+    } catch (error) {
+      setError('Something went wrong, please try again later')
+    }
   }
 
   return (
@@ -119,6 +166,8 @@ const BookLocation: React.FC = () => {
                   disableTime={disableTime}
                   minTime={location.time.open_time}
                   maxTime={location.time.close_time}
+                  selectedDate={selectedStartDate}
+                  setSelectedDate={setSelectedStartDate}
                 />
               </div>
               <div className="row mt-5">
@@ -128,6 +177,8 @@ const BookLocation: React.FC = () => {
                   disableTime={disableTime}
                   minTime={location.time.open_time}
                   maxTime={location.time.close_time}
+                  selectedDate={selectedEndDate}
+                  setSelectedDate={setSelectedEndDate}
                 />
               </div>
             </div>

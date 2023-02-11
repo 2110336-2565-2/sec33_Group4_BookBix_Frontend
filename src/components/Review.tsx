@@ -1,15 +1,9 @@
 import React from 'react'
 import { Rating } from '@mui/material'
+import { ReviewInterface } from '../interfaces/booking.interfaces'
 
-interface Props {
-  title?: string
-  username: string
-  rating?: number
-  text?: string
-  dateCreate: Date
-}
 
-const Review: React.FC<Props> = ({
+const Review: React.FC<ReviewInterface> = ({
   title = '',
   username,
   rating = 0,
@@ -28,7 +22,7 @@ const Review: React.FC<Props> = ({
       </div>
       <div className="row d-flex justify-content-between">
         <div className="col-sm-7 col-md-12 col-lg-7">
-          <Rating name="read-only" value={rating} readOnly />
+          <Rating name="read-only" value={rating} readOnly precision={0.5} />
         </div>
         <div className="col-sm-5 col-lg-5">
           <p>{dateCreate.toDateString()}</p>
