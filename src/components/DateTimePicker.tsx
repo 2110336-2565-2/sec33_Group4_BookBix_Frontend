@@ -74,6 +74,7 @@ const DateTimePicker: React.FC<Props> = ({
 
   return (
     <DatePicker
+      className="w-75"
       selected={selectedDate}
       onChange={(date: Date) => setSelectedDate(date)}
       filterDate={isAvailiabledDate}

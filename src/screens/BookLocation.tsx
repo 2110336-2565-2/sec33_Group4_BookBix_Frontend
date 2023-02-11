@@ -13,6 +13,7 @@ import '../assets/scss/_booklocation.scss'
 import { EffectCoverflow, Pagination } from 'swiper'
 
 import DateTimePicker from '../components/DateTimePicker'
+import Review from '../components/Review'
 
 const mockdata = {
   _id: Object('000000000004000000000004'),
@@ -27,14 +28,18 @@ const mockdata = {
   ],
   reviews: [
     {
+      title: "It's a great place to relax",
       username: 'JaneDoe',
       rating: 4.5,
       text: 'Beautiful park, lots of green spaces and a great place to relax.',
+      dateCreate: new Date('2021-10-10'),
     },
     {
+      title: 'Good for a walk',
       username: 'JohnDoe',
       rating: 5.0,
       text: "One of the best parks I've ever been to. So much to do and see!",
+      dateCreate: new Date('2021-11-10'),
     },
   ],
   time: {
@@ -55,11 +60,14 @@ const mockdata = {
 const BookLocation: React.FC = () => {
   const { locationId } = useParams()
   const [location, setLocation] = useState<any>(mockdata)
-  const disableDate = [0,6] // < unavailable dates >
+  const disableDate = [0, 6] // < unavailable dates >
   // <[[booked start time,booked end time, booked dates]]> must get from booked times in database
-  // mock data 
+  // mock data
   // [["13:00", "15:00", "2/13/2023"]]
-  const disableTime = [["13:00", "15:00", "2023-02-13"]]
+  const disableTime = [
+    ['13:00', '15:00', '2023-02-13'],
+    ['09:00', '10:00', '2023-02-14'],
+  ]
 
   const fetchLocation = async () => {
     const response = await fetch(
@@ -69,8 +77,8 @@ const BookLocation: React.FC = () => {
   }
 
   return (
-    <div className="container-fluid min-vh-100 bg-dark text-white d-flex flex-column">
-      <div className="row align-self-center p-3">
+    <div className="container-fluid bg-dark text-white d-flex flex-column">
+      <div className="row align-self-center p-3 mt-4">
         <h1>{location.name}</h1>
       </div>
       <div className="row">
@@ -99,39 +107,64 @@ const BookLocation: React.FC = () => {
           })}
         </Swiper>
       </div>
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-3">
-          <h2 className="text-center">Time slot</h2>
-          <p>From</p>
-          <DateTimePicker
-            disableDates={disableDate}
-            disableTime={disableTime}
-            minTime={location.time.open_time}
-            maxTime={location.time.close_time}
-          />
-          <p>To</p>
-          <DateTimePicker
-            disableDates={disableDate}
-            disableTime={disableTime}
-            minTime={location.time.open_time}
-            maxTime={location.time.close_time}
-          />
-        </div>
+      <div className="row d-flex justify-content-center mx-auto">
         <div className="col-md-4">
-          <h2 className="text-center">Location information</h2>
-          <div className="bg-light bg-opacity-25">
-            <p>{location.address}</p>
-            <p>{location.description}</p>
+          <h2 className="text-center">Time slot</h2>
+          <div className="rounded review-box bg-light bg-opacity-25 p-3 h-75 overflow-auto">
+            <div className="container">
+              <div className="row mt-4">
+                <p>From</p>
+                <DateTimePicker
+                  disableDates={disableDate}
+                  disableTime={disableTime}
+                  minTime={location.time.open_time}
+                  maxTime={location.time.close_time}
+                />
+              </div>
+              <div className="row mt-5">
+                <p>To</p>
+                <DateTimePicker
+                  disableDates={disableDate}
+                  disableTime={disableTime}
+                  minTime={location.time.open_time}
+                  maxTime={location.time.close_time}
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
+          <h2 className="text-center d-none d-xl-block">
+            Location information
+          </h2>
+          <h2 className="text-center d-xl-none">Location info.</h2>
+          <div className="rounded bg-light bg-opacity-25 p-3 h-75 overflow-auto">
+            <p>{location.address}</p>
+            <p>{location.description}</p>
+            <div className="iframe-container">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: location.url,
+                }}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
           <h2 className="text-center">Reviews</h2>
-          <div className="bg-light bg-opacity-25">
+          <div className="rounded review-box bg-light bg-opacity-25 p-3 h-75 overflow-auto">
             {location.reviews.map((review: any) => {
               return (
-                <div className="d-flex">
-                  {review.username}
-                  {review.text}
+                //Create Review from Review components
+                <div>
+                  <Review
+                    title={review.title}
+                    username={review.username}
+                    rating={review.rating}
+                    text={review.text}
+                    dateCreate={review.dateCreate}
+                  />
+                  <hr />
                 </div>
               )
             })}
@@ -139,7 +172,9 @@ const BookLocation: React.FC = () => {
         </div>
       </div>
       <div className="row d-flex flex-column">
-        <button className="col-md-4 btn-md align-self-center"> Booking </button>
+        <button className="col-md-4 mb-5 booking-btn align-self-center">
+          Booking
+        </button>
       </div>
     </div>
   )
