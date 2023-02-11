@@ -2,42 +2,17 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-interface Props {
-  disableTime?: string[][]
-  disableDates?: number[]
-  minTime?: string
-  maxTime?: string
-}
+import { DatePickerInterface } from '../interfaces/booking.interfaces'
+import { formatDate, formatTime } from '../utils/Time.utils'
 
-// ✅ Format using reusable function
-function padTo2Digits(num: number) {
-  return num.toString().padStart(2, '0')
-}
-
-// format as "YYYY-MM-DD"
-function formatDate(date: Date | null) {
-  return date
-    ? [
-        date.getFullYear(),
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-      ].join('-')
-    : ''
-}
-// format as "hh:mm:ss"
-function formatTime(date: Date | null) {
-  return date
-    ? [padTo2Digits(date.getHours()), padTo2Digits(date.getMinutes())].join(':')
-    : ''
-}
-
-const DateTimePicker: React.FC<Props> = ({
+const DateTimePicker: React.FC<DatePickerInterface> = ({
   disableTime = [[]],
   disableDates = [],
   minTime,
   maxTime,
+  selectedDate,
+  setSelectedDate = () => {},
 }) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [minHours, minMinutes] = minTime?.split(':') || [0, 0]
   const [maxHours, maxMinutes] = maxTime?.split(':') || [23, 59]
 
@@ -52,8 +27,6 @@ const DateTimePicker: React.FC<Props> = ({
     }
     return true
   }
-  console.log(formatDate(selectedDate))
-  console.log(formatTime(selectedDate))
   // Check if the time is available such as booked time
   const isAvailiableTime = (date: Date) => {
     for (var booking of disableTime) {
