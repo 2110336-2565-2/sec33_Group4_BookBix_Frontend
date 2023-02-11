@@ -45,22 +45,18 @@ const DateTimePicker: React.FC<Props> = ({
   const isAvailiabledDate = (date: Date) => {
     // format disableDates -> index of the day
     const day = date.getDay()
-    disableDates.forEach((disableDate) => {
-      console.log('Date', date)
-      console.log('Day of disableDate', disableDate, 'Day of each date', day)
-      console.log('disableDate === day', disableDate === day)
+    for (var disableDate of disableDates) {
       if (disableDate === day) {
-        console.log("Disable !")
         return false
       }
-    })
+    }
     return true
   }
   console.log(formatDate(selectedDate))
   console.log(formatTime(selectedDate))
   // Check if the time is available such as booked time
   const isAvailiableTime = (date: Date) => {
-    disableTime.forEach((booking) => {
+    for (var booking of disableTime) {
       //format time -> HH:mm AM/PM AM, date -> yyyy-MM-dd
       const start_time: string = booking[0]
       const end_time: string = booking[1]
@@ -72,7 +68,7 @@ const DateTimePicker: React.FC<Props> = ({
       ) {
         return false
       }
-    })
+    }
     return true
   }
 
