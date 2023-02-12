@@ -1,4 +1,4 @@
-Utils (functions and interfaces)
+Utils (functions)
 
 I always create a lot of functions within a component.
 As a result, the component can become quite bloated.
