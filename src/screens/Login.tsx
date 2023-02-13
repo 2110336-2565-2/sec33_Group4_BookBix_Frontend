@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 import login_costume from '../assets/images/login-costume.svg'
-import '../assets/scss/_login.scss'
 //.env file
 // const url = process.env.REACT_APP_API_URL
 

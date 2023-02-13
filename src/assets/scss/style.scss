@@ -1,11 +1,6 @@
-$tint-black: #2e2e2e;
-$red-magenta: #db5461;
-$salmon-orange: #eeac76;
-$base-white: #f1edee;
+@use './components/login';
+@use './components/register';
 
-$theme-colors: (
-  'dark': $tint-black,
-);
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300;400;500;600;700;800;900&display=swap);
 
