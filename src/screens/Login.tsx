@@ -13,6 +13,8 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if(!email || !password) 
+      return setError('Please fill in all fields')
 
     try {
       const response = await fetch(`${url}/customers/login`, {
