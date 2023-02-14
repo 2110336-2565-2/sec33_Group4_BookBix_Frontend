@@ -25,12 +25,12 @@ export default function ManageProfile() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const response = await fetch(`${url}/manage-profile`, {
+      const response = await fetch(`${url}/customers/manage-profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user }),
+        body: JSON.stringify(user),
       })
       const data = await response.json()
       if (!response.ok) {

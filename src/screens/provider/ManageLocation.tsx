@@ -29,12 +29,12 @@ export default function ManageLocation() {
     e.preventDefault()
 
     try {
-      const response = await fetch(`${url}/manage-location`, {
+      const response = await fetch(`${url}/locations/manage-location`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ location }),
+        body: JSON.stringify(location),
       })
       const data = await response.json()
       if (!response.ok) {
