@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 import login_costume from '../assets/images/login-costume.svg'
 import '../assets/scss/_login.scss'
-//.env file
-// const url = process.env.REACT_APP_API_URL
+// .env file
+const url = import.meta.env.VITE_API_URL
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('')
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
     e.preventDefault()
 
     try {
-      const response = await fetch(`${''}/login`, {
+      const response = await fetch(`${url}/customers/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
