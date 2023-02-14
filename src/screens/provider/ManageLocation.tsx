@@ -53,7 +53,6 @@ export default function ManageLocation() {
   return (
     <div className="container-fluid text-light fill bg-dark ">
       <div className=" d-flex align-items-center justify-content-center pt-5 ">
-        {/* <img className="col-md-6 img-fluid " src={photo} /> */}
         <Form
           className="row col-md-6 profile-manage pb-3 pt-3"
           onSubmit={handleSubmit}
@@ -66,7 +65,6 @@ export default function ManageLocation() {
             <Form.Label>Name</Form.Label>
             <Form.Control
               onChange={(e) => {
-                // setLocationname(e.target.value)
                 setLocation({ ...location, locationname: e.target.value })
               }}
               type="text"
@@ -81,7 +79,6 @@ export default function ManageLocation() {
             <Form.Label>Description</Form.Label>
             <Form.Control
               onChange={(e) => {
-                // setUrl(e.target.value)
                 setLocation({ ...location, description: e.target.value })
               }}
               type="text"
@@ -96,7 +93,6 @@ export default function ManageLocation() {
             <Form.Label>Address</Form.Label>
             <Form.Control
               onChange={(e) => {
-                // setAddress(e.target.value)
                 setLocation({ ...location, address: e.target.value })
               }}
               type="text"
@@ -107,7 +103,6 @@ export default function ManageLocation() {
             <Form.Label>Google Map URL</Form.Label>
             <Form.Control
               onChange={(e) => {
-                // setUrl(e.target.value)
                 setLocation({ ...location, url: e.target.value })
               }}
               type="text"
@@ -121,7 +116,6 @@ export default function ManageLocation() {
             <Form.Label>Open Time</Form.Label>
             <Form.Control
               onChange={(e) => {
-                // setOpenTime(e.target.value)
                 setLocation({ ...location, openTime: e.target.value })
               }}
               type="time"
@@ -135,7 +129,6 @@ export default function ManageLocation() {
             <Form.Label>Close Time</Form.Label>
             <Form.Control
               onChange={(e) => {
-                // setCloseTime(e.target.value)
                 setLocation({ ...location, closeTime: e.target.value })
               }}
               type="time"

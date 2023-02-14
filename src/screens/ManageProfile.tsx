@@ -6,13 +6,22 @@ const url = import.meta.env.VITE_API_URL
 
 // page for update user info firstname, lastname, sex, birthdate, email
 export default function ManageProfile() {
-  const [firstname, setFirstname] = useState<string>('')
-  const [lastname, setLastname] = useState<string>('')
-  const [sex, setSex] = useState<string>('')
-  const [birthdate, setBirthdate] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
+  interface User {
+    firstname: string
+    lastname: string
+    sex: string
+    birthdate: string
+    email: string
+  }
   const [error, setError] = useState<string>('')
-
+  const [user, setUser] = useState<User>({
+    firstname: '',
+    lastname: '',
+    sex: '',
+    birthdate: '',
+    email: '',
+  })
+  console.log(user)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
@@ -21,7 +30,7 @@ export default function ManageProfile() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstname, lastname, sex, birthdate, email }),
+        body: JSON.stringify({ user }),
       })
       const data = await response.json()
       if (!response.ok) {
@@ -41,7 +50,6 @@ export default function ManageProfile() {
   return (
     <div className="container-fluid text-light fill bg-dark ">
       <div className=" d-flex align-items-center justify-content-center pt-5">
-        {/* <img className="col-md-6 img-fluid " src={photo} /> */}
         <Form
           className="row col-md-6 profile-manage pb-3 pt-3"
           onSubmit={handleSubmit}
@@ -54,7 +62,7 @@ export default function ManageProfile() {
             <Form.Label>Firstname</Form.Label>
             <Form.Control
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setFirstname(e.target.value)
+                setUser({ ...user, firstname: e.target.value })
               }
               type="text"
               placeholder="Enter firstname"
@@ -65,7 +73,7 @@ export default function ManageProfile() {
             <Form.Label>Lirstname</Form.Label>
             <Form.Control
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setLastname(e.target.value)
+                setUser({ ...user, lastname: e.target.value })
               }
               type="text"
               placeholder="Enter lastname"
@@ -76,7 +84,7 @@ export default function ManageProfile() {
             <Form.Label>Sex</Form.Label>
             <Form.Select
               onChange={(e) => {
-                setSex(e.target.value)
+                setUser({ ...user, sex: e.target.value })
               }}
               aria-label="Default select example"
               placeholder="Enter Sex"
@@ -92,7 +100,7 @@ export default function ManageProfile() {
             <Form.Label>Birthdate</Form.Label>
             <Form.Control
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setBirthdate(e.target.value)
+                setUser({ ...user, birthdate: e.target.value })
               }
               type="date"
               placeholder="Enter Birthdate"
@@ -103,7 +111,7 @@ export default function ManageProfile() {
             <Form.Label>Email address</Form.Label>
             <Form.Control
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
+                setUser({ ...user, email: e.target.value })
               }
               type="email"
               placeholder="Enter email"
