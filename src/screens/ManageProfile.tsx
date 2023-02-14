@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
-import '../assets/scss/_manageProfile.scss'
 import { useState } from 'react'
 const url = import.meta.env.VITE_API_URL
 
@@ -48,7 +47,7 @@ export default function ManageProfile() {
   }
 
   return (
-    <div className="container-fluid text-light fill bg-dark ">
+    <div className="container-fluid text-light fill bg-dark manage">
       <div className=" d-flex align-items-center justify-content-center pt-5">
         <Form
           className="row col-md-6 profile-manage pb-3 pt-3"
