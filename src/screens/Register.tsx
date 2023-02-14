@@ -1,46 +1,27 @@
-import login_costume from '../assets/images/login-costume.svg'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import {
-  Form,
-  Button,
-  Container,
-  Stack,
-  Image,
-  Row,
-  Col,
-} from 'react-bootstrap'
+  WebInform,
+  Registration,
+  RegistrationV2,
+} from '../components/LoginRegister'
+//.env file
+// const url = process.env.REACT_APP_API_URL
 
-export default function Register() {
+const Register: React.FC = () => {
   return (
-    <Container fluid className="h-100 bg-dark text-light">
-      <Row md={2} className="h-100">
-        <Col className="justify-content-center align-content-center">
-          <div>
-            <Image className="w-75 " src={login_costume}></Image>
-          </div>
+    <Container fluid className="register fill bg-dark">
+      <Row className="fill">
+        <Col md="6" className="d-none d-md-flex flex-column ">
+          <WebInform />
         </Col>
-        <Col className="bg-primary p-5">
-          <h3>
-            Sign Up to <span className="text-dark fw-bold">BookBix</span>
-          </h3>
-          <Form>
-            <Form.Group className="mb-3 fs-4" controlId="formBasicEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="example@gmail.com" />
-            </Form.Group>
-            <Form.Group className="mb-3 fs-4" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Button
-              variant="light"
-              type="submit"
-              className="btn-primary btn-lg"
-            >
-              <span className="fw-bold">Submit</span>
-            </Button>
-          </Form>
+        <Col md="6" className="wrapper">
+          <Registration />
         </Col>
       </Row>
     </Container>
   )
 }
+
+export default Register
