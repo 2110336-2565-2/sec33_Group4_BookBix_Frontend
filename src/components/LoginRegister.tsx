@@ -3,7 +3,8 @@ import login_costume from '../assets/images/login-costume.svg'
 import { Link } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 
-// const URL = `${process.env.BACKEND_SERVER_PORT}`
+const URL = import.meta.env.VITE_BACKEND_SERVER_PORT
+console.log(URL)
 export const WebInform = () => {
   return (
     <>
