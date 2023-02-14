@@ -161,7 +161,7 @@ export const Registration = () => {
           </div>
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
-        <input type="submit" className="form-regis-btn" value="Register" />
+        <input type="submit" className="form-regis-btn mb-5" value="Register" />
       </Form>
     </>
   )
