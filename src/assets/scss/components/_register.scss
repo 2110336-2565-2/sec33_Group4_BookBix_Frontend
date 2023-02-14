@@ -1,0 +1,69 @@
+@use '../abstracts' as *;
+
+.register {
+  .fill {
+    min-height: 100vh;
+    height: 100%;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $red-magenta;
+    border-top-left-radius: 91px;
+    border-bottom-left-radius: 91px;
+    .switch-page-btn {
+      margin-bottom: 75px;
+      margin-right: 20px;
+
+      .current-page-tag {
+        &.active {
+          background: $white !important;
+        }
+      }
+    }
+    .text-header {
+      display: inline-block;
+      color: $white;
+      margin-bottom: 5%;
+      font-size: medium;
+      span {
+        font-weight: 700 !important;
+        color: $tint-black;
+      }
+    }
+    .form {
+      &-content {
+        display: flex;
+        flex-direction: column;
+      }
+      &-group {
+        font-size: medium;
+        color: $white;
+        padding: 10px;
+      }
+      input[type='email'],
+      input[type='password'],
+      input[type='text'] {
+        background: $white;
+        border: 1px solid $base-white;
+        border-radius: 26px;
+      }
+      &-regis-btn {
+        border-radius: 63px;
+        color: $black;
+        font-size: large;
+        font-weight: 700;
+        padding: 10px 60px;
+        border: 1px solid $baby-pink;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        &:hover {
+          color: $white;
+          background: $tint-black;
+        }
+      }
+    }
+  }
+}
