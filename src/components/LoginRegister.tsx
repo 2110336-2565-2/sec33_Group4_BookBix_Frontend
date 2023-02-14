@@ -27,42 +27,43 @@ export const Registration = () => {
   const [type, setType] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const handleConfirmPassword = (confirmPassword: string): void => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!username || !email || !password || !confirmPassword || !type) {
+      setError('Please fill in all fields')
+      return
+    }
     if (password !== confirmPassword) {
       setError('Password and Confirm Password must be the same')
       return
     }
-    setConfirmPassword(confirmPassword)
-  }
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // try {
-    //   const response = await fetch(`${URL}/register`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json; charset=UTF-8',
-    //     },
-    //     body: JSON.stringify({
-    //       username,
-    //       email,
-    //       password,
-    //       confirmPassword,
-    //       type,
-    //     }),
-    //   })
-    //   const data = await response.json()
-    //   if (!response.ok) {
-    //     setError(data.message)
-    //     return
-    //   }
-    //   // Save the user information in local storage or in the state
-    //   localStorage.setItem('user', JSON.stringify(data.user))
-    //   // Redirect the user to the homepage
-    //   window.location.href = '/home'
-    // } catch (error) {
-    //   setError('Something went wrong, please try again later')
-    // }
+    setError(null)
+    try {
+      const response = await fetch(`${URL}/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          confirmPassword,
+          type,
+        }),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.message)
+        return
+      }
+      // Save the user information in local storage or in the state
+      localStorage.setItem('user', JSON.stringify(data.user))
+      // Redirect the user to the homepage
+      window.location.href = '/home'
+    } catch (error) {
+      setError('Something went wrong, please try again later')
+    }
   }
   return (
     <>
@@ -97,7 +98,6 @@ export const Registration = () => {
             placeholder="Enter Username"
           />
         </Form.Group>
-
         <Form.Group className="form-group mb-1" controlId="registerEmail">
           <Form.Label className="fs-4">Email</Form.Label>
           <Form.Control
@@ -109,7 +109,6 @@ export const Registration = () => {
             placeholder="Enter Email"
           />
         </Form.Group>
-
         <Form.Group className="form-group mb-1" controlId="registerPassword">
           <Form.Label className="fs-4">Password</Form.Label>
           <Form.Control
@@ -121,7 +120,6 @@ export const Registration = () => {
             placeholder="Password"
           />
         </Form.Group>
-
         <Form.Group
           className="form-group mb-3"
           controlId="confirmRegisterPassword"
@@ -136,7 +134,6 @@ export const Registration = () => {
             placeholder="Confirm Password"
           />
         </Form.Group>
-
         <Form.Group
           className="form-group"
           controlId="registerType"
@@ -161,7 +158,6 @@ export const Registration = () => {
             />
           </div>
         </Form.Group>
-
         {error && <div className="alert alert-danger">{error}</div>}
         <input type="submit" className="form-regis-btn" value="Register" />
       </Form>
