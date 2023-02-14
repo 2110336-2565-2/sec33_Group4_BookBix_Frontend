@@ -77,7 +77,7 @@ export const Registration = () => {
         >
           Register
         </Button>
-        <Link to="/login" className="text-link d-flex align-items-center">
+        <Link to="/login" className="nav-link d-flex align-items-center">
           <div className="text-light ms-1 px-3">Login</div>
         </Link>
       </div>

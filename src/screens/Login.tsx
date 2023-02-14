@@ -51,10 +51,7 @@ const Login: React.FC = () => {
         </div>
         <div className="login-right col-md-6">
           <div className="d-flex switch-page-btn border border-1 rounded justify-content-between align-self-end">
-            <Link
-              to="/register"
-              className="text-link d-flex align-items-center"
-            >
+            <Link to="/register" className="nav-link d-flex align-items-center">
               <div className="text-light ms-1 px-3">register</div>
             </Link>
             <Button
