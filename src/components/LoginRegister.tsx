@@ -3,7 +3,7 @@ import login_costume from '../assets/images/login-costume.svg'
 import { Link } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:3001'
 export const WebInform = () => {
   return (
     <>
@@ -39,7 +39,11 @@ export const Registration = () => {
     }
     setError(null)
     try {
-      const response = await fetch(`${URL}/register`, {
+      const url =
+        type == 'Customer'
+          ? `${URL}/customers/register`
+          : `${URL}/providers/register`
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -48,8 +52,6 @@ export const Registration = () => {
           username,
           email,
           password,
-          confirmPassword,
-          type,
         }),
       })
       const data = await response.json()
