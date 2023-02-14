@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
-import '../assets/scss/_booklocation.scss'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper'
 
@@ -89,8 +88,6 @@ const BookLocation: React.FC = () => {
 
 
   // create handleSubmit function to send POST request with body of selected start date, end date, and location id 
-
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -223,7 +220,7 @@ const BookLocation: React.FC = () => {
         </div>
       </div>
       <div className="row d-flex flex-column">
-        <button className="col-md-4 mb-5 booking-btn align-self-center">
+        <button className="col-md-4 mb-5 booking-btn p-2 align-self-center">
           Booking
         </button>
       </div>
