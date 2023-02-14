@@ -1,11 +1,7 @@
-$tint-black: #2e2e2e;
-$red-magenta: #db5461;
-$salmon-orange: #eeac76;
-$base-white: #f1edee;
+@use './components/login';
+@use './components/register';
+@use './components/booklocation';
 
-$theme-colors: (
-  'dark': $tint-black,
-);
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300;400;500;600;700;800;900&display=swap);
 
@@ -18,7 +14,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif !important;
-  font-weight: 500;
+  font-weight: 400;
   min-height: calc(100vh - 56px);
   height: calc(100vh - 56px);
 }
@@ -40,11 +36,5 @@ p font-size: 1rem;
   height: auto;
 }
 
-//This scss file used for apply styles global and change some sass variables
-.text-link,
-text-link:hover {
-  color: inherit;
-  text-decoration: inherit;
-}
 // Import at the bottom of the file
 // @import 'bootstrap/scss/bootstrap';
