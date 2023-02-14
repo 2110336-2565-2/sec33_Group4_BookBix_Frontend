@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import login_costume from '../assets/images/login-costume.svg'
 import { Link } from 'react-router-dom'
-import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 
+const URL = 'http://localhost:3000'
 export const WebInform = () => {
   return (
     <>
@@ -26,16 +27,29 @@ export const Registration = () => {
   const [type, setType] = useState('')
   const [error, setError] = useState<string | null>(null)
 
+  const handleConfirmPassword = (confirmPassword: string): void => {
+    if (password !== confirmPassword) {
+      setError('Password and Confirm Password must be the same')
+      return
+    }
+    setConfirmPassword(confirmPassword)
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(username, email, password, confirmPassword, type)
     // try {
-    //   const response = await fetch(`${''}/login`, {
+    //   const response = await fetch(`${URL}/register`, {
     //     method: 'POST',
     //     headers: {
-    //       'Content-Type': 'application/json',
+    //       'Content-Type': 'application/json; charset=UTF-8',
     //     },
-    //     body: JSON.stringify({ email, password }),
+    //     body: JSON.stringify({
+    //       username,
+    //       email,
+    //       password,
+    //       confirmPassword,
+    //       type,
+    //     }),
     //   })
     //   const data = await response.json()
     //   if (!response.ok) {
@@ -152,75 +166,5 @@ export const Registration = () => {
         <input type="submit" className="form-regis-btn" value="Register" />
       </Form>
     </>
-  )
-}
-
-export const RegistrationV2 = () => {
-  return (
-    <div>
-      <Container>
-        <Row className="vh-100 d-flex justify-content-center align-items-center">
-          <Col md={8} lg={6} xs={12}>
-            <div className="border border-2 border-primary"></div>
-            <Card className="shadow px-4">
-              <Card.Body>
-                <div className="mb-3 mt-md-4">
-                  <h2 className="fw-bold mb-2 text-center text-uppercase ">
-                    Logo
-                  </h2>
-                  <div className="mb-3">
-                    <Form>
-                      <Form.Group className="mb-3" controlId="Name">
-                        <Form.Label className="text-center">Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter Name" />
-                      </Form.Group>
-
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label className="text-center">
-                          Email address
-                        </Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                      </Form.Group>
-
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formBasicPassword"
-                      >
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                      </Form.Group>
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formBasicPassword"
-                      >
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                      </Form.Group>
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formBasicCheckbox"
-                      ></Form.Group>
-                      <div className="d-grid">
-                        <Button variant="primary" type="submit">
-                          Create Account
-                        </Button>
-                      </div>
-                    </Form>
-                    <div className="mt-3">
-                      <p className="mb-0  text-center">
-                        Already have an account??{' '}
-                        <a href="{''}" className="text-primary fw-bold">
-                          Sign In
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </div>
   )
 }
