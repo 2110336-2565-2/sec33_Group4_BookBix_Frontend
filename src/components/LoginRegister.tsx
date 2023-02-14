@@ -3,7 +3,7 @@ import login_costume from '../assets/images/login-costume.svg'
 import { Link } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 
-const URL = 'http://localhost:3001'
+const URL = process.env.BACKEND_SERVER_PORT
 export const WebInform = () => {
   return (
     <>
