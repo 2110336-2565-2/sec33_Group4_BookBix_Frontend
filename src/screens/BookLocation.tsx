@@ -56,6 +56,7 @@ const mockdata = {
     'Sunday',
   ],
 }
+const URL = import.meta.env.VITE_API_URL
 
 const BookLocation: React.FC = () => {
   const { locationId } = useParams()
@@ -75,13 +76,13 @@ const BookLocation: React.FC = () => {
   // fetch booking time slot from backend endpoint
   const fetchBookingTimeSlot = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/locations/${locationId}/bookings`,
+      `${URL}/locations/${locationId}/bookings`,
     )
   }
   // fetch location data from backend endpoint
   const fetchLocation = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/locations/${locationId}`,
+      `${URL}/locations/${locationId}`,
     )
     const data = await response.json()
   }
