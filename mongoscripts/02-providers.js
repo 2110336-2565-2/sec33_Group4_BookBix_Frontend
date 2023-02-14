@@ -29,4 +29,4 @@ db.providers.insertMany([
     organization_name: 'Provider LLC',
     locations: [ObjectId('000000000004000000000004')],
   },
-]);
+])

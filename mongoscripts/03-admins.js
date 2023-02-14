@@ -6,4 +6,4 @@ db.admins.insertMany([
     email: 'admin1@example.com',
     date_created: '2023-02-04T15:06:22.333Z',
   },
-]);
+])

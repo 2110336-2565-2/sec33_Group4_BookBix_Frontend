@@ -5,22 +5,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: unless-stopped
     ports:
       - "${CLIENT_PORT}:${SERVER_PORT}"
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run dev
     environment:
       PORT: ${SERVER_PORT}
       NODE_ENV: ${NODE_ENV}
     working_dir: /app
+    depends_on:
+      - backend-app
     networks:
       - backbone
   backend-app:
     image: s1xz/bookbix-backend:latest
-    depends_on:
-      - db
     ports:
       - "${BACKEND_SERVER_PORT}:3000"
     restart: unless-stopped
@@ -28,6 +28,8 @@ services:
       MONGODB_DBURL: mongodb://${MONGO_INITDB_USER}:${MONGO_INITDB_PWD}@db:27017/${MONGO_INITDB_DATABASE}?authSource=${MONGO_INITDB_DATABASE}
       MONGODB_DBNAME: ${MONGO_INITDB_DATABASE}
       PORT: 3000
+    depends_on:
+      - db
     networks:
       - backbone
   db:
@@ -43,7 +45,6 @@ services:
       MONGO_INITDB_PASSWORD: ${MONGO_INITDB_PWD}
     volumes:
       - ./mongoscripts:/docker-entrypoint-initdb.d:ro
-      - ./data/db:/data/db
     networks:
       - backbone
 networks:
