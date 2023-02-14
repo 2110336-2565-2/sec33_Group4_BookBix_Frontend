@@ -99,4 +99,4 @@ db.locations.insertMany([
       },
     ],
   },
-]);
+])
