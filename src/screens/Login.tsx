@@ -37,7 +37,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="container-fluid fill bg-dark">
+    <div className="container-fluid fill bg-dark login">
       <div className="row fill">
         <div className="col-md-6 d-none d-md-flex flex-column">
           <h1 className="text-start d-inline bookbix-logo">BookBix</h1>
