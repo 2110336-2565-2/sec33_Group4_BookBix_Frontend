@@ -3,6 +3,15 @@ import login_costume from '../assets/images/login-costume.svg'
 import { Link } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 
+interface Data {
+  token?: string | undefined
+  username?: string
+  email?: string
+  password?: string
+  confirmPassword?: string
+  type?: string
+}
+
 const URL = import.meta.env.VITE_API_URL
 export const WebInform = () => {
   return (
@@ -262,7 +271,7 @@ export const ForgetPasswordRequest = () => {
     e.preventDefault()
     try {
       const response = await fetch(`${URL}/resetpassword`, {
-        method: 'PATCH',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -292,7 +301,7 @@ export const ForgetPasswordRequest = () => {
       </div>
 
       <div className="text-header ">
-        <h1 className="fs-1 fw-bolder">Change Password</h1>
+        <h1 className="fs-1 fw-bolder">Forget Password</h1>
       </div>
 
       <Form
@@ -339,9 +348,14 @@ export const ResetPasswordForm = () => {
       setError('Password and Confirm Password must be the same')
       return
     }
+    const send: Data = {
+      token: window.location.pathname.split('/').pop(),
+      password: password,
+      confirmPassword: confirmPassword,
+    }
     setError(null)
     try {
-      const response = await fetch(`${URL}/users/resetpassword`, {
+      const response = await fetch(`${URL}/users/resetpassword/${send.token}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
