@@ -251,7 +251,7 @@ export const LoginForm = () => {
         {error && <div className="alert alert-danger">{error}</div>}
         <p className="text-end mt-5 mb-5">
           <Link
-            to="../forgetpassword"
+            to="../resetpassword"
             className="text-decoration-none fw-bold text-white"
           >
             forget password ?
