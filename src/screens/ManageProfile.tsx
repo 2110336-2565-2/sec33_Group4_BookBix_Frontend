@@ -48,10 +48,10 @@ export default function ManageProfile() {
 
   return (
     <div className="manage">
-      <div className="container-fluid text-light fill bg-dark manage">
+      <div className="container-fluid text-light fill bg-dark">
         <div className=" d-flex align-items-center justify-content-center pt-5">
           <Form
-            className="row col-md-6 profile-manage pb-3 pt-3"
+            className="row col-md-6 profile-manage py-5"
             onSubmit={handleSubmit}
           >
             <h1 className="d-flex align-items-center justify-content-center">

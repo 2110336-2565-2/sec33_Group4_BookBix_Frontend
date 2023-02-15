@@ -15,12 +15,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ManageProfile />} />
           <Route path="/profile-management" element={<ManageProfile />} />
+          <Route path="/location-management" element={<ManageLocation />} />
           <Route path="*" element={<Home />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile-management" element={<ManageProfile />} />
-        <Route path="/location-management" element={<ManageLocation />} />
+        {/* <Route path="/profile-management" element={<ManageProfile />} />
+        <Route path="/location-management" element={<ManageLocation />} /> */}
       </Routes>
     </>
   )

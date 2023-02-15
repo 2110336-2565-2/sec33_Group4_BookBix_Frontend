@@ -14,6 +14,15 @@ interface Location {
 }
 
 export default function ManageLocation() {
+  const dayInWeek = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ]
   const [error, setError] = useState<string>('')
   const [location, setLocation] = useState<Location>({
     locationname: '',
@@ -52,9 +61,9 @@ export default function ManageLocation() {
   return (
     <div className="manage">
       <div className="container-fluid text-light bg-dark fill">
-        <div className=" d-flex align-items-center justify-content-center pt-5 ">
+        <div className=" d-flex align-items-center justify-content-center pt-5">
           <Form
-            className="row col-md-6 profile-manage pb-3 pt-3"
+            className="row col-md-6 profile-manage py-3 mb-5"
             onSubmit={handleSubmit}
           >
             <h1 className="d-flex align-items-center justify-content-center">
@@ -137,15 +146,7 @@ export default function ManageLocation() {
             <Form.Group className="col-md-8">
               <label>Select available days for your location :</label>
               <div className="row ">
-                {[
-                  'Monday',
-                  'Tuesday',
-                  'Wednesday',
-                  'Thursday',
-                  'Friday',
-                  'Saturday',
-                  'Sunday',
-                ].map((type) => (
+                {dayInWeek.map((type) => (
                   <div key={`${type}`} className="col-md-6">
                     <Form.Check
                       // type={type}
