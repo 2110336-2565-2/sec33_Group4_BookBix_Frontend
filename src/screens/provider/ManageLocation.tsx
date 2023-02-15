@@ -63,7 +63,7 @@ export default function ManageLocation() {
       <div className="container-fluid text-light bg-dark fill">
         <div className=" d-flex align-items-center justify-content-center pt-5">
           <Form
-            className="row col-md-6 profile-manage py-3 my-5"
+            className="row col-md-6 profile-manage py-3 mb-5"
             onSubmit={handleSubmit}
           >
             <h1 className="d-flex align-items-center justify-content-center">
