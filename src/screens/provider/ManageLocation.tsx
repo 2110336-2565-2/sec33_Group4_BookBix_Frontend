@@ -135,6 +135,7 @@ export default function ManageLocation() {
               />
             </Form.Group>
             <Form.Group className="col-md-8">
+              <label>Select available days for your location :</label>
               <div className="row ">
                 {[
                   'Monday',
@@ -170,6 +171,7 @@ export default function ManageLocation() {
                 ))}
               </div>
             </Form.Group>
+            {error && <div className="alert alert-danger">{error}</div>}
             <div className="d-flex align-items-center justify-content-center col-md-8 pb-3 pt-3">
               <Button
                 variant="dark"

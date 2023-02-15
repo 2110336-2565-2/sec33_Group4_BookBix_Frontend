@@ -47,83 +47,95 @@ export default function ManageProfile() {
   }
 
   return (
-    <div className="container-fluid text-light fill bg-dark manage">
-      <div className=" d-flex align-items-center justify-content-center pt-5">
-        <Form
-          className="row col-md-6 profile-manage pb-3 pt-3"
-          onSubmit={handleSubmit}
-        >
-          <h1 className="d-flex align-items-center justify-content-center">
-            <br></br>
-            <span className="text-black fw-bold">Manage</span> Profile
-          </h1>
-          <Form.Group className="row mb-3 col-md-8 " controlId="formFirstname">
-            <Form.Label>Firstname</Form.Label>
-            <Form.Control
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setUser({ ...user, firstname: e.target.value })
-              }
-              type="text"
-              placeholder="Enter firstname"
-            />
-          </Form.Group>
-
-          <Form.Group className="row mb-3 col-md-8 " controlId="formLastname">
-            <Form.Label>Lirstname</Form.Label>
-            <Form.Control
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setUser({ ...user, lastname: e.target.value })
-              }
-              type="text"
-              placeholder="Enter lastname"
-            />
-          </Form.Group>
-
-          <Form.Group className="row mb-3 col-md-8 " controlId="formSex">
-            <Form.Label>Sex</Form.Label>
-            <Form.Select
-              onChange={(e) => {
-                setUser({ ...user, sex: e.target.value })
-              }}
-              aria-label="Default select example"
-              placeholder="Enter Sex"
+    <div className="manage">
+      <div className="container-fluid text-light fill bg-dark manage">
+        <div className=" d-flex align-items-center justify-content-center pt-5">
+          <Form
+            className="row col-md-6 profile-manage pb-3 pt-3"
+            onSubmit={handleSubmit}
+          >
+            <h1 className="d-flex align-items-center justify-content-center">
+              <br></br>
+              <span className="text-black fw-bold">Manage</span> Profile
+            </h1>
+            <Form.Group
+              className="row mb-3 col-md-8 "
+              controlId="formFirstname"
             >
-              <option value="">Choose...</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="LGBTQ+">LGBTQ+</option>
-            </Form.Select>
-          </Form.Group>
+              <Form.Label>Firstname</Form.Label>
+              <Form.Control
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setUser({ ...user, firstname: e.target.value })
+                }
+                type="text"
+                placeholder="Enter firstname"
+              />
+            </Form.Group>
 
-          <Form.Group className="row mb-3 col-md-8 " controlId="formBirthdate">
-            <Form.Label>Birthdate</Form.Label>
-            <Form.Control
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setUser({ ...user, birthdate: e.target.value })
-              }
-              type="date"
-              placeholder="Enter Birthdate"
-            />
-          </Form.Group>
+            <Form.Group className="row mb-3 col-md-8 " controlId="formLastname">
+              <Form.Label>Lirstname</Form.Label>
+              <Form.Control
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setUser({ ...user, lastname: e.target.value })
+                }
+                type="text"
+                placeholder="Enter lastname"
+              />
+            </Form.Group>
 
-          <Form.Group className="row mb-3 col-md-8 " controlId="formEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setUser({ ...user, email: e.target.value })
-              }
-              type="email"
-              placeholder="Enter email"
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+            <Form.Group className="row mb-3 col-md-8 " controlId="formSex">
+              <Form.Label>Sex</Form.Label>
+              <Form.Select
+                onChange={(e) => {
+                  setUser({ ...user, sex: e.target.value })
+                }}
+                aria-label="Default select example"
+                placeholder="Enter Sex"
+              >
+                <option value="">Choose...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="LGBTQ+">LGBTQ+</option>
+              </Form.Select>
+            </Form.Group>
 
-          <Button variant="dark" type="submit" className="primary col-md-8 pb">
-            Submit
-          </Button>
-        </Form>
+            <Form.Group
+              className="row mb-3 col-md-8 "
+              controlId="formBirthdate"
+            >
+              <Form.Label>Birthdate</Form.Label>
+              <Form.Control
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setUser({ ...user, birthdate: e.target.value })
+                }
+                type="date"
+                placeholder="Enter Birthdate"
+              />
+            </Form.Group>
+
+            <Form.Group className="row mb-3 col-md-8 " controlId="formEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setUser({ ...user, email: e.target.value })
+                }
+                type="email"
+                placeholder="Enter email"
+              />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+            {error && <div className="alert alert-danger">{error}</div>}
+            <Button
+              variant="dark"
+              type="submit"
+              className="primary col-md-8 pb"
+            >
+              Submit
+            </Button>
+          </Form>
+        </div>
       </div>
     </div>
   )
