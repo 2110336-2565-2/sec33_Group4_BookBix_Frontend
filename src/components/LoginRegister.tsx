@@ -19,6 +19,98 @@ export const WebInform = () => {
   )
 }
 
+export const ChangePasswordForm = () => {
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState<string | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!password || !confirmPassword) {
+      setError('Please fill in all fields')
+      return
+    }
+    if (password !== confirmPassword) {
+      setError('Password and Confirm Password must be the same')
+      return
+    }
+    setError(null)
+    try {
+      const response = await fetch(`${URL}/users/change-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          password,
+        }),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.message)
+        return
+      }
+      // Save the user information in local storage or in the state
+      localStorage.setItem('user', JSON.stringify(data.user))
+      // Redirect the user to the homepage
+      window.location.href = '/home'
+    } catch (error) {
+      setError('Something went wrong, please try again later')
+    }
+  }
+  return (
+    <>
+      <div className="d-flex border rounded justify-content-between align-self-end switch-page-btn">
+        <Link to="/register" className="nav-link d-flex align-items-center">
+          <div className="text-light ms-1 px-3">Register</div>
+        </Link>
+        <Button
+          className="m-1 px-4 current-page-tag active"
+          variant="light"
+          style={{ color: '#db5461' }}
+        >
+          Change Password
+        </Button>
+      </div>
+
+      <div className="text-header">
+        <h1>
+          Change Password to <span>BookBix</span>
+        </h1>
+      </div>
+
+      <Form className="form col-md-8" onSubmit={handleSubmit}>
+        <Form.Group className="form-group mb-1" controlId="changePassword">
+          <Form.Label className="form-label">Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="form-group mb-1" controlId="confirmPassword">
+          <Form.Label className="form-label">Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter your password again"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </Form.Group>
+        {error && <p className="text-danger">{error}</p>}
+        <Button
+          className="btn btn-primary btn-block mt-4"
+          type="submit"
+          style={{ backgroundColor: '#db5461' }}
+        >
+          Change Password
+        </Button>
+      </Form>
+    </>
+  )
+}
+
 export const Registration = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
