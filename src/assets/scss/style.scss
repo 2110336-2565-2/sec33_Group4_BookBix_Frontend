@@ -1,5 +1,6 @@
 @use './components/login';
 @use './components/register';
+@use './components/manageProfile';
 @use './components/booklocation';
 
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap);
@@ -38,3 +39,10 @@ p font-size: 1rem;
 
 // Import at the bottom of the file
 // @import 'bootstrap/scss/bootstrap';
+.navbar {
+  // overflow: hidden;
+  // background-color: #333;
+  position: sticky; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
