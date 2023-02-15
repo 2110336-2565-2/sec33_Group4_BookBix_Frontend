@@ -1,10 +1,10 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { WebInform, ChangePasswordForm } from '../components/LoginRegister'
+import { WebInform, ResetPasswordForm } from '../components/LoginRegister'
 
-const ChangePassword = () => {
+const ResetPassword = () => {
   return (
-    <Container fluid className="change-password fill bg-dark">
+    <Container fluid className="reset-password fill bg-dark">
       <Row className="fill">
         <Col md="6" className="d-none d-md-flex flex-column ">
           <WebInform />
@@ -13,11 +13,11 @@ const ChangePassword = () => {
           md="6"
           className="wrapper d-flex flex-column align-items-center justify-content-center"
         >
-          <ChangePasswordForm />
+          <ResetPasswordForm />
         </Col>
       </Row>
     </Container>
   )
 }
 
-export default ChangePassword
+export default ResetPassword

@@ -6,7 +6,8 @@ import Profile from '../screens/Profile'
 import BookLocation from '../screens/BookLocation'
 import Register from '../screens/Register'
 import ManageProfile from '../screens/ManageProfile'
-import ChangePassword from '../screens/ChangePassword'
+import ForgetPassword from '../screens/ForgetPassword'
+import ResetPassword from '../screens/ResetPassword'
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
       </Routes>
     </>
   )
