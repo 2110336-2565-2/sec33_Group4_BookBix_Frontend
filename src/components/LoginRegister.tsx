@@ -341,7 +341,7 @@ export const ResetPasswordForm = () => {
     }
     setError(null)
     try {
-      const response = await fetch(`${URL}/users/change-password`, {
+      const response = await fetch(`${URL}/users/resetpassword`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -358,7 +358,7 @@ export const ResetPasswordForm = () => {
       // Save the user information in local storage or in the state
       localStorage.setItem('user', JSON.stringify(data.user))
       // Redirect the user to the homepage
-      window.location.href = '/home'
+      window.location.href = '/'
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -372,7 +372,7 @@ export const ResetPasswordForm = () => {
       </div>
 
       <div className="text-header mt-lg-auto mb-lg-5">
-        <h1>Change Password</h1>
+        <h1>Reset Password</h1>
       </div>
 
       <Form
@@ -403,7 +403,7 @@ export const ResetPasswordForm = () => {
 
         <p className="text-mute">{error}</p>
         <Button className="btn my-4 rounded-5 form-change-btn" type="submit">
-          Change Password
+          Reset Password
         </Button>
       </Form>
     </>
