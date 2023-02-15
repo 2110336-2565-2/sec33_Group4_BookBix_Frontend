@@ -294,36 +294,36 @@ export const ForgetPasswordRequest = () => {
   }
   return (
     <>
-      <div className="border rounded-3 align-self-end mt-5 back-btn px-2 py-1">
-        <Link to="/login" className="nav-link">
-          <h2 className="px-3">Back</h2>
-        </Link>
-      </div>
-
-      <div className="text-header ">
-        <h1 className="fs-1 fw-bolder">Forget Password</h1>
-      </div>
-
       <Form
-        className="form col-md-8 w-75 border border-0 rounded p-5 my-2"
+        className="d-inline-flex flex-column form col-lg-8 border border-0 rounded-5 p-5 m-3  justify-content-evenly"
         onSubmit={handleSubmit}
       >
+        <div className="border border-1 rounded align-self-end switch-page-btn btn">
+          <Link to="/login" className="nav-link d-flex align-items-center ">
+            <div className="text-light ms-1 px-3">Back</div>
+          </Link>
+        </div>
+
+        <div className="text-header align-self-center">
+          <h1 className="my-2 fs-1 fw-normal">Forget Password</h1>
+        </div>
+
         <Form.Group className="form-group mb-1 p-2" controlId="email">
-          <Form.Label className="form-label fs-3 mb-2">
+          <Form.Label className="form-label fs-4 ps-2 mb-2">
             Email Address
           </Form.Label>
           <Form.Control
             className="rounded-5"
             type="email"
-            placeholder="Enter your password"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
-        <p className="text-danger ms-3">{error}</p>
+        <p className="text-black ms-3">{error}</p>
         <Button
-          className="btn my-4 rounded-5 form-change-btn w-100 fw-bolder"
+          className="rounded-5 form-change-btn fw-bolder mt-4 mb-auto"
           type="submit"
         >
           Send Reset Code
@@ -379,22 +379,22 @@ export const ResetPasswordForm = () => {
   }
   return (
     <>
-      <div className="border rounded-3 align-self-end mt-5 back-btn px-2 py-1">
-        <Link to="/login" className="nav-link">
-          <h2 className="px-3">Back</h2>
-        </Link>
-      </div>
-
-      <div className="text-header mt-lg-auto mb-lg-5">
-        <h1>Reset Password</h1>
-      </div>
-
       <Form
-        className="form col-md-8 mb-lg-auto mt-lg-5"
+        className="d-inline-flex flex-column form col-lg-8 border border-0 rounded-5 p-5 m-3 justify-content-evenly"
         onSubmit={handleSubmit}
       >
+        <div className="border border-1 rounded align-self-end switch-page-btn btn">
+          <Link to="/login" className="nav-link d-flex align-items-center ">
+            <div className="text-light ms-1 px-3">Back</div>
+          </Link>
+        </div>
+
+        <div className="text-header my-3 my-xl-5 align-self-center">
+          <h1>Reset Password</h1>
+        </div>
+
         <Form.Group className="form-group mb-1 p-2" controlId="changePassword">
-          <Form.Label className="form-label fs-4">Password</Form.Label>
+          <Form.Label className="form-label fs-4 ms-2">Password</Form.Label>
           <Form.Control
             className="rounded-5"
             type="password"
@@ -405,7 +405,9 @@ export const ResetPasswordForm = () => {
         </Form.Group>
 
         <Form.Group className="form-group mb-1 p-2" controlId="confirmPassword">
-          <Form.Label className="form-label fs-4">Confirm Password</Form.Label>
+          <Form.Label className="form-label fs-4 ms-2">
+            Confirm Password
+          </Form.Label>
           <Form.Control
             className="rounded-5"
             type="password"
@@ -416,7 +418,10 @@ export const ResetPasswordForm = () => {
         </Form.Group>
 
         <p className="text-mute">{error}</p>
-        <Button className="btn my-4 rounded-5 form-change-btn" type="submit">
+        <Button
+          className="btn my-4 rounded-5 form-change-btn mb-auto"
+          type="submit"
+        >
           Reset Password
         </Button>
       </Form>
