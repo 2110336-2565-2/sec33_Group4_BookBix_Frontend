@@ -16,11 +16,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ManageProfile />} />
           <Route path="/profile-management" element={<ManageProfile />} />
-<<<<<<< HEAD
           <Route path="/location-management" element={<ManageLocation />} />
-=======
-          <Route path="/location-booking/:locationId" element={<BookLocation/>} />
->>>>>>> dev
+          <Route
+            path="/location-booking/:locationId"
+            element={<BookLocation />}
+          />
           <Route path="*" element={<Home />} />
         </Route>
         <Route path="/register" element={<Register />} />
