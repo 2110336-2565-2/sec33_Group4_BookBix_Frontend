@@ -51,7 +51,7 @@ export default function ManageProfile() {
       <div className="container-fluid text-light fill bg-dark">
         <div className=" d-flex align-items-center justify-content-center pt-5">
           <Form
-            className="row col-md-6 profile-manage py-5"
+            className="row col-8 col-md-6 profile-manage py-5 mb-5"
             onSubmit={handleSubmit}
           >
             <h1 className="d-flex align-items-center justify-content-center">
@@ -127,11 +127,7 @@ export default function ManageProfile() {
               </Form.Text>
             </Form.Group>
             {error && <div className="alert alert-danger">{error}</div>}
-            <Button
-              variant="dark"
-              type="submit"
-              className="primary col-md-8 pb"
-            >
+            <Button variant="dark" type="submit" className="primary col-8">
               Submit
             </Button>
           </Form>
