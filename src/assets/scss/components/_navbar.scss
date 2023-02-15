@@ -1,0 +1,37 @@
+@use '../abstracts' as *;
+
+
+
+.bookbix-logo-org{
+
+    font-family: 'MuseoModerno', sans-serif !important;
+    color: $white;
+    margin: 0%;
+    padding: 0%;
+    border: 0%;
+    .sup-script{
+        color: $red-magenta;
+    }
+}
+.nav-bar{
+    margin: 0%;
+    padding: 5px 5px 5px 5px;
+    border: 0%;
+    background-color: $red-navbar;
+    position: sticky; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    
+}
+.dropdown::after{
+    background-color: #000;
+    display: none !important; 
+  }
+
+#dropdown-autoclose-true{
+    color: #fff;
+    border-radius: 50px;
+    background:  none;
+    border-color: bisque;
+
+}
