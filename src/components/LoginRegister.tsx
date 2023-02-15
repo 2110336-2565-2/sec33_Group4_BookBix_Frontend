@@ -60,50 +60,44 @@ export const ChangePasswordForm = () => {
   }
   return (
     <>
-      <div className="d-flex border rounded justify-content-between align-self-end switch-page-btn">
+      <div className="d-flex border rounded justify-content-between align-self-end mb-5 me-4 switch-page-btn">
         <Link to="/register" className="nav-link d-flex align-items-center">
           <div className="text-light ms-1 px-3">Register</div>
         </Link>
-        <Button
-          className="m-1 px-4 current-page-tag active"
-          variant="light"
-          style={{ color: '#db5461' }}
-        >
+        <Button className="m-1 px-4 current-page-tag" variant="light">
           Change Password
         </Button>
       </div>
 
-      <div className="text-header">
-        <h1>
-          Change Password to <span>BookBix</span>
-        </h1>
+      <div className="text-header mb-4">
+        <h1>Change Password</h1>
       </div>
 
       <Form className="form col-md-8" onSubmit={handleSubmit}>
-        <Form.Group className="form-group mb-1" controlId="changePassword">
-          <Form.Label className="form-label">Password</Form.Label>
+        <Form.Group className="form-group mb-1 p-2" controlId="changePassword">
+          <Form.Label className="form-label fs-4">Password</Form.Label>
           <Form.Control
+            className="rounded-5"
             type="password"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className="form-group mb-1" controlId="confirmPassword">
-          <Form.Label className="form-label">Confirm Password</Form.Label>
+
+        <Form.Group className="form-group mb-1 p-2" controlId="confirmPassword">
+          <Form.Label className="form-label fs-4">Confirm Password</Form.Label>
           <Form.Control
+            className="rounded-5"
             type="password"
             placeholder="Enter your password again"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
-        {error && <p className="text-danger">{error}</p>}
-        <Button
-          className="btn btn-primary btn-block mt-4"
-          type="submit"
-          style={{ backgroundColor: '#db5461' }}
-        >
+
+        {error && <p className="text-mute">{error}</p>}
+        <Button className="btn mt-4 rounded-5 form-change-btn" type="submit">
           Change Password
         </Button>
       </Form>

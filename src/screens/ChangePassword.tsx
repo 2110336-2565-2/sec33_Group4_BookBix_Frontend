@@ -9,7 +9,10 @@ const ChangePassword = () => {
         <Col md="6" className="d-none d-md-flex flex-column ">
           <WebInform />
         </Col>
-        <Col md="6" className="wrapper">
+        <Col
+          md="6"
+          className="wrapper d-flex flex-column align-items-center justify-content-center"
+        >
           <ChangePasswordForm />
         </Col>
       </Row>
