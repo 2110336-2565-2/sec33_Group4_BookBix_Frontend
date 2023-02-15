@@ -73,7 +73,7 @@ export default function ManageProfile() {
             </Form.Group>
 
             <Form.Group className="row mb-3 col-md-8 " controlId="formLastname">
-              <Form.Label>Lirstname</Form.Label>
+              <Form.Label>Lastname</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setUser({ ...user, lastname: e.target.value })
