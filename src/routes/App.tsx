@@ -6,6 +6,7 @@ import Logout from '../screens/Logout'
 import Profile from '../screens/Profile'
 import Register from '../screens/Register'
 import ManageProfile from '../screens/ManageProfile'
+import ManageLocation from '../screens/provider/ManageLocation'
 
 function App() {
   return (
@@ -15,11 +16,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ManageProfile />} />
           <Route path="/profile-management" element={<ManageProfile />} />
+          <Route path="/location-booking/:locationId" element={<BookLocation/>} />
           <Route path="*" element={<Home />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
       </Routes>
     </>
   )
