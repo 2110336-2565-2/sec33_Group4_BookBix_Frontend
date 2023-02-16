@@ -2,11 +2,12 @@ import { Route, Routes } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Home from '../screens/Home'
 import Login from '../screens/Login'
-import Logout from '../screens/Logout'
+// import Logout from '../screens/Logout'
 import Profile from '../screens/Profile'
 import Register from '../screens/Register'
 import ManageProfile from '../screens/ManageProfile'
 import ManageLocation from '../screens/provider/ManageLocation'
+import BookLocation from '../screens/BookLocation'
 
 function App() {
   return (

@@ -19,20 +19,17 @@ export default function MyNavbar() {
 
         <Dropdown.Menu>
           <Dropdown.Item>
+          <Link className="nav-link" to="/location-booking/:locationId">
+            BookLocation
+          </Link>
+          </Dropdown.Item>
+
+          <Dropdown.Item>
           <Link className="nav-link" to="/profile">
             Profile
           </Link>
           </Dropdown.Item>
-          <Dropdown.Item>
-          <Link className="nav-link" to="/register">
-            Register
-          </Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
-          </Dropdown.Item>
+          
           <Dropdown.Item>
           <Link className="nav-link" to="/logout">
             Logout
