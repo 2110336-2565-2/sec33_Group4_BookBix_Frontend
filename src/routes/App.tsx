@@ -7,7 +7,7 @@ import BookLocation from '../screens/BookLocation'
 import Register from '../screens/Register'
 import ManageProfile from '../screens/ManageProfile'
 import ManageLocation from '../screens/provider/ManageLocation'
-
+import SearchPage from '../screens/customer/Search'
 function App() {
   return (
     <>
@@ -23,6 +23,7 @@ function App() {
           />
           <Route path="*" element={<Home />} />
         </Route>
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         {/* <Route path="/profile-management" element={<ManageProfile />} />
