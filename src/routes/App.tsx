@@ -14,25 +14,20 @@ const URL = import.meta.env.VITE_API_URL
 
 function App() {
   const [user, setUser] = useState<UserInterface | null>(null)
-
-  useEffect(() => {
-    // fetch to get user info
-    // if user is logged in, set user info in context
-    async function getUserInfo() {
-      const response = await fetch(`${URL}/users/me`, {
+  // fetch user info
+  const fetchUser = async () => {
+    const response = await fetch(`${URL}/me`, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       })
-
-      const data = await response.json()
-
+      const data: UserInterface = await response.json()
       if (response.ok) {
         setUser(data)
-        console.log(data)
+        console.log(`fetch user is ${data}`)
       }
-    }
-
-
+  }
+  useEffect(() => {
+    fetchUser()
   },[])
 
   return (
