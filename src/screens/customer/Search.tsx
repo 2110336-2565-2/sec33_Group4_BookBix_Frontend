@@ -8,7 +8,7 @@ export default function SearchPage() {
   const [location, setLocation] = useState<string>('')
 
   // handle submit
-  const handleSummit = (e) => {
+  const handleSummit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // console.log(location)
     // search location by name
@@ -142,17 +142,17 @@ export default function SearchPage() {
       toSlider.style.zIndex = '0'
     }
   }
-  // const fromSlider = document.querySelector('#fromSlider') as HTMLInputElement
-  // const toSlider = document.querySelector('#toSlider') as HTMLInputElement
-  // const fromInput = document.querySelector('#fromInput') as HTMLInputElement
-  // const toInput = document.querySelector('#toInput') as HTMLInputElement
-  // fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider)
-  // setToggleAccessible(toSlider)
-  // fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput)
-  // toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput)
-  // fromInput.oninput = () =>
-  //   controlFromInput(fromSlider, fromInput, toInput, toSlider)
-  // toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider)
+  const fromSlider = document.querySelector('#fromSlider') as HTMLInputElement
+  const toSlider = document.querySelector('#toSlider') as HTMLInputElement
+  const fromInput = document.querySelector('#fromInput') as HTMLInputElement
+  const toInput = document.querySelector('#toInput') as HTMLInputElement
+  fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider)
+  setToggleAccessible(toSlider)
+  fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput)
+  toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput)
+  fromInput.oninput = () =>
+    controlFromInput(fromSlider, fromInput, toInput, toSlider)
+  toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider)
   return (
     <div className="search-page">
       <div className="fill bg-dark  justify-content-center d-flex pt-5">
