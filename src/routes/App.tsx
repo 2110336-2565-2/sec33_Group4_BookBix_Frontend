@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Home from '../screens/Home'
@@ -7,8 +8,28 @@ import BookLocation from '../screens/BookLocation'
 import Register from '../screens/Register'
 import ManageProfile from '../screens/ManageProfile'
 import ManageLocation from '../screens/provider/ManageLocation'
+import { UserInterface } from '../interfaces/user.interfaces'
+
+const URL = import.meta.env.VITE_API_URL
 
 function App() {
+  const [user, setUser] = useState<UserInterface | null>(null)
+  // fetch user info
+  const fetchUser = async () => {
+    const response = await fetch(`${URL}/me`, {
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      })
+      const data: UserInterface = await response.json()
+      if (response.ok) {
+        setUser(data)
+        console.log(`fetch user is ${data}`)
+      }
+  }
+  useEffect(() => {
+    fetchUser()
+  },[])
+
   return (
     <>
       <Routes>
