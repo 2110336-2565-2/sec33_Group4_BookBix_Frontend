@@ -1,0 +1,8 @@
+@use '../abstracts' as *;
+
+.booking-summary{ 
+    &.fill {
+        min-height: 100vh;
+        height: 100%;
+    }
+}
