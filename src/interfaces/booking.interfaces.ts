@@ -14,3 +14,14 @@ export interface DatePickerInterface {
   selectedDate?: Date | null
   setSelectedDate?: (date: Date) => void 
 }
+
+export interface BookingInterface {
+  id: string
+  locationName: string
+  price: number
+  period: {
+    start: string // 00:00/2021-01-01
+    end: string // 00:00/2021-01-01
+  }
+  status: string
+}
