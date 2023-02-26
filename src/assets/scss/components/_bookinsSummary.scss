@@ -5,4 +5,17 @@
         min-height: 100vh;
         height: 100%;
     }
+    .booking-panel {
+        background-color: $grey;
+        border-radius: 10px;
+    }
+    .booking-panel-header {
+        font-weight: 600;
+    }
+}
+
+.booking {
+    background-color: $tint-black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
