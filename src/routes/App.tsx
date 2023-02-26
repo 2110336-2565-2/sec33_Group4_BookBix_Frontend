@@ -9,6 +9,8 @@ import Register from '../screens/Register'
 import ManageProfile from '../screens/ManageProfile'
 import ManageLocation from '../screens/provider/ManageLocation'
 import { UserInterface } from '../interfaces/user.interfaces'
+import ForgetPassword from '../screens/ForgetPassword'
+import ResetPassword from '../screens/ResetPassword'
 
 const URL = import.meta.env.VITE_API_URL
 
@@ -46,6 +48,8 @@ function App() {
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/resetpassword" element={<ForgetPassword />} />
+        <Route path="/resetpassword/:id" element={<ResetPassword />} />
         {/* <Route path="/profile-management" element={<ManageProfile />} />
         <Route path="/location-management" element={<ManageLocation />} /> */}
       </Routes>
