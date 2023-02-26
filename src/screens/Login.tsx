@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Container, Form, Row, Col} from 'react-bootstrap'
+import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { WebInform, LoginForm } from '../components/LoginRegister'
 // .env file
 
@@ -9,10 +9,10 @@ const Login: React.FC = () => {
     <Container fluid className="login fill bg-dark">
       <Row className="fill">
         <Col md="6" className="d-none d-md-flex flex-column ">
-          <WebInform/>
+          <WebInform />
         </Col>
         <Col md="6" className="wrapper">
-          <LoginForm/>
+          <LoginForm />
         </Col>
       </Row>
     </Container>

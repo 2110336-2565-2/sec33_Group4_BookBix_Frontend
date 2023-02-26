@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import login_costume from '../assets/images/login-costume.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 
 interface Data {
@@ -35,6 +35,7 @@ export const Registration = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [type, setType] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -71,7 +72,7 @@ export const Registration = () => {
       // Save the user information in local storage or in the state
       localStorage.setItem('user', JSON.stringify(data.user))
       // Redirect the user to the homepage
-      window.location.href = '/home'
+      navigate('/home')
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -180,6 +181,7 @@ export const LoginForm = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -191,6 +193,7 @@ export const LoginForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       })
       const data = await response.json()
@@ -202,7 +205,7 @@ export const LoginForm = () => {
       localStorage.setItem('user', JSON.stringify(data.user))
 
       // Redirect the user to the homepage
-      window.location.href = '/home'
+      navigate('/home')
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
