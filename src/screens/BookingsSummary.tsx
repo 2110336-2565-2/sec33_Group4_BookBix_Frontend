@@ -75,14 +75,16 @@ const BookingSummary: React.FC = () => {
     if (data) {
       return data.map((booking) => {
         return (
-          <Booking
-            key={booking.id}
-            id={booking.id}
-            locationName={booking.locationName}
-            price={booking.price}
-            period={booking.period}
-            status={booking.status}
-          />
+          <Row>
+            <Booking
+              key={booking.id}
+              id={booking.id}
+              locationName={booking.locationName}
+              price={booking.price}
+              period={booking.period}
+              status={booking.status}
+            />
+          </Row>
         )
       })
     }
@@ -93,11 +95,19 @@ const BookingSummary: React.FC = () => {
     <Container fluid className="booking-summary fill bg-dark">
       <Row className="">
         <Col md="4">
-            <h1 className='text-white'>Your bookings</h1>
+          <h1 className="text-white">Your bookings</h1>
         </Col>
       </Row>
-      <Row className="booking-summary-panel">
-        <div className='bookings-list text-white'>{renderBookings()}</div>
+      <Row className="booking-panel mt-4 mx-auto">
+        <Row className="booking-panel-header p-3">
+          <Col md="3" ><span>location</span></Col>
+          <Col md="3" className='text-center'><span>period</span></Col>
+          <Col md="1"><span>booking_id</span></Col>
+          <Col md="1" className='text-center'><span>price</span></Col>
+          <Col md="2" className='text-center'><span>status</span></Col>
+          <Col md="1" className='text-center'><span>action</span></Col>
+        </Row>
+        {renderBookings()}
       </Row>
     </Container>
   )

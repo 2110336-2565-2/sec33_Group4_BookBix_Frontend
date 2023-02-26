@@ -19,3 +19,14 @@ export function formatTime(date: Date | null) {
     ? [padTo2Digits(date.getHours()), padTo2Digits(date.getMinutes())].join(':')
     : ''
 }
+
+// HH:mm,yyyy-MM-DD format [HH:mm,yyyy-MM-DD]
+export function formatBookingPeriod(
+  start: string | null,
+  end: string | null,
+  separator = '/',
+) {
+  var startTime = start?.split(separator)
+  var endTime = end?.split(separator)
+  return {startTime, endTime} 
+}
