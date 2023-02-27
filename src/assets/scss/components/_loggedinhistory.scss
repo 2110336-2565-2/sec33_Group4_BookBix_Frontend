@@ -1,0 +1,9 @@
+@use '../abstracts' as *;
+
+.history-page {
+  .main-container {
+    background-color: $red-magenta;
+    color: white;
+    padding: 30px;
+  }
+}
