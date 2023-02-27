@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Table } from 'react-bootstrap'
 
 interface HistoriesInterface {
   histories: HistoryInterface[]
@@ -37,21 +37,21 @@ const LoggedInHistory = () => {
   ]
 
   return (
-    <Container fluid className="fill bg-dark">
-      <Row className="p-3">
-        <Col>
-          <h1 className="text-start d-inline bookbix-logo">BookBix</h1>
-        </Col>
+    <Container fluid className="history-page fill bg-dark">
+      <Row>
+        <h1 className="text-start bookbix-logo">BookBix</h1>
       </Row>
-      <Row className="pb-5">
+      <Row>
         <Col>
-          <Container className="bg-white px-4 py-5 border rounded-3">
-            <Container>
-              <h4 className="fw-bold">Authentication History</h4>
-            </Container>
-            <Container>
+          <Container className="main-container rounded-4">
+            <Row className="pb-4">
+              <Col>
+                <h2 className="fw-bold p-1">Authentication History</h2>
+              </Col>
+            </Row>
+            <Row>
               <HistoryTable histories={histories} />
-            </Container>
+            </Row>
           </Container>
         </Col>
       </Row>
@@ -61,7 +61,7 @@ const LoggedInHistory = () => {
 
 const HistoryTable = ({ histories }: HistoriesInterface) => {
   return (
-    <table className="table table-striped">
+    <Table borderless responsive="sm">
       <HistoryTableHeader />
       {histories.map((history) => {
         return (
@@ -73,17 +73,25 @@ const HistoryTable = ({ histories }: HistoriesInterface) => {
           />
         )
       })}
-    </table>
+    </Table>
   )
 }
 const HistoryTableHeader = () => {
   return (
-    <thead>
+    <thead className="table-dark">
       <tr>
-        <th scope="col">Lastest Login Update</th>
-        <th scope="col">Device Type</th>
-        <th scope="col">Email</th>
-        <th scope="col">IP Address</th>
+        <th scope="col">
+          <h5 className="fw-bold">Lastest Login Update</h5>
+        </th>
+        <th scope="col">
+          <h5 className="fw-bold">Device Type</h5>
+        </th>
+        <th scope="col">
+          <h5 className="fw-bold">Email</h5>
+        </th>
+        <th scope="col">
+          <h5 className="fw-bold">IP Address</h5>
+        </th>
       </tr>
     </thead>
   )
@@ -91,11 +99,19 @@ const HistoryTableHeader = () => {
 const HistoryTableBody = ({ date, deviceType, email, ipAddress }: HistoryInterface) => {
   return (
     <tbody>
-      <tr>
-        <td>{date.toDateString()}</td>
-        <td>{deviceType}</td>
-        <td>{email}</td>
-        <td>{ipAddress}</td>
+      <tr className="table-light">
+        <td>
+          <h5>{date.toDateString()}</h5>
+        </td>
+        <td>
+          <h5>{deviceType}</h5>
+        </td>
+        <td>
+          <h5>{email}</h5>
+        </td>
+        <td>
+          <h5>{ipAddress}</h5>
+        </td>
       </tr>
     </tbody>
   )
