@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import Booking from '../components/Booking'
+import { RowBooking, TicketBooking } from '../components/Booking'
 import { BookingInterface } from '../interfaces/booking.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
@@ -26,14 +26,14 @@ const mockBookings: BookingInterface[] = [
     status: 'pending',
   },
   {
-    id: 'b003',
+    id: '0000000003',
     locationName: 'Beachfront Villa',
     price: 750.0,
     period: {
       start: '12:00/2023-03-20',
       end: '10:00/2023-03-25',
     },
-    status: 'cancelled',
+    status: 'canceled',
   },
   {
     id: 'b004',
@@ -42,6 +42,26 @@ const mockBookings: BookingInterface[] = [
     period: {
       start: '16:00/2023-04-02',
       end: '10:00/2023-04-07',
+    },
+    status: 'confirmed',
+  },
+  {
+    id: 'b005',
+    locationName: 'Central park',
+    price: 1800,
+    period: {
+      start: '16:00/2023-06-02',
+      end: '10:00/2023-06-07',
+    },
+    status: 'confirmed',
+  },
+  {
+    id: 'b005',
+    locationName: 'Central park',
+    price: 1800,
+    period: {
+      start: '16:00/2023-06-02',
+      end: '10:00/2023-06-07',
     },
     status: 'confirmed',
   },
@@ -76,7 +96,15 @@ const BookingSummary: React.FC = () => {
       return data.map((booking) => {
         return (
           <Row>
-            <Booking
+            <RowBooking
+              key={booking.id}
+              id={booking.id}
+              locationName={booking.locationName}
+              price={booking.price}
+              period={booking.period}
+              status={booking.status}
+            />
+            <TicketBooking
               key={booking.id}
               id={booking.id}
               locationName={booking.locationName}
@@ -95,18 +123,35 @@ const BookingSummary: React.FC = () => {
     <Container fluid className="booking-summary fill bg-dark">
       <Row className="">
         <Col md="4">
-          <h1 className="text-white">Your bookings</h1>
+          <h1 className="text-white page-title">Your bookings</h1>
         </Col>
       </Row>
       <Row className="booking-panel mt-4 mx-auto">
-        <Row className="booking-panel-header p-3">
-          <Col md="3" ><span>location</span></Col>
-          <Col md="3" className='text-center'><span>period</span></Col>
-          <Col md="1"><span>booking_id</span></Col>
-          <Col md="1" className='text-center'><span>price</span></Col>
-          <Col md="2" className='text-center'><span>status</span></Col>
-          <Col md="1" className='text-center'><span>action</span></Col>
-        </Row>
+        <div className="d-none d-lg-block">
+          <Row className="p-3 booking-panel-header d-flex flex-row">
+            <Col md="3">
+              <span>location</span>
+            </Col>
+            <Col md="1" className="d-xl-none">
+              <span>period</span>
+            </Col>
+            <Col md="3" className="d-none d-xl-block period-header">
+              <span>period</span>
+            </Col>
+            <Col md="2" lg="1" className="p-0 me-2 id-header">
+              <span>booking_id</span>
+            </Col>
+            <Col md="2" lg="1" className="ms-4">
+              <span>price</span>
+            </Col>
+            <Col md="1" className="status-header">
+              <span>status</span>
+            </Col>
+            <Col md="1" className="ms-5">
+              <span>action</span>
+            </Col>
+          </Row>
+        </div>
         {renderBookings()}
       </Row>
     </Container>
