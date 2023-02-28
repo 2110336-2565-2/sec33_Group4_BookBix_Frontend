@@ -2,7 +2,7 @@
 @use './components/register';
 @use './components/manageProfile';
 @use './components/booklocation';
-@use './components/bookinsSummary';
+@use './components/bookingsSummary';
 
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300;400;500;600;700;800;900&display=swap);
@@ -21,18 +21,6 @@ body {
   height: calc(100vh - 56px);
 }
 
-// h1, h2, h3, h4, h5 {
-//   font-family: 'Poppins', sans-serif !important;
-// }
-
-/* For mapping with figma
-h1 font-size: 3.052rem;
-h2 font-size: 2.441rem;
-h3 font-size: 1.953rem;
-h4 font-size: 1.563rem;
-h5 font-size: 1.25rem;
-p font-size: 1rem;
-*/
 #root {
   min-height: 100vh;
   height: auto;

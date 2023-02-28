@@ -1,0 +1,156 @@
+@use '../abstracts' as *;
+
+.booking-summary {
+  &.fill {
+    min-height: 100vh;
+    height: 100%;
+  }
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: 1px;
+    margin-left: 30%;
+    margin-top: 15%;
+  }
+  .booking-panel {
+    background-color: $grey;
+    width: 80%;
+    max-height: 616px;
+    border-radius: 10px;
+    overflow: scroll;
+  }
+  .booking-panel-header {
+    font-weight: 600;
+    margin-left: 0.1%;
+    .status-header {
+      margin-left: 4.5%;
+    }
+    .period-header {
+      padding-left: 8.5%;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .id-header {
+      margin-left: 3%;
+    }
+    .status-header {
+      margin-left: 3.5% !important;
+    }
+  }
+}
+
+.booking {
+  background-color: $tint-black-09;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  width: 97%;
+  margin-left: 2%;
+  margin-right: 2%;
+  @media screen and (max-width: 1200px) {
+    .id-body {
+      margin-left: 3%;
+    }
+    .status-body {
+      margin-left: 6%;
+    }
+  }
+  @media screen and (max-width: 1800px) {
+    .status-body {
+      margin-left: 5%;
+    }
+  }
+  //create cirular progress bar
+  .status-text {
+    &.pending {
+      color: $yellow-pastel;
+    }
+    &.confirmed {
+      color: $green-pastel;
+    }
+    &.canceled {
+      color: $shadow-red-magenta;
+    }
+  }
+  .progress-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .outer-progress-circle {
+      width: 40px;
+      height: 40px;
+      padding: 2.5px;
+      position: relative;
+      border-radius: 50%;
+      margin: 0 auto;
+      &.pending {
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          $white 0deg,
+          $yellow-pastel 179.65deg,
+          $white 180.02deg,
+          $white 360deg,
+          #ffffff 360deg
+        );
+      }
+      &.confirmed {
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          $white 0deg,
+          $green-pastel 350.63deg,
+          $white 360deg
+        );
+      }
+      &.canceled {
+        background: $shadow-red-magenta;
+      }
+    }
+    .outer-progress-circle .inner-progress-circle {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: $tint-black;
+      margin: 0 auto;
+    }
+  }
+  .action-btn {
+    height: 35px;
+    font-size: calc($font-base * 1);
+    border-radius: 5px;
+    width: calc(120% * 1.2);
+    overflow: hidden;
+    @media screen and (max-width: 1200px) {
+      width: calc(120% * 1.7);
+    }
+    &.pending {
+      background: $yellow-pastel;
+      border-color: $yellow-pastel;
+    }
+    &.confirmed {
+      background: $purple-pastel;
+      border-color: $purple-pastel;
+    }
+  }
+  .ticket-action-btn {
+    font-size: calc($font-base * 1);
+    border-radius: 5px;
+    width: 45%;
+    margin-left: 50%;
+  }
+}
+
+.booking-outside {
+  .cancel-btn {
+    width: 15px;
+    height: 15px;
+    background: $shadow-red-magenta;
+    border-radius: 3px;
+    .icon-x {
+      color: $white;
+      background: $white;
+      background-color: $white;
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
