@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Row, Col, Table } from 'react-bootstrap'
 
 interface HistoriesInterface {
@@ -15,24 +14,6 @@ const LoggedInHistory = () => {
   const histories: HistoryInterface[] = [
     { date: new Date('2022-03-25'), deviceType: 'Mobile', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
     { date: new Date('2022-01-25'), deviceType: 'Web', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
     { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
   ]
 
@@ -61,11 +42,12 @@ const LoggedInHistory = () => {
 
 const HistoryTable = ({ histories }: HistoriesInterface) => {
   return (
-    <Table borderless responsive="sm">
+    <Table borderless responsive="lg">
       <HistoryTableHeader />
       {histories.map((history) => {
         return (
           <HistoryTableBody
+            key={history.date.toDateString()}
             date={history.date}
             deviceType={history.deviceType}
             email={history.email}

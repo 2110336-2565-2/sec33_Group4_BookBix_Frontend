@@ -1,10 +1,13 @@
 @use '../abstracts' as *;
 
 .history-page {
+  min-height: 100vh;
   .main-container {
+    min-height: 80vh;
     background-color: $red-magenta;
     color: white;
     padding: 30px;
+    margin-bottom: 50px;
   }
   tr {
     height: 70px;
