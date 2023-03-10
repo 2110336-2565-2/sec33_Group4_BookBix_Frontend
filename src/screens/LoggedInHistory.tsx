@@ -1,4 +1,5 @@
-import { Container, Row, Col, Table } from 'react-bootstrap'
+import { Container, Row, Col, Table, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 interface HistoriesInterface {
   histories: HistoryInterface[]
@@ -24,10 +25,15 @@ const LoggedInHistory = () => {
       </Row>
       <Row>
         <Col>
-          <Container className="main-container rounded-4">
+          <Container className="main-container rounded-4" fluid="lg">
             <Row className="pb-4">
               <Col>
                 <h2 className="fw-bold p-1">Authentication History</h2>
+              </Col>
+              <Col xs="auto" md="auto">
+                <Link to="/" className="nav-link  border border-1 rounded-2 back-btn align-self-center">
+                  <h5>Back</h5>
+                </Link>
               </Col>
             </Row>
             <Row>
@@ -42,7 +48,7 @@ const LoggedInHistory = () => {
 
 const HistoryTable = ({ histories }: HistoriesInterface) => {
   return (
-    <Table borderless responsive="lg">
+    <Table borderless responsive="md">
       <HistoryTableHeader />
       {histories.map((history) => {
         return (
@@ -59,21 +65,18 @@ const HistoryTable = ({ histories }: HistoriesInterface) => {
   )
 }
 const HistoryTableHeader = () => {
+  const headerText = ['Lastest Login Update', 'Device Type', 'Email', 'IP Address']
+
   return (
     <thead className="table-dark">
       <tr>
-        <th scope="col">
-          <h5 className="fw-bold">Lastest Login Update</h5>
-        </th>
-        <th scope="col">
-          <h5 className="fw-bold">Device Type</h5>
-        </th>
-        <th scope="col">
-          <h5 className="fw-bold">Email</h5>
-        </th>
-        <th scope="col">
-          <h5 className="fw-bold">IP Address</h5>
-        </th>
+        {headerText.map((header) => {
+          return (
+            <th key={header} scope="col">
+              <h5 className="fw-bold">{header}</h5>
+            </th>
+          )
+        })}
       </tr>
     </thead>
   )

@@ -17,4 +17,16 @@
   th {
     padding: 10px 40px;
   }
+  .back-btn {
+    background-color: white;
+    color: $red-magenta;
+    &:hover {
+      background-color: $red-magenta;
+      color: white;
+      border: 1px solid white;
+    }
+    h5 {
+      padding: 10px 50px;
+    }
+  }
 }
