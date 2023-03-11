@@ -17,6 +17,12 @@
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
+  &.fw-semiBold {
+    font-weight: 600 ;
+  }
+  &.fw-bold {
+    font-weight: 700;
+  }
 }
 
 h1 { font-size: $font-h1;}

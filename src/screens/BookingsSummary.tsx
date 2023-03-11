@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { RowBooking, TicketBooking } from '../components/Booking'
+import { RowBooking} from '../components/RowBooking'
+import { TicketBooking } from '../components/TicketBooking'
 import { BookingInterface } from '../interfaces/booking.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
 const mockBookings: BookingInterface[] = [
   {
-    id: 'b001',
+    id: 'b000000001',
     locationName: 'Luxury Suite at Grand Hotel',
     price: 350.0,
     period: {
@@ -16,7 +17,7 @@ const mockBookings: BookingInterface[] = [
     status: 'confirmed',
   },
   {
-    id: 'b002',
+    id: 'b000000002',
     locationName: 'Cozy Cabin in the Woods',
     price: 120.5,
     period: {
@@ -26,7 +27,7 @@ const mockBookings: BookingInterface[] = [
     status: 'pending',
   },
   {
-    id: '0000000003',
+    id: 'b000000003',
     locationName: 'Beachfront Villa',
     price: 750.0,
     period: {
@@ -36,7 +37,7 @@ const mockBookings: BookingInterface[] = [
     status: 'canceled',
   },
   {
-    id: 'b004',
+    id: 'b000000004',
     locationName: 'City Apartment with View',
     price: 180.0,
     period: {
@@ -46,7 +47,7 @@ const mockBookings: BookingInterface[] = [
     status: 'confirmed',
   },
   {
-    id: 'b005',
+    id: 'b000000005',
     locationName: 'Central park',
     price: 1800,
     period: {
@@ -56,7 +57,7 @@ const mockBookings: BookingInterface[] = [
     status: 'confirmed',
   },
   {
-    id: 'b005',
+    id: 'b000000006',
     locationName: 'Central park',
     price: 1800,
     period: {
@@ -123,36 +124,47 @@ const BookingSummary: React.FC = () => {
     <Container fluid className="booking-summary fill bg-dark">
       <Row className="">
         <Col md="4">
-          <h1 className="text-white page-title">Your bookings</h1>
+          <h2 className="text-white page-title fw-bold">Your bookings</h2>
         </Col>
       </Row>
       <Row className="booking-panel mt-4 mx-auto">
         <div className="d-none d-lg-block">
-          <Row className="p-3 booking-panel-header d-flex flex-row">
-            <Col md="3">
-              <span>location</span>
-            </Col>
-            <Col md="1" className="d-xl-none">
-              <span>period</span>
-            </Col>
-            <Col md="3" className="d-none d-xl-block period-header">
-              <span>period</span>
-            </Col>
-            <Col md="2" lg="1" className="p-0 me-2 id-header">
-              <span>booking_id</span>
-            </Col>
-            <Col md="2" lg="1" className="ms-4">
-              <span>price</span>
-            </Col>
-            <Col md="1" className="status-header">
-              <span>status</span>
-            </Col>
-            <Col md="1" className="ms-5">
-              <span>action</span>
-            </Col>
-          </Row>
+          <BookingsSummaryHeader />
         </div>
         {renderBookings()}
+      </Row>
+    </Container>
+  )
+}
+
+const BookingsSummaryHeader: React.FC = () => {
+  return (
+    <Container>
+      <Row className="p-3 ms-1 flex-row align-items-center booking-summary-header justify-content-between ">
+        <Col md="3" className='p-0'>
+          <h5 className="fw-semiBold">location</h5>
+        </Col>
+        <Col md="1" className="d-xl-none w-auto p-0">
+          <h5 className="fw-semiBold">period</h5>
+        </Col>
+        <Col md="3" className="d-none d-xl-block p-0 text-center">
+          <h5 className="fw-semiBold">period</h5>
+        </Col>
+        <Col md="2" className="d-xl-none text-center p-0">
+          <h5 className="fw-semiBold">id</h5>
+        </Col>
+        <Col md="2" lg="1" className="d-none d-xl-block id-header w-auto">
+          <h5 className="fw-semiBold">bookingId</h5>
+        </Col>
+        <Col md="2" lg="1" className="text-center">
+          <h5 className="fw-semiBold">price</h5>
+        </Col>
+        <Col md="1" className="status-header text-center w-auto">
+          <h5 className="fw-semiBold">status</h5>
+        </Col>
+        <Col md="2" xl="1" className="text-center">
+          <h5 className="fw-semiBold">action</h5>
+        </Col>
       </Row>
     </Container>
   )

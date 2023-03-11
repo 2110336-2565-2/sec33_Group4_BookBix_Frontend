@@ -39,9 +39,7 @@ export function calculateDays(
   var startTime = start?.split('-')
   var endTime = end?.split('-')
   var startDay = new Date( parseInt(startTime![0]), parseInt(startTime![1]), parseInt(startTime![2]))
-  console.log("startDay: ",startDay)
   var endDay = new Date(parseInt(endTime![0]), parseInt(endTime![1]), parseInt(endTime![2]))
-  console.log("endDay: ",endDay)
   var days = (endDay.getTime() - startDay.getTime()) / (1000 * 60 * 60 * 24)
   return days
 }

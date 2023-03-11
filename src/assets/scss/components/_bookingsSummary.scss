@@ -5,13 +5,17 @@
     min-height: 100vh;
     height: 100%;
   }
+
   .page-title {
-    font-size: 2rem;
-    font-weight: 700;
     line-height: 130%;
     letter-spacing: 1px;
-    margin-left: 30%;
     margin-top: 15%;
+    @media screen and (min-width: $mnw-laptop) {
+      margin-left: 30%;
+    }
+    @media screen and (max-width: $mxw-tablet) {
+      text-align: center;
+    }
   }
   .booking-panel {
     background-color: $grey;
@@ -20,23 +24,8 @@
     border-radius: 10px;
     overflow: scroll;
   }
-  .booking-panel-header {
-    font-weight: 600;
-    margin-left: 0.1%;
-    .status-header {
-      margin-left: 4.5%;
-    }
-    .period-header {
-      padding-left: 8.5%;
-    }
-  }
-  @media screen and (max-width: 1200px) {
-    .id-header {
-      margin-left: 3%;
-    }
-    .status-header {
-      margin-left: 3.5% !important;
-    }
+  .booking-summary-header {
+    width: 97%;
   }
 }
 
@@ -45,21 +34,6 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   width: 97%;
-  margin-left: 2%;
-  margin-right: 2%;
-  @media screen and (max-width: 1200px) {
-    .id-body {
-      margin-left: 3%;
-    }
-    .status-body {
-      margin-left: 6%;
-    }
-  }
-  @media screen and (max-width: 1800px) {
-    .status-body {
-      margin-left: 5%;
-    }
-  }
   //create cirular progress bar
   .status-text {
     &.pending {
@@ -94,12 +68,7 @@
         );
       }
       &.confirmed {
-        background: conic-gradient(
-          from 0deg at 50% 50%,
-          $white 0deg,
-          $green-pastel 350.63deg,
-          $white 360deg
-        );
+        background: conic-gradient(from 0deg at 50% 50%, $white 0deg, $green-pastel 350.63deg, $white 360deg);
       }
       &.canceled {
         background: $shadow-red-magenta;
@@ -115,13 +84,10 @@
   }
   .action-btn {
     height: 35px;
-    font-size: calc($font-base * 1);
+    width: 100%;
     border-radius: 5px;
-    width: calc(120% * 1.2);
     overflow: hidden;
-    @media screen and (max-width: 1200px) {
-      width: calc(120% * 1.7);
-    }
+    box-sizing: border-box;
     &.pending {
       background: $yellow-pastel;
       border-color: $yellow-pastel;
@@ -132,10 +98,8 @@
     }
   }
   .ticket-action-btn {
-    font-size: calc($font-base * 1);
     border-radius: 5px;
-    width: 45%;
-    margin-left: 50%;
+    width: 100%;
   }
 }
 
@@ -143,8 +107,13 @@
   .cancel-btn {
     width: 15px;
     height: 15px;
-    background: $shadow-red-magenta;
+    background: $red-magenta;
     border-radius: 3px;
+    &:hover {
+      cursor: pointer;
+      background: $shadow-red-magenta;
+      background-color: $shadow-red-magenta;
+    }
     .icon-x {
       color: $white;
       background: $white;
