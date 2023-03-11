@@ -18,6 +18,7 @@ export interface DatePickerInterface {
 export interface BookingInterface {
   id: string
   locationName: string
+  locationId: string
   price: number
   period: {
     start: string // 00:00/2021-01-01

@@ -5,12 +5,14 @@ import { formatBookingPeriod } from '../utils/Time.utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { statusSelector } from '../utils/Booking.utils'
+import { Link } from 'react-router-dom'
 
 const URL = import.meta.env.VITE_API_URL
 
 export const TicketBooking: React.FC<BookingInterface> = ({
     id = '',
     locationName = '',
+    locationId= '',
     price = 0,
     period = {
       start: '',
@@ -55,8 +57,8 @@ export const TicketBooking: React.FC<BookingInterface> = ({
               {id}
             </Col>
             <Col xs="5" sm="3" className="d-flex flex-column status-body align-items-center">
-              {statusSelector(status, 'status-text')}
-              <div className="progress-circle">{statusSelector(status, 'progress-circle')}</div>
+              {statusSelector(status, 'status-text', locationId)}
+              <div className="progress-circle">{statusSelector(status, 'progress-circle', locationId)}</div>
             </Col>
           </Row>
           <Row className="p-3 d-flex flex-nowrap justify-content-between">
@@ -70,7 +72,7 @@ export const TicketBooking: React.FC<BookingInterface> = ({
               Price {price} THB
             </Col>
             <Col xs="5" sm="3">
-              <div className="ticket-action-btn">{statusSelector(status, 'action-btn')}</div>
+              <div className="ticket-action-btn">{statusSelector(status, 'action-btn', locationId)}</div>
             </Col>
           </Row>
         </Container>
@@ -84,9 +86,11 @@ export const TicketBooking: React.FC<BookingInterface> = ({
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="danger" onClick={() => handleDelete(id)}>
-              Delete
-            </Button>
+            <Link to={`/user/bookings`}>
+                <Button variant="danger" onClick={() => handleDelete(id)}>
+                Delete
+                </Button>
+            </Link>
           </Modal.Footer>
         </Modal>
       </div>

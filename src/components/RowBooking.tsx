@@ -5,12 +5,14 @@ import { calculateDays, formatBookingPeriod } from '../utils/Time.utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { statusSelector } from '../utils/Booking.utils'
+import { Link } from 'react-router-dom'
 
 const URL = import.meta.env.VITE_API_URL
 
 export const RowBooking: React.FC<BookingInterface> = ({
   id = '',
   locationName = '',
+  locationId= '',
   price = 0,
   period = {
     start: '',
@@ -72,11 +74,11 @@ export const RowBooking: React.FC<BookingInterface> = ({
             {price} THB
           </Col>
           <Col md="1" className="d-flex flex-column status-body align-items-center">
-            {statusSelector(status, 'status-text')}
-            <div className="progress-circle">{statusSelector(status, 'progress-circle')}</div>
+            {statusSelector(status, 'status-text', locationId)}
+            <div className="progress-circle">{statusSelector(status, 'progress-circle',locationId)}</div>
           </Col>
           <Col md="2" xl="1" className="action p-0">
-            {statusSelector(status, 'action-btn')}
+            {statusSelector(status, 'action-btn',locationId)}
           </Col>
         </Row>
       </Container>
@@ -94,9 +96,11 @@ export const RowBooking: React.FC<BookingInterface> = ({
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="danger" onClick={() => handleDelete(id)}>
-            Delete
-          </Button>
+          <Link to={`/user/bookings`}>
+                <Button variant="danger" onClick={() => handleDelete(id)}>
+                Delete
+                </Button>
+            </Link>
         </Modal.Footer>
       </Modal>
     </div>

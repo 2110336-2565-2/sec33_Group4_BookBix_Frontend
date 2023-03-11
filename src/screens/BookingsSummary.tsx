@@ -9,6 +9,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000001',
     locationName: 'Luxury Suite at Grand Hotel',
+    locationId:'l000000001',
     price: 350.0,
     period: {
       start: '15:00/2023-03-01',
@@ -19,6 +20,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000002',
     locationName: 'Cozy Cabin in the Woods',
+    locationId:'l000000002',
     price: 120.5,
     period: {
       start: '14:00/2023-03-10',
@@ -29,6 +31,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000003',
     locationName: 'Beachfront Villa',
+    locationId:'l000000003',
     price: 750.0,
     period: {
       start: '12:00/2023-03-20',
@@ -39,6 +42,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000004',
     locationName: 'City Apartment with View',
+    locationId:'l000000004',
     price: 180.0,
     period: {
       start: '16:00/2023-04-02',
@@ -49,6 +53,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000005',
     locationName: 'Central park',
+    locationId:'l000000005',
     price: 1800,
     period: {
       start: '16:00/2023-06-02',
@@ -59,6 +64,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000006',
     locationName: 'Central park',
+    locationId:'l000000006',
     price: 1800,
     period: {
       start: '16:00/2023-06-02',
@@ -101,6 +107,7 @@ const BookingSummary: React.FC = () => {
               key={booking.id}
               id={booking.id}
               locationName={booking.locationName}
+              locationId={booking.locationId}
               price={booking.price}
               period={booking.period}
               status={booking.status}
@@ -109,6 +116,7 @@ const BookingSummary: React.FC = () => {
               key={booking.id}
               id={booking.id}
               locationName={booking.locationName}
+              locationId={booking.locationId}
               price={booking.price}
               period={booking.period}
               status={booking.status}
