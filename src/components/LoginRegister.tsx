@@ -49,10 +49,7 @@ export const Registration = () => {
     }
     setError(null)
     try {
-      const url =
-        type == 'Customer'
-          ? `${URL}/customers/register`
-          : `${URL}/providers/register`
+      const url = `${URL}/auth/register`
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -188,7 +185,7 @@ export const LoginForm = () => {
     if (!email || !password) return setError('Please fill in all fields')
 
     try {
-      const response = await fetch(`${URL}/customers/login`, {
+      const response = await fetch(`${URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
