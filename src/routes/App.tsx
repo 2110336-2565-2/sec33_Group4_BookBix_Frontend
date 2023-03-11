@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, createContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Home from '../screens/Home'
@@ -12,10 +12,18 @@ import { UserInterface } from '../interfaces/user.interfaces'
 import ForgetPassword from '../screens/ForgetPassword'
 import ResetPassword from '../screens/ResetPassword'
 
-const URL = import.meta.env.VITE_API_URL
+const mockUser: UserInterface = {
+  _id: "1",
+  username: 'jewjew',
+  role: 'provider'
+}
+
+export const UserContext = createContext<UserInterface | null>(mockUser);
+const URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [user, setUser] = useState<UserInterface | null>(null)
+
   // fetch user info
   const fetchUser = async () => {
     const response = await fetch(`${URL}/me`, {
@@ -29,7 +37,9 @@ function App() {
       }
   }
   useEffect(() => {
-    fetchUser()
+    <UserContext.Provider value={user}> 
+      fetchUser()
+    </UserContext.Provider>
   },[])
 
   return (

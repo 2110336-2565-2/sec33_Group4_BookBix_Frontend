@@ -1,0 +1,46 @@
+@use '../abstracts' as *;
+
+.navbar {
+  min-height: 115px;
+  .navbar-toggler {
+    border-color: $white;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  .dropdown-toggle {
+    background: -webkit-linear-gradient(180deg, #db3b5f 0%, #eeac76 78.12%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    &.show {
+      background: -webkit-linear-gradient(180deg, #db3b5f 0%, #eeac76 78.12%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .bookbix-brand {
+    /* Ellipse 1 */
+    position: absolute;
+    width: 329.35px;
+    height: 307.32px;
+    left: -100px;
+    top: -200px;
+    border-radius: 50%;
+    z-index: -1;
+    background: linear-gradient(180deg, #db3b5f 0%, #eeac76 78.12%, #ffffff 100%);
+    transform: rotate(127.27deg);
+  }
+  .logo {
+    font-family: 'MuseoModerno', sans-serif !important;
+    z-index: 1;
+  }
+  .logo__role {
+    font-family: 'MuseoModerno', sans-serif !important;
+    color: $black;
+    margin-bottom: 20%;
+    z-index: 1;
+    @media (max-width: $breakpoint-lg) {
+      background: -webkit-linear-gradient(180deg, #db3b5f 0%, #eeac76 78.12%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
