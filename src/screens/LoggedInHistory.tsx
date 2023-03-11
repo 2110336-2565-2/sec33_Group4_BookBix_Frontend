@@ -1,22 +1,53 @@
-import { Container, Row, Col, Table, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-
-interface HistoriesInterface {
-  histories: HistoryInterface[]
-}
-interface HistoryInterface {
-  date: Date
-  deviceType: string
-  email: string
-  ipAddress: string
-}
+import { useState, useEffect } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { HistoryInterface } from '../interfaces/history.interface'
+import { HistoryTable } from '../components/CustomTable'
 
 const LoggedInHistory = () => {
-  const histories: HistoryInterface[] = [
-    { date: new Date('2022-03-25'), deviceType: 'Mobile', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2022-01-25'), deviceType: 'Web', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-    { date: new Date('2021-08-21'), deviceType: 'Ipad', email: 'nick@mail.com', ipAddress: '162.1.1.1' },
-  ]
+  const { customerId } = useParams()
+  const [histories, setHistories] = useState<HistoryInterface[]>([])
+  const navigate = useNavigate()
+  const URL = `${import.meta.env.VITE_API_URL}/customers/${customerId}/history`
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch(URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      let data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong')
+      }
+      setHistories(data)
+    } catch (error) {
+      console.log('something went wrong')
+      navigate('/login')
+    }
+  }
+  useEffect(() => {
+    // fetchUser()
+    setHistories([
+      {
+        device: 'POSTMAN - POSTMAN DESKTOP',
+        ip: '111.11.0.1',
+        date: '11/03/2023 21:11:25',
+      },
+      {
+        device: 'POSTMAN - POSTMAN DESKTOP',
+        ip: '111.11.0.1',
+        date: '11/03/2023 21:11:27',
+      },
+      {
+        device: 'POSTMAN - POSTMAN DESKTOP',
+        ip: '111.11.0.1',
+        date: '11/03/2023 21:11:31',
+      },
+    ])
+  }, [])
 
   return (
     <Container fluid className="history-page fill bg-dark">
@@ -31,7 +62,7 @@ const LoggedInHistory = () => {
                 <h2 className="fw-bold p-1">Authentication History</h2>
               </Col>
               <Col xs="auto" md="auto">
-                <Link to="/" className="nav-link  border border-1 rounded-2 back-btn align-self-center">
+                <Link to="/" className="nav-link rounded-3 back-btn">
                   <h5>Back</h5>
                 </Link>
               </Col>
@@ -46,59 +77,4 @@ const LoggedInHistory = () => {
   )
 }
 
-const HistoryTable = ({ histories }: HistoriesInterface) => {
-  return (
-    <Table borderless responsive="md">
-      <HistoryTableHeader />
-      {histories.map((history) => {
-        return (
-          <HistoryTableBody
-            key={history.date.toDateString()}
-            date={history.date}
-            deviceType={history.deviceType}
-            email={history.email}
-            ipAddress={history.ipAddress}
-          />
-        )
-      })}
-    </Table>
-  )
-}
-const HistoryTableHeader = () => {
-  const headerText = ['Lastest Login Update', 'Device Type', 'Email', 'IP Address']
-
-  return (
-    <thead className="table-dark">
-      <tr>
-        {headerText.map((header) => {
-          return (
-            <th key={header} scope="col">
-              <h5 className="fw-bold">{header}</h5>
-            </th>
-          )
-        })}
-      </tr>
-    </thead>
-  )
-}
-const HistoryTableBody = ({ date, deviceType, email, ipAddress }: HistoryInterface) => {
-  return (
-    <tbody>
-      <tr className="table-light">
-        <td>
-          <h5>{date.toDateString()}</h5>
-        </td>
-        <td>
-          <h5>{deviceType}</h5>
-        </td>
-        <td>
-          <h5>{email}</h5>
-        </td>
-        <td>
-          <h5>{ipAddress}</h5>
-        </td>
-      </tr>
-    </tbody>
-  )
-}
 export default LoggedInHistory

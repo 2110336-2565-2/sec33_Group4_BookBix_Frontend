@@ -32,7 +32,8 @@ function App() {
     }
   }
   useEffect(() => {
-    fetchUser()
+    console.log('fetch Data')
+    // fetchUser()
   }, [])
 
   return (
@@ -51,7 +52,7 @@ function App() {
         <Route path="/resetpassword" element={<ForgetPassword />} />
         <Route path="/resetpassword/:id" element={<ResetPassword />} />
         {/* Down Here is for easy test */}
-        <Route path="/login-history" element={<LoggedInHistory />} />
+        <Route path="/customers/:customerId/history" element={<LoggedInHistory />} />
       </Routes>
     </>
   )
