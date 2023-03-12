@@ -43,8 +43,8 @@ function App() {
           <Route path="/location-management" element={<ManageLocation />} />
           <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
+          <Route path="/search" element={<SearchPage />} />
         </Route>
-        <Route path="/search" element={<SearchPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/resetpassword" element={<ForgetPassword />} />
