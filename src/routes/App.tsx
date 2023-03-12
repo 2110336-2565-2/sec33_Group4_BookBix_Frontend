@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, createContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Home from '../screens/Home'
@@ -12,10 +12,18 @@ import SearchPage from '../screens/customer/Search'
 import { UserInterface } from '../interfaces/user.interfaces'
 import ForgetPassword from '../screens/ForgetPassword'
 import ResetPassword from '../screens/ResetPassword'
+import { UserProvider } from '../hooks/CustomProvider'
+
+const mockUser: UserInterface = {
+  _id: '1',
+  username: 'jewjew',
+  role: 'provider',
+}
 
 const URL = import.meta.env.VITE_API_URL
 
 function App() {
+<<<<<<< HEAD
   const [user, setUser] = useState<UserInterface | null>(null)
   // fetch user info
   const fetchUser = async () => {
@@ -32,9 +40,11 @@ function App() {
   useEffect(() => {
     fetchUser()
   }, [])
+=======
+>>>>>>> navigation-bar
 
   return (
-    <>
+    <UserProvider>
       <Routes>
         <Route element={<Navbar />}>
           <Route path="/" element={<Home />} />
@@ -49,10 +59,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/resetpassword" element={<ForgetPassword />} />
         <Route path="/resetpassword/:id" element={<ResetPassword />} />
-        {/* <Route path="/profile-management" element={<ManageProfile />} />
-        <Route path="/location-management" element={<ManageLocation />} /> */}
       </Routes>
-    </>
+    </UserProvider>
   )
 }
 
