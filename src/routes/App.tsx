@@ -11,59 +11,35 @@ import ManageLocation from '../screens/provider/ManageLocation'
 import { UserInterface } from '../interfaces/user.interfaces'
 import ForgetPassword from '../screens/ForgetPassword'
 import ResetPassword from '../screens/ResetPassword'
+import { UserProvider } from '../hooks/CustomProvider'
 
 const mockUser: UserInterface = {
-  _id: "1",
+  _id: '1',
   username: 'jewjew',
-  role: 'provider'
+  role: 'provider',
 }
 
-export const UserContext = createContext<UserInterface | null>(mockUser);
-const URL = import.meta.env.VITE_API_URL;
+const URL = import.meta.env.VITE_API_URL
 
 function App() {
-  const [user, setUser] = useState<UserInterface | null>(null)
-
-  // fetch user info
-  const fetchUser = async () => {
-    const response = await fetch(`${URL}/me`, {
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-      })
-      const data: UserInterface = await response.json()
-      if (response.ok) {
-        setUser(data)
-        console.log(`fetch user is ${data}`)
-      }
-  }
-  useEffect(() => {
-    <UserContext.Provider value={user}> 
-      fetchUser()
-    </UserContext.Provider>
-  },[])
 
   return (
-    <>
+    <UserProvider>
       <Routes>
         <Route element={<Navbar />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ManageProfile />} />
           <Route path="/profile-management" element={<ManageProfile />} />
           <Route path="/location-management" element={<ManageLocation />} />
-          <Route
-            path="/location-booking/:locationId"
-            element={<BookLocation />}
-          />
+          <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/resetpassword" element={<ForgetPassword />} />
         <Route path="/resetpassword/:id" element={<ResetPassword />} />
-        {/* <Route path="/profile-management" element={<ManageProfile />} />
-        <Route path="/location-management" element={<ManageLocation />} /> */}
       </Routes>
-    </>
+    </UserProvider>
   )
 }
 

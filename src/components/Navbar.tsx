@@ -1,11 +1,28 @@
 import { useContext } from 'react'
-import { Navbar, Container, Nav, Dropdown, DropdownButton, NavDropdown } from 'react-bootstrap'
-import { Link, Outlet } from 'react-router-dom'
-import { UserContext } from '../routes/App'
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useUserContext } from '../hooks/CustomProvider'
 
 export default function MyNavbar() {
-  const currentUser = useContext(UserContext)
+  const { currentUser, setCurrentUser } = useUserContext()
   const direction = 'down-centered'
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    // Reset session
+    sessionStorage.clear()
+
+    // Reset user information
+    setCurrentUser(null)
+
+    // Reset cookies
+    document.cookie.split(';').forEach((c) => {
+      document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/')
+    })
+
+    // Redirect to home page after logout
+    navigate('/')
+  }
 
   return (
     <>
@@ -74,7 +91,7 @@ export default function MyNavbar() {
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.2">
                     {/* clear cookies with logout */}
-                    <Link className="nav-link" to="/logout">
+                    <Link className="nav-link" to="/logout" onClick={() => handleLogout()}>
                       Logout
                     </Link>
                   </NavDropdown.Item>
