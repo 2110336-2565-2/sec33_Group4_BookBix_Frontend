@@ -1,6 +1,15 @@
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+/**
+ * Return various component which is separated by component 
+ * @param status status of booking
+ * @param component type of component
+ * @param locationId identifier of location
+ * @returns status-text which is separated by status
+ *          progress-circle which is separated by status
+ *          action-btn which is separated by status and locationId
+ */
 export function statusSelector(status: string, component: string, locationId: string) {
   switch (component) {
     case 'progress-circle':
