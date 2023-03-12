@@ -8,7 +8,7 @@ export default function ManageProfile() {
   interface User {
     firstname: string
     lastname: string
-    sex: string
+    sex: string 
     birthdate: string
     email: string
   }

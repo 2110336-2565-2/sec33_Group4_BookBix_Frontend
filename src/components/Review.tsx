@@ -1,6 +1,7 @@
 import React from 'react'
 import { Rating } from '@mui/material'
 import { ReviewInterface } from '../interfaces/booking.interfaces'
+import { Container, Row, Col } from 'react-bootstrap'
 
 
 const Review: React.FC<ReviewInterface> = ({
@@ -11,27 +12,27 @@ const Review: React.FC<ReviewInterface> = ({
   dateCreate,
 }) => {
   return (
-    <div className="container">
-      <div className="row d-flex justify-content-between">
-        <div className="col-sm-8 col-md-12 col-lg-8">
+    <Container>
+      <Row className="d-flex justify-content-between">
+        <Col sm="8" md="12" lg="8">
           <p>{title}</p>
-        </div>
-        <div className="col-sm-4 col-lg-4">
+        </Col>
+        <Col sm="4" className='text-center'>
           <p>{username}</p>
-        </div>
-      </div>
-      <div className="row d-flex justify-content-between">
-        <div className="col-sm-7 col-md-12 col-lg-7">
+        </Col>
+      </Row>
+      <Row className="d-flex justify-content-between">
+        <Col sm="7" md="12" lg="7">
           <Rating name="read-only" value={rating} readOnly precision={0.5} />
-        </div>
-        <div className="col-sm-5 col-lg-5">
+        </Col>
+        <Col sm="5" md="7" lg="5" className='text-center'>
           <p>{dateCreate.toDateString()}</p>
-        </div>
-      </div>
-      <div className="row">
+        </Col>
+      </Row>
+      <Row>
         <p className='d-none d-lg-block'>{text}</p>
-      </div>
-    </div>
+      </Row>
+    </Container>
   )
 }
 
