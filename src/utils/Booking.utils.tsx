@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { ButtonReview } from '../components/CustomButton'
 
 export enum ComponentType {
   PROGRESS_CIRCLE = 'progress-circle',
@@ -16,7 +17,7 @@ interface StatusSelectorInterface {
   locationId: string
 }
 
-export const StatusSelector = ({ status, component, locationId }: StatusSelectorInterface) => {
+export const StatusSelector: React.FC<StatusSelectorInterface> = ({ status, component, locationId }) => {
   switch (component) {
     case ComponentType.PROGRESS_CIRCLE:
       return (
@@ -38,11 +39,7 @@ export const StatusSelector = ({ status, component, locationId }: StatusSelector
             </Link>
           )
         case StatusType.BUTTON_CONFIRMED:
-          return (
-            // <Link to={`/location/${locationId}/review`}>
-            <Button className={`action-btn ${status} text-dark`}>Review</Button>
-            // </Link>
-          )
+          return <ButtonReview locationId={locationId} />
         default:
           return <></>
       }
