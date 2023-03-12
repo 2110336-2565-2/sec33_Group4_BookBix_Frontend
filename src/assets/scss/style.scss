@@ -5,6 +5,7 @@
 @use './components/bookingsSummary';
 @use './components/forgetpassword';
 @use './components/resetpassword';
+@use './components/customModal';
 @use './abstracts' as *;
 
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap);
@@ -14,24 +15,44 @@
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   padding: 0;
   &.fw-semiBold {
-    font-weight: 600 ;
+    font-weight: 600;
   }
   &.fw-bold {
     font-weight: 700;
   }
 }
 
-h1 { font-size: $font-h1;}
-h2 { font-size: $font-h2;}
-h3 { font-size: $font-h3;}
-h4 { font-size: $font-h4;}
-h5 { font-size: $font-h5;}
-h6 { font-size: $font-h6;}
-p { font-size: $font-description;}
+h1 {
+  font-size: $font-h1;
+}
+h2 {
+  font-size: $font-h2;
+}
+h3 {
+  font-size: $font-h3;
+}
+h4 {
+  font-size: $font-h4;
+}
+h5 {
+  font-size: $font-h5;
+}
+h6 {
+  font-size: $font-h6;
+}
+p {
+  font-size: $font-description;
+}
 
 html,
 body {
@@ -49,7 +70,7 @@ body {
 }
 
 .navbar {
-  position: sticky; 
-  top: 0; 
-  width: 100%; 
+  position: sticky;
+  top: 0;
+  width: 100%;
 }

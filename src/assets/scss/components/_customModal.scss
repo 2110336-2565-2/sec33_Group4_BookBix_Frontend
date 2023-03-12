@@ -1,0 +1,44 @@
+@use '../abstracts' as *;
+
+.reviewModal {
+  color: $white;
+  .modal-header,
+  .modal-footer {
+    border-bottom: none;
+    border-top: none;
+  }
+  .modal-content {
+    padding: 20px;
+    gap: 10px;
+    background-color: $dark-grey;
+  }
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-secondary {
+    padding: 8px 21px;
+    background-color: $grey-dark;
+    border-color: $grey-dark;
+    &:hover {
+      background-color: $shadow-grey-dark;
+      border-color: $shadow-grey-dark;
+    }
+  }
+  .btn-primary {
+    padding: 8px 21px;
+    background-color: $red-magenta;
+    border-color: $red-magenta;
+    &:hover {
+      background-color: $shadow-red-magenta;
+      border-color: $shadow-red-magenta;
+    }
+  }
+  .text-container {
+    background: #f1edee;
+    border-radius: 5px;
+  }
+}

@@ -3,20 +3,27 @@ import { Button } from 'react-bootstrap'
 import { ReviewModal } from './CustomModal'
 
 export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState<boolean>(false)
+  const [rating, setRating] = useState<number>(0)
 
-  const reviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const reviewButtonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     setShow(true)
     console.log('reviewHandler')
+    console.log(locationId)
   }
-  const handleCancel = () => setShow(false)
-  const handleSubmit = () => setShow(false)
+  const handleCancel = () => {
+    console.log('Cancel Review')
+    setShow(false)
+  }
+  const handleSubmit = () => {
+    console.log('Sent Review')
+    setShow(false)
+  }
 
-  console.log('locationId', locationId)
   return (
     <>
-      <Button onClick={reviewHandler} className="action-btn confirmed text-dark">
+      <Button onClick={reviewButtonHandler} className="action-btn confirmed text-dark">
         Review
       </Button>
       <ReviewModal show={show} locationId={locationId} handleCancel={handleCancel} handleSubmit={handleSubmit} />
