@@ -8,10 +8,12 @@ import Profile from './Profile'
 import Register from './Register'
 import ResetPassword from './ResetPassword'
 import ManageLocation from './provider/ManageLocation'
+import Bookings from './BookingsSummary'
 
 export {
   Home,
   BookLocation,
+  Bookings,
   ForgetPassword,
   LoggedInHistory,
   Login,
