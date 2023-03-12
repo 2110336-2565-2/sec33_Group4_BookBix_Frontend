@@ -23,7 +23,6 @@ const mockUser: UserInterface = {
 const URL = import.meta.env.VITE_API_URL
 
 function App() {
-<<<<<<< HEAD
   const [user, setUser] = useState<UserInterface | null>(null)
   // fetch user info
   const fetchUser = async () => {
@@ -40,8 +39,6 @@ function App() {
   useEffect(() => {
     fetchUser()
   }, [])
-=======
->>>>>>> navigation-bar
 
   return (
     <UserProvider>

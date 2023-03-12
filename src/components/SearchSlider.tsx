@@ -36,7 +36,7 @@ export const SearchForm = () => {
           <Col>
             <Form.Group controlId="formLocationType">
               <Form.Control as="select">
-                <option>Choose location type</option>
+                <option>Location type</option>
                 <option>Hotel</option>
                 <option>Restaurant</option>
                 <option>Bar</option>
@@ -47,7 +47,7 @@ export const SearchForm = () => {
           <Col>
             <Form.Group controlId="formLocationFunction">
               <Form.Control as="select">
-                <option>Choose location function</option>
+                <option>Location function</option>
                 <option>Wedding</option>
                 <option>Party</option>
                 <option>Meeting</option>
@@ -158,7 +158,7 @@ export const PriceSlider = () => {
   return (
     <div className="range_container">
       <div className="sliders_control">
-        <h1>Your budget (per hour)</h1>
+        <h1 className="w-auto">Your budget (per hour)</h1>
         <input
           id="fromSlider"
           type="range"

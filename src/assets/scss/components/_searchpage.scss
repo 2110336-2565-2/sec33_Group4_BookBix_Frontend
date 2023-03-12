@@ -9,21 +9,37 @@
     color: $white;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
+    // @media (max-width: $breakpoint-sm) {
+    //   font-size: 1rem;
+    // }
   }
   .card {
-    max-width: 30%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 30%;
+    // margin-left: auto;
+    // margin-right: auto;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    margin-bottom: 1rem;
     background-color: #3f3d3d;
     // font to white
     color: $white;
     border-radius: 1rem;
+    @media (max-width: $breakpoint-xl) {
+      width: 40%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: $breakpoint-md) {
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
-  .star {
-    max-width: 10%;
-
-    // margin-bottom: 1rem;
-    // position: ;
+  .cropped-ofp {
+    // width: 150px;
+    // height: 150px;
+    object-fit: cover;
+    object-position: 25% 25%;
   }
   .text-gray {
     color: #8a8383;
@@ -82,7 +98,7 @@
     // min-width: rem;
     // margin-left: 0;
     // responsive min-width with screen size
-    min-width: 20rem;
+    min-width: 10rem;
   }
 
   .form_control {
@@ -145,8 +161,11 @@
     height: 2px;
     width: 100%;
     position: absolute;
-    background-color: #c6c6c6;
+    background-color: $red-magenta;
     pointer-events: none;
+    // @media (max-width: $breakpoint-sm) {
+    //   width: 50%;
+    // }
   }
 
   #fromSlider {
