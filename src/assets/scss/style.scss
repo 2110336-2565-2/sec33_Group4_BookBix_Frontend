@@ -4,6 +4,7 @@
 @use './components/booklocation';
 @use './components/forgetpassword';
 @use './components/resetpassword';
+@use './components/loggedinhistory';
 @use './abstracts' as *;
 
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap);
