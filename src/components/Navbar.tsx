@@ -72,14 +72,19 @@ export default function MyNavbar() {
                       Profile
                     </Link>
                   </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    <Link className="nav-link" to="/customers/000000000001000000000001/history">
+                      Logged-in history
+                    </Link>
+                  </NavDropdown.Item>
                   {currentUser?.role === 'customer' ? (
-                    <NavDropdown.Item href="#action/3.1">
+                    <NavDropdown.Item href="#action/3.3">
                       <Link className="nav-link" to="/me/bookings">
                         My Bookings
                       </Link>
                     </NavDropdown.Item>
                   ) : currentUser?.role === 'provider' ? (
-                    <NavDropdown.Item href="#action/3.1">
+                    <NavDropdown.Item href="#action/3.4">
                       <Link className="nav-link" to="/me/locations">
                         My locations
                       </Link>
@@ -89,9 +94,9 @@ export default function MyNavbar() {
                   )}
 
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.2">
+                  <NavDropdown.Item href="#action/3.5">
                     {/* clear cookies with logout */}
-                    <Link className="nav-link" to="/logout" onClick={() => handleLogout()}>
+                    <Link className="nav-link" to="/" onClick={() => handleLogout()}>
                       Logout
                     </Link>
                   </NavDropdown.Item>

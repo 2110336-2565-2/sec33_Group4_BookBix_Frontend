@@ -67,7 +67,7 @@ export const Registration = () => {
         return
       }
       localStorage.setItem('user', JSON.stringify(data.user))
-      navigate('/home')
+      navigate('/')
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -148,7 +148,7 @@ export const LoginForm = () => {
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
-  const {setCurrentUser} = useUserContext()
+  const { setCurrentUser } = useUserContext()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -174,11 +174,11 @@ export const LoginForm = () => {
         }
       }
       // Save the user information in local storage or in the state
-      if(data.user){
+      if (data.user) {
         setCurrentUser({ _id: data.user._id, username: data.user.username, role: data.user.role })
       }
       // Redirect the user to the homepage
-      navigate('/home')
+      navigate('/')
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -307,8 +307,8 @@ export const ResetPasswordForm = () => {
       return
     }
     if (password !== confirmPassword) {
-      console.log(password, confirmPassword);
-      
+      console.log(password, confirmPassword)
+
       setError('Password and Confirm Password must be the same')
       return
     }
