@@ -165,11 +165,18 @@ export const LoginForm = () => {
       })
       const data = await response.json()
       if (!response.ok) {
-        setError(data.message)
-        return
+        switch (response.status) {
+          case 403:
+            console.log(response.status)
+            return setError('Invalid email or password')
+          default:
+            return setError(data.message)
+        }
       }
       // Save the user information in local storage or in the state
-      setCurrentUser({"_id": data.user._id, "username": data.user.username, "role": data.user.role})
+      if(data.user){
+        setCurrentUser({ _id: data.user._id, username: data.user.username, role: data.user.role })
+      }
       // Redirect the user to the homepage
       navigate('/home')
     } catch (error) {
