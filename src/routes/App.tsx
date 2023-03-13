@@ -14,7 +14,6 @@ import {
   ForgetPassword,
   ResetPassword,
   LoggedInHistory,
-  Bookings,
   SearchPage,
 } from '../screens/index'
 import { UserProvider } from '../hooks/CustomProvider'
