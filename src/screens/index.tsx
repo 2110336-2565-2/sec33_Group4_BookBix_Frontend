@@ -9,6 +9,7 @@ import Register from './Register'
 import ResetPassword from './ResetPassword'
 import ManageLocation from './provider/ManageLocation'
 import Bookings from './BookingsSummary'
+import SearchPage from './customer/Search'
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   ResetPassword,
   ManageLocation,
   Bookings,
+  SearchPage,
 }

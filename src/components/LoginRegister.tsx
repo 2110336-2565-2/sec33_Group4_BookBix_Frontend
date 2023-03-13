@@ -165,11 +165,18 @@ export const LoginForm = () => {
       })
       const data = await response.json()
       if (!response.ok) {
-        setError(data.message)
-        return
+        switch (response.status) {
+          case 403:
+            console.log(response.status)
+            return setError('Invalid email or password')
+          default:
+            return setError(data.message)
+        }
       }
       // Save the user information in local storage or in the state
-      setCurrentUser({"_id": data.user._id, "username": data.user.username, "role": data.user.role})
+      if(data.user){
+        setCurrentUser({ _id: data.user._id, username: data.user.username, role: data.user.role })
+      }
       // Redirect the user to the homepage
       navigate('/home')
     } catch (error) {
@@ -230,7 +237,7 @@ export const ForgetPasswordRequest = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const response = await fetch(`${URL}/resetpassword`, {
+      const response = await fetch(`${URL}/auth/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -300,6 +307,8 @@ export const ResetPasswordForm = () => {
       return
     }
     if (password !== confirmPassword) {
+      console.log(password, confirmPassword);
+      
       setError('Password and Confirm Password must be the same')
       return
     }
@@ -310,13 +319,14 @@ export const ResetPasswordForm = () => {
     }
     setError(null)
     try {
-      const response = await fetch(`${URL}/users/resetpassword/${send.token}`, {
-        method: 'POST',
+      const response = await fetch(`${URL}/auth/reset-password/${send.token}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: JSON.stringify({
           password,
+          confirmPassword,
         }),
       })
       const data = await response.json()

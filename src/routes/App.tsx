@@ -14,6 +14,8 @@ import {
   ForgetPassword,
   ResetPassword,
   LoggedInHistory,
+  Bookings,
+  SearchPage,
 } from '../screens/index'
 import { UserProvider } from '../hooks/CustomProvider'
 
@@ -28,18 +30,19 @@ function App() {
     <UserProvider>
       <Routes>
         <Route element={<Navbar />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<SearchPage />} />
           <Route path="/profile" element={<ManageProfile />} />
           <Route path="/profile-management" element={<ManageProfile />} />
           <Route path="/location-management" element={<ManageLocation />} />
           <Route path="/me/bookings" element={<Bookings />} />
           <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
+          {/* <Route path="/search" element={<SearchPage />} /> */}
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/resetpassword" element={<ForgetPassword />} />
-        <Route path="/resetpassword/:id" element={<ResetPassword />} />
+        <Route path="/auth/reset-password/:id" element={<ResetPassword />} />
         {/* Down Here is for easy test */}
         <Route path="/customers/:customerId/history" element={<LoggedInHistory />} />
       </Routes>
