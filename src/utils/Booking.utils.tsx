@@ -17,9 +17,8 @@ interface StatusSelectorInterface {
   locationId: string
 }
 
-export const StatusSelector: React.FC<StatusSelectorInterface> = ({ status, component, locationId }) => {
 /**
- * Return various component which is separated by component 
+ * Return various component which is separated by component
  * @param status status of booking
  * @param component type of component
  * @param locationId identifier of location
@@ -27,6 +26,7 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({ status, comp
  *          progress-circle which is separated by status
  *          action-btn which is separated by status and locationId
  */
+export const StatusSelector: React.FC<StatusSelectorInterface> = ({ status, component, locationId }) => {
   switch (component) {
     case ComponentType.PROGRESS_CIRCLE:
       return (

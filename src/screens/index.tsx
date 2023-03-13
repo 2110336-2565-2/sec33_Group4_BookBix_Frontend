@@ -13,7 +13,6 @@ import Bookings from './BookingsSummary'
 export {
   Home,
   BookLocation,
-  Bookings,
   ForgetPassword,
   LoggedInHistory,
   Login,
@@ -22,5 +21,5 @@ export {
   Register,
   ResetPassword,
   ManageLocation,
-  Bookings
+  Bookings,
 }

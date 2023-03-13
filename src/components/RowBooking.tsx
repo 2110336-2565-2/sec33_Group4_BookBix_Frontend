@@ -57,7 +57,6 @@ export const RowBooking: React.FC<BookingInterface> = ({
           </Col>
           <Col md="2" xl="1" className="action p-0">
             <StatusSelector status={status} component={ComponentType.ACTION_BUTTON} locationId={locationId} />
-            {/* {StatusSelector(status, ComponentType.ACTION_BUTTON, locationId)} */}
           </Col>
         </Row>
       </Container>
