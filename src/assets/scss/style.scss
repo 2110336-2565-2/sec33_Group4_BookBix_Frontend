@@ -8,6 +8,7 @@
 @use './components/resetpassword';
 @use './components/navBar';
 @use './components/loggedinhistory';
+@use './components/customModal';
 @use './abstracts' as *;
 
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap);
@@ -27,7 +28,7 @@ p {
   margin: 0;
   padding: 0;
   &.fw-semiBold {
-    font-weight: 600 ;
+    font-weight: 600;
   }
   &.fw-bold {
     font-weight: 700;

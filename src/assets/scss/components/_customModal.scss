@@ -1,0 +1,62 @@
+@use '../abstracts' as *;
+
+.reviewModal {
+  color: $white;
+  .modal-header,
+  .modal-footer {
+    border-bottom: none;
+    border-top: none;
+  }
+  .modal-content {
+    padding: 20px;
+    gap: 10px;
+    background-color: $dark-grey;
+  }
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-secondary {
+    padding: 8px 21px;
+    background-color: $grey-dark;
+    border-color: $grey-dark;
+    &:hover {
+      background-color: $shadow-grey-dark;
+      border-color: $shadow-grey-dark;
+    }
+  }
+  .btn-primary {
+    padding: 8px 21px;
+    background-color: $red-magenta;
+    border-color: $red-magenta;
+    &:hover {
+      background-color: $shadow-red-magenta;
+      border-color: $shadow-red-magenta;
+    }
+  }
+  .text-container {
+    background: $base-white;
+    border-radius: 5px;
+    padding: 30px;
+  }
+  .reviewText {
+    textarea {
+      resize: none;
+      border-radius: 5px;
+      font-size: $font-h6;
+      padding: 15px 20px;
+      height: 300px;
+      background: $white;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .floatingLabel {
+      color: $dark-grey;
+      .form-control {
+        font-size: $font-h5;
+      }
+    }
+  }
+}

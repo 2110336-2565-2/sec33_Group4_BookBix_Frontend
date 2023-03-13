@@ -7,13 +7,13 @@ import {
   Login,
   Profile,
   BookLocation,
+  Bookings,
   Register,
   ManageProfile,
   ManageLocation,
   ForgetPassword,
   ResetPassword,
   LoggedInHistory,
-  Bookings,
   SearchPage,
 } from '../screens/index'
 import { UserProvider } from '../hooks/CustomProvider'
@@ -34,7 +34,6 @@ function App() {
           <Route path="/profile-management" element={<ManageProfile />} />
           <Route path="/location-management" element={<ManageLocation />} />
           <Route path="/me/bookings" element={<Bookings />} />
-          <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
           {/* <Route path="/search" element={<SearchPage />} /> */}

@@ -4,7 +4,7 @@ import { BookingInterface } from '../interfaces/booking.interfaces'
 import { calculateDays, formatBookingPeriod } from '../utils/Time.utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { statusSelector } from '../utils/Booking.utils'
+import { StatusSelector, ComponentType } from '../utils/Booking.utils'
 import { Link } from 'react-router-dom'
 
 const URL = import.meta.env.VITE_API_URL
@@ -12,7 +12,7 @@ const URL = import.meta.env.VITE_API_URL
 export const RowBooking: React.FC<BookingInterface> = ({
   id = '',
   locationName = '',
-  locationId= '',
+  locationId = '',
   price = 0,
   period = {
     start: '',
@@ -52,12 +52,11 @@ export const RowBooking: React.FC<BookingInterface> = ({
           <Col md="2" lg="1" className="text-center">
             {price} THB
           </Col>
-          <Col md="1" className="d-flex flex-column status-body align-items-center">
-            {statusSelector(status, 'status-text', locationId)}
-            <div className="progress-circle">{statusSelector(status, 'progress-circle',locationId)}</div>
+          <Col md="1" className="status-body">
+            <StatusSelector status={status} component={ComponentType.PROGRESS_CIRCLE} locationId={locationId} />
           </Col>
           <Col md="2" xl="1" className="action p-0">
-            {statusSelector(status, 'action-btn',locationId)}
+            <StatusSelector status={status} component={ComponentType.ACTION_BUTTON} locationId={locationId} />
           </Col>
         </Row>
       </Container>
