@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import login_costume from '../assets/images/login-costume.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
+import { useUserContext } from '../hooks/CustomProvider'
 
 interface Data {
   token?: string | undefined
@@ -13,6 +14,7 @@ interface Data {
 }
 
 const URL = import.meta.env.VITE_API_URL
+
 export const WebInform = () => {
   return (
     <>
@@ -146,13 +148,14 @@ export const LoginForm = () => {
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
+  const {setCurrentUser} = useUserContext()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!email || !password) return setError('Please fill in all fields')
 
     try {
-      const response = await fetch(`${URL}/customers/login`, {
+      const response = await fetch(`${URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,8 +169,7 @@ export const LoginForm = () => {
         return
       }
       // Save the user information in local storage or in the state
-      localStorage.setItem('user', JSON.stringify(data.user))
-
+      setCurrentUser({"_id": data.user._id, "username": data.user.username, "role": data.user.role})
       // Redirect the user to the homepage
       navigate('/home')
     } catch (error) {

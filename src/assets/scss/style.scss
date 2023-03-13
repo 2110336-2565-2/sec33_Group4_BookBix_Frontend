@@ -5,6 +5,7 @@
 @use './components/bookingsSummary';
 @use './components/forgetpassword';
 @use './components/resetpassword';
+@use './components/navBar';
 @use './components/loggedinhistory';
 @use './components/customModal';
 @use './abstracts' as *;
@@ -71,7 +72,8 @@ body {
 }
 
 .navbar {
-  position: sticky;
-  top: 0;
-  width: 100%;
+  position: sticky; 
+  top: 0; 
+  width: 100%; 
+  z-index: 1000;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, createContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { UserInterface } from '../interfaces/user.interfaces'
@@ -14,43 +14,28 @@ import {
   ForgetPassword,
   ResetPassword,
   LoggedInHistory,
+  Bookings,
 } from '../screens/index'
+import { UserProvider } from '../hooks/CustomProvider'
 
-const URL = import.meta.env.VITE_API_URL
+const mockUser: UserInterface = {
+  _id: '1',
+  username: 'jewjew',
+  role: 'provider',
+}
 
 function App() {
-  const [user, setUser] = useState<UserInterface | null>(null)
-  // fetch user info
-  const fetchUser = async () => {
-    const response = await fetch(`${URL}/me`, {
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-    })
-    const data: UserInterface = await response.json()
-    if (response.ok) {
-      setUser(data)
-      console.log(`fetch user is ${data}`)
-    }
-  }
-  useEffect(() => {
-    console.log('fetch Data')
-    // fetchUser()
-  }, [])
-
   return (
-    <>
+    <UserProvider>
       <Routes>
         <Route element={<Navbar />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ManageProfile />} />
           <Route path="/profile-management" element={<ManageProfile />} />
           <Route path="/location-management" element={<ManageLocation />} />
+          <Route path="/me/bookings" element={<Bookings />} />
           <Route path="/location-booking/:locationId" element={<BookLocation />} />
-          <Route path="/user/bookings" element={<Bookings/>} />
-          <Route
-            path="/location-booking/:locationId"
-            element={<BookLocation />}
-          />
+          <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
         </Route>
         <Route path="/register" element={<Register />} />
@@ -60,7 +45,7 @@ function App() {
         {/* Down Here is for easy test */}
         <Route path="/customers/:customerId/history" element={<LoggedInHistory />} />
       </Routes>
-    </>
+    </UserProvider>
   )
 }
 

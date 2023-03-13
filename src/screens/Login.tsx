@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Container, Form, Row, Col } from 'react-bootstrap'
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 import { WebInform, LoginForm } from '../components/LoginRegister'
 // .env file
 
 const Login: React.FC = () => {
+  
   return (
     <Container fluid className="login fill bg-dark">
       <Row className="fill">
@@ -12,7 +12,7 @@ const Login: React.FC = () => {
           <WebInform />
         </Col>
         <Col md="6" className="wrapper">
-          <LoginForm />
+            <LoginForm />
         </Col>
       </Row>
     </Container>

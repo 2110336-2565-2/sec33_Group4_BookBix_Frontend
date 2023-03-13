@@ -22,4 +22,5 @@ export {
   Register,
   ResetPassword,
   ManageLocation,
+  Bookings
 }

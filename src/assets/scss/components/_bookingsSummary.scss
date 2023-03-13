@@ -3,7 +3,6 @@
 .booking-summary {
   &.fill {
     min-height: 100vh;
-    height: 100%;
   }
 
   .page-title {
@@ -81,6 +80,7 @@
   }
   .action-btn {
     height: 35px;
+    padding: 0px;
     width: 100%;
     border-radius: 5px;
     overflow: hidden;
