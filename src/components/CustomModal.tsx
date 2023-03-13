@@ -1,11 +1,19 @@
-import React from 'react'
-import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap'
+import React, { Dispatch, SetStateAction } from 'react'
+import { Modal, Form, Button, Container, FloatingLabel } from 'react-bootstrap'
+import { Rating } from '@mui/material'
 
 interface ReviewModalInterface {
   show: boolean
-  locationId: string
+  reviewRespond: reviewRespondInterface
+  setReviewRespond: Dispatch<SetStateAction<reviewRespondInterface>>
   handleCancel: () => void
   handleSubmit: () => void
+}
+export interface reviewRespondInterface {
+  title: string | undefined
+  locationId: string
+  rating: number | null
+  review: string | undefined
 }
 const exampleLocations = {
   l000000001: {
@@ -63,7 +71,13 @@ const exampleLocations = {
     status: 'confirmed',
   },
 }
-export const ReviewModal: React.FC<ReviewModalInterface> = ({ show, locationId, handleCancel, handleSubmit }) => {
+export const ReviewModal: React.FC<ReviewModalInterface> = ({
+  show,
+  reviewRespond,
+  setReviewRespond,
+  handleCancel,
+  handleSubmit,
+}) => {
   return (
     <Modal show={show} onHide={handleCancel} centered size="lg" className="reviewModal">
       <Modal.Header>
@@ -71,13 +85,37 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({ show, locationId, 
       </Modal.Header>
       <Modal.Body>
         <div>
-          <h5 className="fw-bold">{exampleLocations[locationId].locationName}</h5>
-          <h6 className="fw-bold">{exampleLocations[locationId].price} Bath</h6>
+          <h5 className="fw-bold">{exampleLocations[reviewRespond.locationId].locationName}</h5>
+          <h6 className="fw-bold">{exampleLocations[reviewRespond.locationId].price} Bath</h6>
+          <Rating
+            value={reviewRespond.rating}
+            precision={0.5}
+            onChange={(event, newValue) => {
+              setReviewRespond({ ...reviewRespond, rating: newValue })
+            }}
+          />
         </div>
         <Container className="text-container">
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-              <Form.Control as="textarea" rows={3} />
+            <Form.Group controlId="reviewText" className="reviewText">
+              <FloatingLabel controlId="floatingInput" label="Review Title" className="floatingLabel">
+                <Form.Control
+                  placeholder="Review Title"
+                  type="text"
+                  value={reviewRespond.title}
+                  onChange={(e) => {
+                    setReviewRespond({ ...reviewRespond, title: e.target.value })
+                  }}
+                />
+              </FloatingLabel>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={reviewRespond.review}
+                onChange={(e) => {
+                  setReviewRespond({ ...reviewRespond, review: e.target.value })
+                }}
+              />
             </Form.Group>
           </Form>
         </Container>

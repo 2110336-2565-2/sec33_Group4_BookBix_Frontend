@@ -34,7 +34,6 @@ function App() {
           <Route path="/location-management" element={<ManageLocation />} />
           <Route path="/me/bookings" element={<Bookings />} />
           <Route path="/location-booking/:locationId" element={<BookLocation />} />
-          <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
         </Route>
         <Route path="/register" element={<Register />} />

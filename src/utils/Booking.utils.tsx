@@ -2,14 +2,14 @@ import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ButtonReview } from '../components/CustomButton'
 
-export enum ComponentType {
-  PROGRESS_CIRCLE = 'progress-circle',
-  ACTION_BUTTON = 'action-btn',
-}
 export enum StatusType {
   BUTTON_PENDING = 'pending',
   BUTTON_CANCEL = 'canceled',
   BUTTON_CONFIRMED = 'confirmed',
+}
+export enum ComponentType {
+  PROGRESS_CIRCLE = 'progress-circle',
+  ACTION_BUTTON = 'action-btn',
 }
 interface StatusSelectorInterface {
   status: string
@@ -18,13 +18,12 @@ interface StatusSelectorInterface {
 }
 
 /**
- * Return various component which is separated by component
- * @param status status of booking
- * @param component type of component
+ * Return various React.FC<StatusSelectorInterface> which is separated by component
+ * @param status StatusType of booking
+ * @param component ComponentType of component
  * @param locationId identifier of location
- * @returns status-text which is separated by status
- *          progress-circle which is separated by status
- *          action-btn which is separated by status and locationId
+ * @returns ComponentType.PROGRESS_CIRCLE which is separated by ComponentType
+ *          ComponentType.ACTION_BUTTON which is separated by ComponentType and locationId
  */
 export const StatusSelector: React.FC<StatusSelectorInterface> = ({ status, component, locationId }) => {
   switch (component) {
