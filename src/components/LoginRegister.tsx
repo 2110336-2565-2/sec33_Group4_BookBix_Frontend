@@ -18,11 +18,7 @@ export const WebInform = () => {
     <>
       <h1 className="text-start d-inline bookbix-logo">BookBix</h1>
       <div className="login-left d-flex">
-        <img
-          src={login_costume}
-          className="img-fluid"
-          alt="costume-of-login-page"
-        />
+        <img src={login_costume} className="img-fluid" alt="costume-of-login-page" />
       </div>
     </>
   )
@@ -33,13 +29,13 @@ export const Registration = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [type, setType] = useState('')
+  const [userType, setUserType] = useState('')
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!username || !email || !password || !confirmPassword || !type) {
+    if (!username || !email || !password || !confirmPassword || !userType) {
       setError('Please fill in all fields')
       return
     }
@@ -48,11 +44,9 @@ export const Registration = () => {
       return
     }
     setError(null)
+    console.log(userType)
     try {
-      const url =
-        type == 'Customer'
-          ? `${URL}/customers/register`
-          : `${URL}/providers/register`
+      const url = `${URL}/auth/register`
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -62,6 +56,7 @@ export const Registration = () => {
           username,
           email,
           password,
+          userType,
         }),
       })
       const data = await response.json()
@@ -69,9 +64,7 @@ export const Registration = () => {
         setError(data.message)
         return
       }
-      // Save the user information in local storage or in the state
       localStorage.setItem('user', JSON.stringify(data.user))
-      // Redirect the user to the homepage
       navigate('/home')
     } catch (error) {
       setError('Something went wrong, please try again later')
@@ -80,11 +73,7 @@ export const Registration = () => {
   return (
     <>
       <div className="d-flex border rounded justify-content-between align-self-end switch-page-btn">
-        <Button
-          className="m-1 px-4 current-page-tag active"
-          variant="light"
-          style={{ color: '#db5461' }}
-        >
+        <Button className="m-1 px-4 current-page-tag active" variant="light" style={{ color: '#db5461' }}>
           Register
         </Button>
         <Link to="/login" className="nav-link d-flex align-items-center">
@@ -104,9 +93,7 @@ export const Registration = () => {
           <Form.Control
             type="text"
             value={username}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setUsername(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             placeholder="Enter Username"
           />
         </Form.Group>
@@ -115,9 +102,7 @@ export const Registration = () => {
           <Form.Control
             type="email"
             value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setEmail(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             placeholder="Enter Email"
           />
         </Form.Group>
@@ -126,48 +111,27 @@ export const Registration = () => {
           <Form.Control
             type="password"
             value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             placeholder="Password"
           />
         </Form.Group>
-        <Form.Group
-          className="form-group mb-3"
-          controlId="confirmRegisterPassword"
-        >
+        <Form.Group className="form-group mb-3" controlId="confirmRegisterPassword">
           <Form.Label className="fs-4">Confirm Password</Form.Label>
           <Form.Control
             type="password"
             value={confirmPassword}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setConfirmPassword(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
             placeholder="Confirm Password"
           />
         </Form.Group>
         <Form.Group
           className="form-group"
           controlId="registerType"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setType(e.target.id)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserType(e.target.id)}
         >
           <div key="radio" className="mb-3 fs-5">
-            <Form.Check
-              inline
-              label="Customer"
-              name="type"
-              type="radio"
-              id="Customer"
-            />
-            <Form.Check
-              inline
-              label="Provider"
-              name="type"
-              type="radio"
-              id="Provider"
-            />
+            <Form.Check inline label="Customer" name="type" type="radio" id="customer" />
+            <Form.Check inline label="Provider" name="type" type="radio" id="provider" />
           </div>
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
@@ -231,32 +195,23 @@ export const LoginForm = () => {
           <Form.Control
             type="email"
             value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setEmail(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             placeholder="Enter email"
           />
-          <Form.Text className="ms-3 fs-7 text-white">
-            We'll never share your email with anyone else.
-          </Form.Text>
+          <Form.Text className="ms-3 fs-7 text-white">We'll never share your email with anyone else.</Form.Text>
         </Form.Group>
         <Form.Group className="form-group mb-3" controlId="formBasicPassword">
           <Form.Label className="fs-4">Password</Form.Label>
           <Form.Control
             type="password"
             value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             placeholder="Password"
           />
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
         <p className="text-end mt-5 mb-5">
-          <Link
-            to="../resetpassword"
-            className="text-decoration-none fw-bold text-white"
-          >
+          <Link to="../resetpassword" className="text-decoration-none fw-bold text-white">
             forget password ?
           </Link>
         </p>
@@ -312,9 +267,7 @@ export const ForgetPasswordRequest = () => {
         </div>
 
         <Form.Group className="form-group mb-1 p-2" controlId="email">
-          <Form.Label className="form-label fs-4 ps-2 mb-2">
-            Email Address
-          </Form.Label>
+          <Form.Label className="form-label fs-4 ps-2 mb-2">Email Address</Form.Label>
           <Form.Control
             className="rounded-5"
             type="email"
@@ -325,10 +278,7 @@ export const ForgetPasswordRequest = () => {
         </Form.Group>
 
         <p className="text-black ms-3">{error}</p>
-        <Button
-          className="rounded-5 form-change-btn fw-bolder mt-4 mb-auto"
-          type="submit"
-        >
+        <Button className="rounded-5 form-change-btn fw-bolder mt-4 mb-auto" type="submit">
           Send Reset Code
         </Button>
       </Form>
@@ -408,9 +358,7 @@ export const ResetPasswordForm = () => {
         </Form.Group>
 
         <Form.Group className="form-group mb-1 p-2" controlId="confirmPassword">
-          <Form.Label className="form-label fs-4 ms-2">
-            Confirm Password
-          </Form.Label>
+          <Form.Label className="form-label fs-4 ms-2">Confirm Password</Form.Label>
           <Form.Control
             className="rounded-5"
             type="password"
@@ -421,10 +369,7 @@ export const ResetPasswordForm = () => {
         </Form.Group>
 
         <p className="text-mute">{error}</p>
-        <Button
-          className="btn my-4 rounded-5 form-change-btn mb-auto"
-          type="submit"
-        >
+        <Button className="btn my-4 rounded-5 form-change-btn mb-auto" type="submit">
           Reset Password
         </Button>
       </Form>
