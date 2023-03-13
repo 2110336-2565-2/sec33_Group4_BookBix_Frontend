@@ -3,6 +3,7 @@ import star from '../assets/images/star.png'
 import { locationInterface } from '../interfaces/location.interfaces'
 import { mockup1 } from './mock_location'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 interface IMyProps {
   state: boolean
 }
@@ -23,9 +24,9 @@ export const SearchCard: React.FC<IMyProps> = ({ state }) => {
       <Row className="g-4">
         {mockup1.map((location, idx) => (
           <Card>
-            <a href={`/location-booking/${location._id}`}>
+            <Link to={`/location-booking/${location._id}`}>
               <Card.Img variant="top cropped-ofp" className="card-location-img" src={location.images[0]} />
-            </a>
+            </Link>
             <Card.Body className="pb-0">
               <Card.Title>{location.name}</Card.Title>
             </Card.Body>

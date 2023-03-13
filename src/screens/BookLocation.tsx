@@ -61,7 +61,7 @@ const BookLocation: React.FC = () => {
   const disableDate = getDisableDate(location.available_days)
   // <[[booked start time,booked end time, booked dates]]> must get from booked times in database
   // mock data
-  
+
   // [["13:00", "15:00", "2/13/2023"]]
   const [disableTimeSlots, setDisbleTimeSlots] = useState<String[][] | null>([
     ['13:00', '15:00', '2023-02-13'],
@@ -116,47 +116,44 @@ const BookLocation: React.FC = () => {
     fetchBookingTimeSlot()
     fetchLocation()
   }, [])
-  
 
-  // create handleSubmit function to send POST request with body of selected start date, end date, and location id 
+  // create handleSubmit function to send POST request with body of selected start date, end date, and location id
 
   const handleSubmit = async () => {
-
     const startDate = formatDate(selectedStartDate)
     const endDate = formatDate(selectedEndDate)
     const startTime = formatTime(selectedStartDate)
     const endTime = formatTime(selectedEndDate)
 
     try {
-      const url = 'http://localhost:3001/stripe/create-checkout-session';
+      const url = 'http://localhost:3001/stripe/create-checkout-session'
 
       const data = {
-        priceId: 'price_1Mh6ShLx9QcUn2bQSje143ye'
-      };
+        priceId: 'price_1Mh6ShLx9QcUn2bQSje143ye',
+      }
 
       const requestOptions = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
-      };
+        body: JSON.stringify(data),
+      }
 
       fetch(url, requestOptions)
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response was not ok')
           }
-          return response.json();
+          return response.json()
         })
-        .then(data => {
-           console.log(data);
-           window.location.href = data.url;
+        .then((data) => {
+          console.log(data)
+          window.location.href = data.url
         })
-        .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-        });
-      
+        .catch((error) => {
+          console.error('There was a problem with the fetch operation:', error)
+        })
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -250,7 +247,9 @@ const BookLocation: React.FC = () => {
         </Col>
       </Row>
       <div className="row d-flex flex-column">
-        <button className="col-md-4 mb-5 booking-btn p-2 align-self-center">Booking</button>
+        <button onClick={() => handleSubmit()} className="col-md-4 mb-5 booking-btn p-2 align-self-center">
+          Booking
+        </button>
       </div>
     </Container>
   )
