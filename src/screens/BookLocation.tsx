@@ -118,9 +118,9 @@ const BookLocation: React.FC = () => {
   }, [])
   
 
-  // create handleSubmit function to send POST request with body of selected start date, end date, and location id
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  // create handleSubmit function to send POST request with body of selected start date, end date, and location id 
+
+  const handleSubmit = async () => {
 
     const startDate = formatDate(selectedStartDate)
     const endDate = formatDate(selectedEndDate)
@@ -128,23 +128,35 @@ const BookLocation: React.FC = () => {
     const endTime = formatTime(selectedEndDate)
 
     try {
-      const response = await fetch(`${''}/login`, {
+      const url = 'http://localhost:3001/stripe/create-checkout-session';
+
+      const data = {
+        priceId: 'price_1Mh6ShLx9QcUn2bQSje143ye'
+      };
+
+      const requestOptions = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ startDate, endDate, startTime, endTime, locationId }),
-      })
-      const data = await response.json()
-      if (!response.ok) {
-        setError(data.message)
-        return
-      }
-      // Save the user information in local storage or in the state
-      localStorage.setItem('user', JSON.stringify(data.user))
+        body: JSON.stringify(data)
+      };
 
-      // Redirect the user to the homepage
-      window.location.href = '/home'
+      fetch(url, requestOptions)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+           console.log(data);
+           window.location.href = data.url;
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+        });
+      
     } catch (error) {
       setError('Something went wrong, please try again later')
     }

@@ -1,11 +1,20 @@
-$tint-black: #2e2e2e;
 $black: #000000;
-$red-magenta: #db5461;
-$salmon-orange: #eeac76;
+$tint-black: #2e2e2e;
+$tint-black-09: rgba(46, 46, 46, 0.9);
+$dark-grey: #3d3d3d;
+$shadow-grey-dark: #6c757d;
+$grey-dark: #868e96;
+$grey: #dadada;
+$grey-white: #dad4d5;
 $base-white: #f1edee;
 $white: #ffffff;
+$shadow-red-magenta: #da4848;
+$red-magenta: #db5461;
+$salmon-orange: #eeac76;
+$yellow-pastel: #eedb76;
 $baby-pink: #ebc1c1;
-$shadow-red-magenta: #DA4848; 
+$purple-pastel: #ba5fe4;
+$green-pastel: #78ee76;
 
 $theme-colors: (
   'dark': $tint-black,

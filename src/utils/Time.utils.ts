@@ -1,9 +1,21 @@
-// ✅ Format using reusable function
+
+/**
+ * Pad a number to 2 digits with leading zeros
+ * 
+ * @param num - The number to pad
+ * @returns The padded string
+ * 
+ */
 export function padTo2Digits(num: number) {
   return num.toString().padStart(2, '0')
 }
 
-// format as "YYYY-MM-DD"
+
+/**
+ * Format a date as a string in the format "YYYY-MM-DD"
+ * @param date the date to format
+ * @returns the formatted date as a string
+ */
 export function formatDate(date: Date | null) {
   return date
     ? [
@@ -13,7 +25,12 @@ export function formatDate(date: Date | null) {
       ].join('-')
     : ''
 }
-// format as "hh:mm:ss"
+
+/**
+ * Format a date as a string in the format "hh:mm:ss"
+ * @param date the date to format
+ * @returns the formatted time as a string
+ */
 export function formatTime(date: Date | null) {
   return date
     ? [padTo2Digits(date.getHours()), padTo2Digits(date.getMinutes())].join(':')
