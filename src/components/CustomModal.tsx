@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { Modal, Form, Button, Container, FloatingLabel } from 'react-bootstrap'
 import { Rating } from '@mui/material'
 
@@ -6,10 +6,13 @@ interface ReviewModalInterface {
   show: boolean
   reviewRespond: reviewRespondInterface
   setReviewRespond: Dispatch<SetStateAction<reviewRespondInterface>>
+  error: string | null
+  setError: Dispatch<SetStateAction<string | null>>
   handleCancel: () => void
   handleSubmit: () => void
 }
 export interface reviewRespondInterface {
+  username: string | undefined
   title: string | undefined
   locationId: string
   rating: number | null
@@ -75,9 +78,14 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({
   show,
   reviewRespond,
   setReviewRespond,
+  error,
+  setError,
   handleCancel,
   handleSubmit,
 }) => {
+  const [validated, setValidated] = useState(false)
+
+  console.log(error)
   return (
     <Modal show={show} onHide={handleCancel} centered size="lg" className="reviewModal">
       <Modal.Header>
@@ -96,10 +104,12 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({
           />
         </div>
         <Container className="text-container">
+          {/* <Form noValidate validated={validated}> */}
           <Form>
             <Form.Group controlId="reviewText" className="reviewText">
               <FloatingLabel controlId="floatingInput" label="Review Title" className="floatingLabel">
                 <Form.Control
+                  required
                   placeholder="Review Title"
                   type="text"
                   value={reviewRespond.title}
@@ -128,6 +138,7 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({
           <h5 className="fw-bold">SUBMIT</h5>
         </Button>
       </Modal.Footer>
+      {error && <p className="error">{error}</p>}
     </Modal>
   )
 }

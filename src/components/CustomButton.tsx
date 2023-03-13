@@ -1,25 +1,36 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import { ReviewModal, reviewRespondInterface } from './CustomModal'
+import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
+import { AccessTokenInterface } from '../interfaces/cookie.interfaces'
+import { ReviewRequestInterface } from '../interfaces/reviews.interfaces'
+
+//For testing
+const URL = 'http://localhost:3001'
 
 export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) => {
   const [show, setShow] = useState<boolean>(false)
+  const [cookies, setCookie] = useCookies(['access_token'])
   const [reviewRespond, setReviewRespond] = useState<reviewRespondInterface>({
+    username: undefined,
     title: undefined,
     locationId: locationId,
     rating: 0,
     review: undefined,
   })
+  const [error, setError] = useState<string | null>(null)
+  let accessToken: AccessTokenInterface
+
+  useEffect(() => {
+    if (reviewRespond.username === undefined) {
+      accessToken = jwt_decode(cookies.access_token)
+      setReviewRespond({ ...reviewRespond, username: accessToken.username })
+    }
+  }, [])
 
   const reviewButtonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-
-    var token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGYzZDFlZTZhZDE1ZmI4N2JiOTZlZiIsImVtYWlsIjoia3V5YWlAbWFpbC5jb20iLCJ0eXBlIjoiY3VzdG9tZXIiLCJpYXQiOjE2Nzg3MjAzNDcsImV4cCI6MTY3ODcyMDQwN30.FnR2QHtqnR0QfAumAtO1t_WRH5CRIe-1zx66e2Q6raM'
-    var decodedHeader = jwt_decode(token)
-    console.log(decodedHeader)
-
     setShow(true)
     console.log('Open', reviewRespond.locationId)
   }
@@ -27,9 +38,34 @@ export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) =
     setShow(false)
     console.log('Close', reviewRespond.locationId)
   }
-  const handleSubmit = () => {
-    console.log('Submit', reviewRespond)
-    setShow(false)
+
+  const handleSubmit = async () => {
+    // console.log('Submit', reviewRespond)
+    try {
+      // const response = await fetch(`${URL}/locations/${reviewRespond.locationId}/reviews`, {
+      const response = await fetch(`${URL}/locations/000000000004000000000004/reviews`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          title: reviewRespond.title,
+          username: reviewRespond.username,
+          rating: reviewRespond.rating,
+          text: reviewRespond.review,
+        } as ReviewRequestInterface),
+      })
+      // const data = await response.json()
+      if (!response.ok) {
+        setError('Something went wrong, please try again later')
+        return
+      }
+      setShow(false)
+    } catch (error) {
+      console.log(error)
+      setError('Something error, please try again later')
+    }
+    // console.log('Submit', reviewRespond)
   }
 
   return (
@@ -43,6 +79,8 @@ export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) =
         setReviewRespond={setReviewRespond}
         handleCancel={handleCancel}
         handleSubmit={handleSubmit}
+        error={error}
+        setError={setError}
       />
     </>
   )
