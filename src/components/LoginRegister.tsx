@@ -169,7 +169,7 @@ export const LoginForm = () => {
         return
       }
       // Save the user information in local storage or in the state
-      setCurrentUser({"_id": JSON.stringify(data.user._id), "username": JSON.stringify(data.user.username), "role": JSON.stringify(data.user.role)})
+      setCurrentUser({"_id": data.user._id, "username": data.user.username, "role": data.user.role})
       // Redirect the user to the homepage
       navigate('/home')
     } catch (error) {
