@@ -2,12 +2,14 @@
 @use './components/register';
 @use './components/manageProfile';
 @use './components/booklocation';
+@use './components/bookingsSummary';
 @use './components/forgetpassword';
 @use './components/resetpassword';
 @use './components/navBar';
+@use './components/loggedinhistory';
 @use './abstracts' as *;
 
-@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300;400;500;600;700;800;900&display=swap);
 
 * {
@@ -17,6 +19,12 @@
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
+  &.fw-semiBold {
+    font-weight: 600 ;
+  }
+  &.fw-bold {
+    font-weight: 700;
+  }
 }
 
 h1 { font-size: $font-h1;}
