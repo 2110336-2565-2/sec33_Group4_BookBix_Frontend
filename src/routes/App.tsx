@@ -40,7 +40,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/resetpassword" element={<ForgetPassword />} />
-        <Route path="/resetpassword/:id" element={<ResetPassword />} />
+        <Route path="/auth/reset-password/:id" element={<ResetPassword />} />
         {/* Down Here is for easy test */}
         <Route path="/customers/:customerId/history" element={<LoggedInHistory />} />
       </Routes>
