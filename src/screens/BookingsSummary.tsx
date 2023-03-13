@@ -135,7 +135,7 @@ const BookingSummary: React.FC = () => {
           <h2 className="text-white page-title fw-bold">Your bookings</h2>
         </Col>
       </Row>
-      <Row className="booking-panel mt-4 mx-auto">
+      <Row className="booking-panel mt-4 mx-auto justify-content-center">
         <div className="d-none d-lg-block">
           <BookingsSummaryHeader />
         </div>
@@ -147,9 +147,9 @@ const BookingSummary: React.FC = () => {
 
 const BookingsSummaryHeader: React.FC = () => {
   return (
-    <Container>
-      <Row className="p-3 ms-1 flex-row align-items-center booking-summary-header justify-content-between ">
-        <Col md="3" className='p-0'>
+    <Container className='d-flex justify-content-center'>
+      <Row className="p-3 flex-row align-items-center booking-summary-header justify-content-between ">
+        <Col md="3" className='ps-2 '>
           <h5 className="fw-semiBold">location</h5>
         </Col>
         <Col md="1" className="d-xl-none w-auto p-0">

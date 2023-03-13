@@ -22,27 +22,6 @@ export const TicketBooking: React.FC<BookingInterface> = ({
   }) => {
     const { startTime, endTime }: { startTime: string[] | undefined; endTime: string[] | undefined } =
       formatBookingPeriod(period.start, period.end)
-    const [show, setShow] = useState(false)
-    const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
-  
-    const handleDelete = (id: string) => {
-      console.log('delete')
-      fetch(`${URL}/bookings/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((error) => {
-          console.error('Error:', error)
-        })
-      handleClose()
-    }
   
     return (
       <div className="booking-outside d-flex">
@@ -76,23 +55,6 @@ export const TicketBooking: React.FC<BookingInterface> = ({
             </Col>
           </Row>
         </Container>
-        <FontAwesomeIcon icon={faTimes} className="cancel-btn mt-4 d-lg-none p-1 ms-1" onClick={handleShow} />
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Delete the booking</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Please make sure that you need to delete this booking.</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Link to={`/user/bookings`}>
-                <Button variant="danger" onClick={() => handleDelete(id)}>
-                Delete
-                </Button>
-            </Link>
-          </Modal.Footer>
-        </Modal>
       </div>
     )
   }
