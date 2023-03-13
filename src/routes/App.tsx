@@ -13,7 +13,7 @@ import {
   ForgetPassword,
   ResetPassword,
   LoggedInHistory,
-  Bookings
+  Bookings,
 } from '../screens/index'
 import { UserProvider } from '../hooks/CustomProvider'
 
@@ -23,10 +23,7 @@ const mockUser: UserInterface = {
   role: 'provider',
 }
 
-const URL = import.meta.env.VITE_API_URL
-
 function App() {
-
   return (
     <UserProvider>
       <Routes>
@@ -35,11 +32,8 @@ function App() {
           <Route path="/profile" element={<ManageProfile />} />
           <Route path="/profile-management" element={<ManageProfile />} />
           <Route path="/location-management" element={<ManageLocation />} />
-          <Route path="/me/bookings" element={<Bookings/>} />
-          <Route
-            path="/location-booking/:locationId"
-            element={<BookLocation />}
-          />
+          <Route path="/me/bookings" element={<Bookings />} />
+          <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
         </Route>
