@@ -7,6 +7,41 @@ import { useState } from 'react'
 const URL = import.meta.env.VITE_API_URL
 
 const SearchPage: React.FC = () => {
+  const GetSearchValue = () => {
+    //   const [location, setLocation] = useState<string>('')
+    //   const [locationType, setLocationType] = useState<string>('')
+    //   const [locationFunction, setLocationFunction] = useState<string>('')
+    //   const [price, setPrice] = useState<{ min: number; max: number }>({ min: 10, max: 1000 })
+    //   const handleSummit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault()
+    //     // search location by name
+    //     try {
+    //       const response = fetch(`${URL}locations/search?location=${location}`, {
+    //         method: 'GET',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //       })
+    //       console.log(response)
+    //     } catch (error) {
+    //       console.log(error)
+    //     }
+    //   }
+    //   return {
+    //     location,
+    //     locationType,
+    //     locationFunction,
+    //     price,
+    //     setLocation,
+    //     setLocationType,
+    //     setLocationFunction,
+    //     setPrice,
+    //     handleSummit,
+    //   }
+  }
+
+  const [state, setState] = useState(false)
+
   return (
     <Container fluid className="search-page bg-dark">
       <div className="align-content-center fill">
@@ -16,11 +51,18 @@ const SearchPage: React.FC = () => {
         <Row className="p-3 to_center">
           <PriceSlider />
         </Row>
-        <Button variant="primary" type="submit" className="search-btn to_center">
+        <Button
+          onSubmit={() => {
+            setState(!state)
+          }}
+          variant="primary"
+          type="submit"
+          className="search-btn to_center"
+        >
           Search
         </Button>
         <div className="to_center">
-          <SearchCard />
+          <SearchCard state={state} />
         </div>
       </div>
     </Container>

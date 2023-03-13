@@ -1,4 +1,4 @@
-export interface locations {
+export interface locationInterface {
   _id: string
   name: string
   address: string

@@ -1,31 +1,25 @@
 import { useState } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+
+// interface locationProps {
+//   locationName: string
+//   locationType: string
+//   locationFunction: string
+// }
+
 export const SearchForm = () => {
-  const [location, setLocation] = useState<string>('')
-  const handleSummit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // search location by name
-    try {
-      const response = fetch(`${URL}locations/search?location=${location}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const [locationName, setLocationName] = useState<string>('')
+  const [locationType, setLocationType] = useState<string>('')
+  const [locationFunction, setLocationFunction] = useState<string>('')
   return (
     <div>
-      <h1>Let us help you find your</h1>
-      <Form onSubmit={handleSummit}>
+      <h1>Let us help you find your place</h1>
+      <Form>
         <Row>
           <Form.Group controlId="formLocationName">
             <Form.Control
               onChange={(e) => {
-                setLocation(e.target.value)
+                setLocationName(e.target.value)
               }}
               type="text"
               placeholder="Enter location"
@@ -35,7 +29,12 @@ export const SearchForm = () => {
         <Row className="pt-3">
           <Col>
             <Form.Group controlId="formLocationType">
-              <Form.Control as="select">
+              <Form.Control
+                onChange={(e) => {
+                  setLocationType(e.target.value)
+                }}
+                as="select"
+              >
                 <option>Location type</option>
                 <option>Hotel</option>
                 <option>Restaurant</option>
@@ -46,7 +45,12 @@ export const SearchForm = () => {
           </Col>
           <Col>
             <Form.Group controlId="formLocationFunction">
-              <Form.Control as="select">
+              <Form.Control
+                onChange={(e) => {
+                  setLocationFunction(e.target.value)
+                }}
+                as="select"
+              >
                 <option>Location function</option>
                 <option>Wedding</option>
                 <option>Party</option>
