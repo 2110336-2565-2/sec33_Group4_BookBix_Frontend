@@ -7,6 +7,7 @@ import {
   Login,
   Profile,
   BookLocation,
+  Bookings,
   Register,
   ManageProfile,
   ManageLocation,
@@ -34,7 +35,6 @@ function App() {
           <Route path="/profile-management" element={<ManageProfile />} />
           <Route path="/location-management" element={<ManageLocation />} />
           <Route path="/me/bookings" element={<Bookings />} />
-          <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="/location-booking/:locationId" element={<BookLocation />} />
           <Route path="*" element={<Home />} />
           {/* <Route path="/search" element={<SearchPage />} /> */}
