@@ -1,7 +1,6 @@
 import { useEffect, useState, createContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import SearchPage from '../screens/customer/Search'
 import { UserInterface } from '../interfaces/user.interfaces'
 import {
   Home,
@@ -15,6 +14,7 @@ import {
   ResetPassword,
   LoggedInHistory,
   Bookings,
+  SearchPage,
 } from '../screens/index'
 import { UserProvider } from '../hooks/CustomProvider'
 
