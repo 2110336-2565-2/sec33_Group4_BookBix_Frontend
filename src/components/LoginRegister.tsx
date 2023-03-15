@@ -15,7 +15,7 @@ interface Data {
 
 const URL = import.meta.env.VITE_API_URL
 
-export const WebInform = () => {
+export const IconContainer = () => {
   return (
     <>
       <h1 className="text-start d-inline bookbix-logo">BookBix</h1>
