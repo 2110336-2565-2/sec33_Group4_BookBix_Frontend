@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { IconContainer, LoginContainer } from '../components/LoginRegister'
+import { IconContainer, LoginContainer } from '../components/Authentication'
 // .env file
 
 const Login: React.FC = () => {

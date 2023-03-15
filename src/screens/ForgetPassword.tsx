@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { IconContainer, ForgetPasswordRequest } from '../components/LoginRegister'
+import { IconContainer, ForgetPasswordRequest } from '../components/Authentication'
 
 const ForgetPassword = () => {
   return (
