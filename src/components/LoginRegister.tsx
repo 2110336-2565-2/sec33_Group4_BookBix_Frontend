@@ -143,7 +143,7 @@ export const RegisterContainer = () => {
   )
 }
 
-export const LoginForm = () => {
+export const LoginContainer = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string | null>(null)

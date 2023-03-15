@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { IconContainer, LoginForm } from '../components/LoginRegister'
+import { IconContainer, LoginContainer } from '../components/LoginRegister'
 // .env file
 
 const Login: React.FC = () => {
@@ -11,7 +11,7 @@ const Login: React.FC = () => {
           <IconContainer />
         </Col>
         <Col md="6" className="wrapper">
-          <LoginForm />
+          <LoginContainer />
         </Col>
       </Row>
     </Container>
