@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { IconContainer, Registration } from '../components/LoginRegister'
+import { IconContainer, RegisterContainer } from '../components/LoginRegister'
 
 const Register: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const Register: React.FC = () => {
           <IconContainer />
         </Col>
         <Col md="6" className="wrapper">
-          <Registration />
+          <RegisterContainer />
         </Col>
       </Row>
     </Container>

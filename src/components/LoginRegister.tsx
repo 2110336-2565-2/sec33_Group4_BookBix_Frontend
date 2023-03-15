@@ -26,7 +26,7 @@ export const IconContainer = () => {
   )
 }
 
-export const Registration = () => {
+export const RegisterContainer = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
