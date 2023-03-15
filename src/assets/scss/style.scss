@@ -1,14 +1,4 @@
-@use './components/login';
-@use './components/register';
-@use './components/manageProfile';
-@use './components/booklocation';
-@use './components/searchpage';
-@use './components/bookingsSummary';
-@use './components/forgetpassword';
-@use './components/resetpassword';
-@use './components/navBar';
-@use './components/loggedinhistory';
-@use './components/customModal';
+@use './components/index';
 @use './abstracts' as *;
 
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap);
@@ -73,8 +63,8 @@ body {
 }
 
 .navbar {
-  position: sticky; 
-  top: 0; 
-  width: 100%; 
+  position: sticky;
+  top: 0;
+  width: 100%;
   z-index: 1000;
 }
