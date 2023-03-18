@@ -1,26 +1,34 @@
-import { useContext } from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
+import { useEffect } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { useUserContext } from '../hooks/CustomProvider'
+import { useCookies } from 'react-cookie'
+import jwt_decode from 'jwt-decode'
+import { AccessTokenInterface } from '../interfaces/cookie.interfaces'
 
 export default function MyNavbar() {
   const { currentUser, setCurrentUser } = useUserContext()
   const direction = 'down-centered'
   const navigate = useNavigate()
-  console.log(currentUser)
+  const [cookies, setCookie] = useCookies(['access_token'])
+  let accessToken: AccessTokenInterface
+
+  useEffect(() => {
+    try {
+      accessToken = jwt_decode(cookies.access_token)
+      console.log(accessToken)
+    } catch (error) {
+      return
+    }
+    if (accessToken) {
+      setCurrentUser(accessToken)
+    }
+  }, [])
+
   const handleLogout = () => {
-    // Reset session
     sessionStorage.clear()
-
-    // Reset user information
     setCurrentUser(null)
-
-    // Reset cookies
-    document.cookie.split(';').forEach((c) => {
-      document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/')
-    })
-
-    // Redirect to home page after logout
+    setCookie('access_token', '', { path: '/', expires: new Date(0) })
     navigate('/')
   }
 
