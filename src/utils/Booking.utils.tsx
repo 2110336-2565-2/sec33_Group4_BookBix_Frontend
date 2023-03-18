@@ -1,21 +1,7 @@
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ButtonReview } from '../components/CustomButton'
-
-export enum StatusType {
-  BUTTON_PENDING = 'pending',
-  BUTTON_CANCEL = 'canceled',
-  BUTTON_CONFIRMED = 'confirmed',
-}
-export enum ComponentType {
-  PROGRESS_CIRCLE = 'progress-circle',
-  ACTION_BUTTON = 'action-btn',
-}
-interface StatusSelectorInterface {
-  status: string
-  component: string
-  locationId: string
-}
+import { StatusType, ComponentType, StatusSelectorInterface } from '../interfaces/booking.interfaces'
 
 /**
  * Return various React.FC<StatusSelectorInterface> which is separated by component

@@ -7,6 +7,7 @@ export default function MyNavbar() {
   const { currentUser, setCurrentUser } = useUserContext()
   const direction = 'down-centered'
   const navigate = useNavigate()
+  console.log(currentUser)
   const handleLogout = () => {
     // Reset session
     sessionStorage.clear()

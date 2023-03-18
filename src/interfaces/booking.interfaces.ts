@@ -30,3 +30,18 @@ export interface BookingInterface {
   }
   status: string
 }
+
+export enum StatusType {
+  BUTTON_PENDING = 'pending',
+  BUTTON_CANCEL = 'canceled',
+  BUTTON_CONFIRMED = 'confirmed',
+}
+export enum ComponentType {
+  PROGRESS_CIRCLE = 'progress-circle',
+  ACTION_BUTTON = 'action-btn',
+}
+export interface StatusSelectorInterface {
+  status: string
+  component: string
+  locationId: string
+}
