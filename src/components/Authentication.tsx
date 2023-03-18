@@ -287,7 +287,7 @@ export const ResetPasswordForm = () => {
       // Save the user information in local storage or in the state
       localStorage.setItem('user', JSON.stringify(data.user))
       // Redirect the user to the homepage
-      window.location.href = '/'
+      window.location.href = '/login'
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
