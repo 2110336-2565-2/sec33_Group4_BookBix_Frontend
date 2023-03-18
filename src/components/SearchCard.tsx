@@ -4,10 +4,10 @@ import { locationInterface } from '../interfaces/location.interfaces'
 import { mockup1 } from './mock_location'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-interface IMyProps {
+interface MyPropsInterface {
   state: boolean
 }
-export const SearchCard: React.FC<IMyProps> = ({ state }) => {
+export const SearchCard: React.FC<MyPropsInterface> = ({ state }) => {
   // console.log(state)
   const LocationCard = () => {
     // const [data, setData] = useState<locationInterface[]>([])
@@ -23,7 +23,7 @@ export const SearchCard: React.FC<IMyProps> = ({ state }) => {
     return (
       <Row className="g-4">
         {mockup1.map((location, idx) => (
-          <Card>
+          <Card key={idx}>
             <Link to={`/location-booking/${location._id}`}>
               <Card.Img variant="top cropped-ofp" className="card-location-img" src={location.images[0]} />
             </Link>
