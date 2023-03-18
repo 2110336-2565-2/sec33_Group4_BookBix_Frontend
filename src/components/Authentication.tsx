@@ -3,7 +3,7 @@ import login_costume from '../assets/images/login-costume.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 import { useUserContext } from '../hooks/CustomProvider'
-import { UserType, AuthDataInterface } from '../interfaces/authentication.interface'
+import { UserType, AuthDataInterface, RespondInterface } from '../interfaces/authentication.interface'
 import { registerRequest, loginRequest } from '../utils/authentication.utils'
 
 const URL = import.meta.env.VITE_API_URL
@@ -32,9 +32,9 @@ export const RegisterContainer = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const respond = await registerRequest(authData)
-    if (!respond) navigate('/login')
-    setError(respond)
+    const respond: RespondInterface = await registerRequest(authData)
+    if (respond.ok) navigate('/login')
+    setError(respond.message)
   }
   return (
     <>
@@ -117,7 +117,6 @@ export const LoginContainer = () => {
   const [authData, setAuthData] = useState<AuthDataInterface>({
     email: undefined,
     password: undefined,
-    confirmPassword: undefined,
   })
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
@@ -125,12 +124,12 @@ export const LoginContainer = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const respond = await loginRequest(authData, setAuthData)
-    if (!respond) {
-      setCurrentUser({ _id: authData._id, username: authData.username, role: authData.role })
+    const respond: RespondInterface = await loginRequest(authData)
+    if (respond.ok) {
+      setCurrentUser(JSON.parse(respond.message))
       navigate('/')
     }
-    setError(respond)
+    setError(respond.message)
   }
   return (
     <>

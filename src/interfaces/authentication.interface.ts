@@ -10,3 +10,8 @@ export interface AuthDataInterface {
   confirmPassword?: string | undefined
   role?: string | undefined
 }
+
+export interface RespondInterface {
+  ok: boolean
+  message: string
+}
