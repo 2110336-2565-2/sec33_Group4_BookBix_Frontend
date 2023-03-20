@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 import { ReviewModal, reviewRespondInterface } from './CustomModal'
 import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
-import { AccessTokenInterface } from '../interfaces/cookie.interfaces'
+import { AccessTokenInterface } from '../interfaces/authentication.interface'
 import { ReviewRequestInterface } from '../interfaces/reviews.interfaces'
 
 //For testing

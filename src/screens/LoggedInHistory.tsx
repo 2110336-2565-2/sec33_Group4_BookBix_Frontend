@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { HistoryInterface } from '../interfaces/history.interface'
 import { HistoryTable } from '../components/CustomTable'
+import { RoutePath } from '../interfaces/route.interface'
 
 const LoggedInHistory = () => {
   const { customerId } = useParams()
@@ -25,7 +26,7 @@ const LoggedInHistory = () => {
       setHistories(data)
     } catch (error) {
       console.log('something went wrong')
-      navigate('/login')
+      navigate(RoutePath.Login)
     }
   }
   useEffect(() => {
@@ -62,7 +63,7 @@ const LoggedInHistory = () => {
                 <h2 className="fw-bold p-1">Authentication History</h2>
               </Col>
               <Col xs="auto" md="auto">
-                <Link to="/" className="nav-link rounded-3 back-btn">
+                <Link to={RoutePath.SearchPage} className="nav-link rounded-3 back-btn">
                   <h5>Back</h5>
                 </Link>
               </Col>

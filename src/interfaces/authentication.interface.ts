@@ -1,4 +1,4 @@
-export enum UserType {
+export enum UserEnum {
   PROVIDER = 'provider',
   CUSTOMER = 'customer',
 }
@@ -14,4 +14,11 @@ export interface AuthDataInterface {
 export interface RespondInterface {
   ok: boolean
   message: string
+}
+export interface AccessTokenInterface {
+  id: string
+  username: string
+  type: UserEnum
+  iat: number
+  exp: number
 }

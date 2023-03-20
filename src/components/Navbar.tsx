@@ -1,13 +1,14 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import { useEffect } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { useUserContext } from '../hooks/CustomProvider'
+import { useTokenContext } from '../hooks/CustomProvider'
 import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
-import { AccessTokenInterface } from '../interfaces/cookie.interfaces'
+import { AccessTokenInterface } from '../interfaces/authentication.interface'
+import { RoutePath } from '../interfaces/route.interface'
 
 export default function MyNavbar() {
-  const { currentUser, setCurrentUser } = useUserContext()
+  const { currentToken, setCurrentToken } = useTokenContext()
   const direction = 'down-centered'
   const navigate = useNavigate()
   const [cookies, setCookie] = useCookies(['access_token'])
@@ -16,20 +17,19 @@ export default function MyNavbar() {
   useEffect(() => {
     try {
       accessToken = jwt_decode(cookies.access_token)
-      console.log(accessToken)
     } catch (error) {
       return
     }
     if (accessToken) {
-      setCurrentUser(accessToken)
+      setCurrentToken(accessToken)
     }
   }, [])
 
   const handleLogout = () => {
     sessionStorage.clear()
-    setCurrentUser(null)
+    setCurrentToken(null)
     setCookie('access_token', '', { path: '/', expires: new Date(0) })
-    navigate('/')
+    navigate(RoutePath.SearchPage)
   }
 
   return (
@@ -37,13 +37,13 @@ export default function MyNavbar() {
       <Navbar expand="lg" bg="dark">
         <Container fluid>
           <Navbar.Brand>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to={RoutePath.SearchPage}>
               <div className="bookbix-brand d-none d-lg-block"></div>
               <div className="d-flex flex-row w-auto mb-2">
                 <h3 className="text-start logo text-white align-self-center mb-2">BookBix</h3>
-                {currentUser?.role === 'customer' ? (
+                {currentToken?.type === 'customer' ? (
                   <h5 className="logo__role">CST</h5>
-                ) : currentUser?.role === 'provider' ? (
+                ) : currentToken?.type === 'provider' ? (
                   <h5 className="logo__role">ORG</h5>
                 ) : (
                   ''
@@ -54,59 +54,58 @@ export default function MyNavbar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto me-3">
-              <Link className="nav-link text-white" to="/">
+              <Link className="nav-link text-white" to={RoutePath.SearchPage}>
                 <h5 className="px-3 border-end d-none d-lg-block">Home</h5>
                 <h5 className="d-lg-none">Home</h5>
               </Link>
-              {!currentUser?.username && (
+              {!currentToken?.username && (
                 <>
-                  <Link className="nav-link text-white" to="/register">
+                  <Link className="nav-link text-white" to={RoutePath.Register}>
                     <h5>Register</h5>
                   </Link>
-                  <Link className="nav-link text-white" to="/login">
+                  <Link className="nav-link text-white" to={RoutePath.Login}>
                     <h5>Login</h5>
                   </Link>
                 </>
               )}
-              {currentUser?.username && (
+              {currentToken?.username && (
                 <NavDropdown
                   key={direction}
                   id={`dropdown-button-drop-${direction}`}
                   drop={direction}
-                  title={` Signed in as ${currentUser?.username}`}
+                  title={` Signed in as ${currentToken?.username}`}
                 >
-                  <NavDropdown.Item href="#action/3.1">
-                    <Link className="nav-link" to="/profile-management">
+                  <NavDropdown.Item>
+                    <div className="nav-link" onClick={() => navigate(RoutePath.ManageProfile)}>
                       Profile
-                    </Link>
+                    </div>
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
-                    <Link className="nav-link" to="/customers/000000000001000000000001/history">
+                  <NavDropdown.Item>
+                    <div className="nav-link" onClick={() => navigate('/customers/000000000001000000000001/history')}>
                       Logged-in history
-                    </Link>
+                    </div>
                   </NavDropdown.Item>
-                  {currentUser?.role === 'customer' ? (
-                    <NavDropdown.Item href="#action/3.3">
-                      <Link className="nav-link" to="/me/bookings">
+                  {currentToken?.type === 'customer' ? (
+                    <NavDropdown.Item>
+                      <div className="nav-link" onClick={() => navigate(RoutePath.Bookings)}>
                         My Bookings
-                      </Link>
+                      </div>
                     </NavDropdown.Item>
-                  ) : currentUser?.role === 'provider' ? (
-                    <NavDropdown.Item href="#action/3.4">
-                      <Link className="nav-link" to="/me/locations">
+                  ) : currentToken?.type === 'provider' ? (
+                    <NavDropdown.Item>
+                      <div className="nav-link" onClick={() => navigate(RoutePath.ManageLocation)}>
                         My locations
-                      </Link>
+                      </div>
                     </NavDropdown.Item>
                   ) : (
                     ''
                   )}
 
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.5">
-                    {/* clear cookies with logout */}
-                    <Link className="nav-link" to="/" onClick={() => handleLogout()}>
+                  <NavDropdown.Item>
+                    <div className="nav-link" onClick={() => handleLogout()}>
                       Logout
-                    </Link>
+                    </div>
                   </NavDropdown.Item>
                 </NavDropdown>
               )}

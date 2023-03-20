@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import login_costume from '../assets/images/login-costume.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
-import { useUserContext } from '../hooks/CustomProvider'
-import { UserType, AuthDataInterface, RespondInterface } from '../interfaces/authentication.interface'
+import { useTokenContext } from '../hooks/CustomProvider'
+import { UserEnum, AuthDataInterface, RespondInterface } from '../interfaces/authentication.interface'
 import { registerRequest, loginRequest } from '../utils/authentication.utils'
+import { RoutePath } from '../interfaces/route.interface'
 
 const URL = import.meta.env.VITE_API_URL
 
@@ -33,7 +34,7 @@ export const RegisterContainer = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const respond: RespondInterface = await registerRequest(authData)
-    if (respond.ok) navigate('/login')
+    if (respond.ok) navigate(RoutePath.Login)
     setError(respond.message)
   }
   return (
@@ -42,7 +43,7 @@ export const RegisterContainer = () => {
         <Button className="m-1 px-4 current-page-tag active" variant="light" style={{ color: '#db5461' }}>
           Register
         </Button>
-        <Link to="/login" className="nav-link d-flex align-items-center">
+        <Link to={RoutePath.Login} className="nav-link d-flex align-items-center">
           <div className="text-light ms-1 px-3">Login</div>
         </Link>
       </div>
@@ -102,8 +103,8 @@ export const RegisterContainer = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthData({ ...authData, userType: e.target.id })}
         >
           <div key="radio" className="mb-3 fs-5">
-            <Form.Check inline label="Customer" name="type" type="radio" id={UserType.CUSTOMER} />
-            <Form.Check inline label="Provider" name="type" type="radio" id={UserType.PROVIDER} />
+            <Form.Check inline label="Customer" name="type" type="radio" id={UserEnum.CUSTOMER} />
+            <Form.Check inline label="Provider" name="type" type="radio" id={UserEnum.PROVIDER} />
           </div>
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
@@ -120,21 +121,21 @@ export const LoginContainer = () => {
   })
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
-  const { setCurrentUser } = useUserContext()
+  const { setCurrentToken: setCurrentUser } = useTokenContext()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const respond: RespondInterface = await loginRequest(authData)
     if (respond.ok) {
       setCurrentUser(JSON.parse(respond.message))
-      navigate('/')
+      navigate(RoutePath.SearchPage)
     }
     setError(respond.message)
   }
   return (
     <>
       <div className="d-flex switch-page-btn border border-1 rounded justify-content-between align-self-end">
-        <Link to="/register" className="nav-link d-flex align-items-center">
+        <Link to={RoutePath.Register} className="nav-link d-flex align-items-center">
           <div className="text-light ms-1 px-3">Register</div>
         </Link>
         <Button className="m-1 px-4 current-page-tag active" variant="light">
@@ -170,7 +171,7 @@ export const LoginContainer = () => {
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
         <p className="text-end mt-5 mb-5">
-          <Link to="../resetpassword" className="text-decoration-none fw-bold text-white">
+          <Link to={RoutePath.ResetPassword} className="text-decoration-none fw-bold text-white">
             forget password ?
           </Link>
         </p>
@@ -216,7 +217,7 @@ export const ForgetPasswordRequest = () => {
         onSubmit={handleSubmit}
       >
         <div className="border border-1 rounded align-self-end switch-page-btn btn">
-          <Link to="/login" className="nav-link d-flex align-items-center ">
+          <Link to={RoutePath.Login} className="nav-link d-flex align-items-center ">
             <div className="text-light ms-1 px-3">Back</div>
           </Link>
         </div>
@@ -299,7 +300,7 @@ export const ResetPasswordForm = () => {
         onSubmit={handleSubmit}
       >
         <div className="border border-1 rounded align-self-end switch-page-btn btn">
-          <Link to="/login" className="nav-link d-flex align-items-center ">
+          <Link to={RoutePath.Login} className="nav-link d-flex align-items-center ">
             <div className="text-light ms-1 px-3">Back</div>
           </Link>
         </div>
