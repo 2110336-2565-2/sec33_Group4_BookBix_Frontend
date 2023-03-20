@@ -4,7 +4,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { useTokenContext } from '../hooks/CustomProvider'
 import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
-import { AccessTokenInterface } from '../interfaces/authentication.interface'
+import { AccessTokenInterface, UserEnum } from '../interfaces/authentication.interface'
 import { RoutePath } from '../interfaces/route.interface'
 
 export default function MyNavbar() {
@@ -41,9 +41,9 @@ export default function MyNavbar() {
               <div className="bookbix-brand d-none d-lg-block"></div>
               <div className="d-flex flex-row w-auto mb-2">
                 <h3 className="text-start logo text-white align-self-center mb-2">BookBix</h3>
-                {currentToken?.type === 'customer' ? (
+                {currentToken?.type === UserEnum.CUSTOMER ? (
                   <h5 className="logo__role">CST</h5>
-                ) : currentToken?.type === 'provider' ? (
+                ) : currentToken?.type === UserEnum.PROVIDER ? (
                   <h5 className="logo__role">ORG</h5>
                 ) : (
                   ''

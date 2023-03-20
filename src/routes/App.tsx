@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar'
 import {
   Home,
   Login,
-  Profile,
   BookLocation,
   Bookings,
   Register,
