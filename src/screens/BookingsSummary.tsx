@@ -102,9 +102,9 @@ const BookingSummary: React.FC = () => {
     if (data) {
       return data.map((booking) => {
         return (
-          <Row>
+          <Row key={booking.id}>
             <RowBooking
-              key={booking.id}
+              key={'R' + booking.id}
               id={booking.id}
               locationName={booking.locationName}
               locationId={booking.locationId}
@@ -113,7 +113,7 @@ const BookingSummary: React.FC = () => {
               status={booking.status}
             />
             <TicketBooking
-              key={booking.id}
+              key={'T' + booking.id}
               id={booking.id}
               locationName={booking.locationName}
               locationId={booking.locationId}
@@ -128,7 +128,7 @@ const BookingSummary: React.FC = () => {
   }
   return (
     <Container fluid className="booking-summary fill bg-dark">
-      <Row className="">
+      <Row>
         <Col md="4">
           <h2 className="text-white page-title fw-bold">Your bookings</h2>
         </Col>
