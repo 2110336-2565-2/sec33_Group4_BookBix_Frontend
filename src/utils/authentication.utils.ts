@@ -3,11 +3,8 @@ import { AuthDataInterface, RespondInterface } from '../interfaces/authenticatio
 const URL = import.meta.env.VITE_API_URL
 
 export async function registerRequest(authData: AuthDataInterface): Promise<RespondInterface> {
-  if (!authData.email || !authData.username || !authData.password! || !authData.confirmPassword || !authData.role)
-    return { ok: false, message: 'Please fill in all fields' }
-  if (authData.password !== authData.confirmPassword)
-    return { ok: false, message: 'Password and Confirm Password must be the same' }
-
+  const respondValidatePassword = validatePassword(authData)
+  if (!respondValidatePassword.ok) return { ok: false, message: respondValidatePassword.message }
   try {
     const url = `${URL}/auth/register`
     const response = await fetch(url, {
@@ -19,7 +16,7 @@ export async function registerRequest(authData: AuthDataInterface): Promise<Resp
         username: authData.username,
         email: authData.email,
         password: authData.password,
-        userType: authData.role,
+        userType: authData.userType,
       }),
     })
     const data = await response.json()
@@ -31,6 +28,24 @@ export async function registerRequest(authData: AuthDataInterface): Promise<Resp
   } catch (error) {
     return { ok: false, message: "Couldn't register user" }
   }
+}
+
+function validatePassword(authData: AuthDataInterface): RespondInterface {
+  if (!authData.email || !authData.username || !authData.password || !authData.confirmPassword || !authData.userType)
+    return { ok: false, message: 'Please fill in all fields' }
+
+  if (authData.password.length < 8) {
+    return { ok: false, message: 'Your password must be at least 8 characters' }
+  }
+  if (authData.password.search(/[a-z]/i) < 0) {
+    return { ok: false, message: 'Your password must contain at least one letter.' }
+  }
+  if (authData.password.search(/[0-9]/) < 0) {
+    return { ok: false, message: 'Your password must contain at least one digit.' }
+  }
+  if (authData.password !== authData.confirmPassword)
+    return { ok: false, message: 'Password and Confirm Password must be the same' }
+  return { ok: true, message: '' }
 }
 
 export async function loginRequest(authData: AuthDataInterface): Promise<RespondInterface> {

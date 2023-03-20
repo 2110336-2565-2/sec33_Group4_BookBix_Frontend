@@ -25,7 +25,7 @@ export const RegisterContainer = () => {
     email: undefined,
     password: undefined,
     confirmPassword: undefined,
-    role: undefined,
+    userType: undefined,
   })
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
@@ -99,7 +99,7 @@ export const RegisterContainer = () => {
         <Form.Group
           className="form-group"
           controlId="registerType"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthData({ ...authData, role: e.target.id })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthData({ ...authData, userType: e.target.id })}
         >
           <div key="radio" className="mb-3 fs-5">
             <Form.Check inline label="Customer" name="type" type="radio" id={UserType.CUSTOMER} />

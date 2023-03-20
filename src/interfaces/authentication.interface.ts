@@ -8,7 +8,7 @@ export interface AuthDataInterface {
   email?: string | undefined
   password?: string | undefined
   confirmPassword?: string | undefined
-  role?: string | undefined
+  userType?: string | undefined
 }
 
 export interface RespondInterface {
