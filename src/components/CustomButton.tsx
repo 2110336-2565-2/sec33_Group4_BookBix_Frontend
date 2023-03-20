@@ -32,11 +32,9 @@ export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) =
   const reviewButtonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     setShow(true)
-    console.log('Open', reviewRespond.locationId)
   }
   const handleCancel = () => {
     setShow(false)
-    console.log('Close', reviewRespond.locationId)
   }
 
   const handleSubmit = async () => {

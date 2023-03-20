@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { RowBooking} from '../components/RowBooking'
+import { RowBooking } from '../components/RowBooking'
 import { TicketBooking } from '../components/TicketBooking'
 import { BookingInterface } from '../interfaces/booking.interfaces'
 
@@ -9,7 +9,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000001',
     locationName: 'Luxury Suite at Grand Hotel',
-    locationId:'l000000001',
+    locationId: 'l000000001',
     price: 350.0,
     period: {
       start: '15:00/2023-03-01',
@@ -20,7 +20,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000002',
     locationName: 'Cozy Cabin in the Woods',
-    locationId:'l000000002',
+    locationId: 'l000000002',
     price: 120.5,
     period: {
       start: '14:00/2023-03-10',
@@ -31,7 +31,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000003',
     locationName: 'Beachfront Villa',
-    locationId:'l000000003',
+    locationId: 'l000000003',
     price: 750.0,
     period: {
       start: '12:00/2023-03-20',
@@ -42,7 +42,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000004',
     locationName: 'City Apartment with View',
-    locationId:'l000000004',
+    locationId: 'l000000004',
     price: 180.0,
     period: {
       start: '16:00/2023-04-02',
@@ -53,7 +53,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000005',
     locationName: 'Central park',
-    locationId:'l000000005',
+    locationId: 'l000000005',
     price: 1800,
     period: {
       start: '16:00/2023-06-02',
@@ -64,7 +64,7 @@ const mockBookings: BookingInterface[] = [
   {
     id: 'b000000006',
     locationName: 'Central park',
-    locationId:'l000000006',
+    locationId: 'l000000006',
     price: 1800,
     period: {
       start: '16:00/2023-06-02',
@@ -126,8 +126,6 @@ const BookingSummary: React.FC = () => {
       })
     }
   }
-  console.log(data)
-
   return (
     <Container fluid className="booking-summary fill bg-dark">
       <Row className="">
@@ -147,9 +145,9 @@ const BookingSummary: React.FC = () => {
 
 const BookingsSummaryHeader: React.FC = () => {
   return (
-    <Container className='d-flex justify-content-center'>
+    <Container className="d-flex justify-content-center">
       <Row className="p-3 flex-row align-items-center booking-summary-header justify-content-between ">
-        <Col md="3" className='ps-2 '>
+        <Col md="3" className="ps-2 ">
           <h5 className="fw-semiBold">location</h5>
         </Col>
         <Col md="1" className="d-xl-none w-auto p-0">

@@ -84,8 +84,6 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({
   handleSubmit,
 }) => {
   const [validated, setValidated] = useState(false)
-
-  console.log(error)
   return (
     <Modal show={show} onHide={handleCancel} centered size="lg" className="reviewModal">
       <Modal.Header>
