@@ -8,7 +8,7 @@ export default function ManageProfile() {
   interface User {
     firstname: string
     lastname: string
-    sex: string 
+    sex: string
     birthdate: string
     email: string
   }
@@ -20,7 +20,6 @@ export default function ManageProfile() {
     birthdate: '',
     email: '',
   })
-  console.log(user)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
@@ -50,23 +49,15 @@ export default function ManageProfile() {
     <div className="manage">
       <div className="container-fluid text-light fill bg-dark">
         <div className=" d-flex align-items-center justify-content-center pt-5">
-          <Form
-            className="row col-8 col-md-6 profile-manage py-5 mb-5"
-            onSubmit={handleSubmit}
-          >
+          <Form className="row col-8 col-md-6 profile-manage py-5 mb-5" onSubmit={handleSubmit}>
             <h1 className="d-flex align-items-center justify-content-center">
               <br></br>
               <span className="text-black fw-bold">Manage</span> Profile
             </h1>
-            <Form.Group
-              className="row mb-3 col-md-8 "
-              controlId="formFirstname"
-            >
+            <Form.Group className="row mb-3 col-md-8 " controlId="formFirstname">
               <Form.Label>Firstname</Form.Label>
               <Form.Control
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setUser({ ...user, firstname: e.target.value })
-                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, firstname: e.target.value })}
                 type="text"
                 placeholder="Enter firstname"
               />
@@ -75,9 +66,7 @@ export default function ManageProfile() {
             <Form.Group className="row mb-3 col-md-8 " controlId="formLastname">
               <Form.Label>Lastname</Form.Label>
               <Form.Control
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setUser({ ...user, lastname: e.target.value })
-                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, lastname: e.target.value })}
                 type="text"
                 placeholder="Enter lastname"
               />
@@ -99,15 +88,10 @@ export default function ManageProfile() {
               </Form.Select>
             </Form.Group>
 
-            <Form.Group
-              className="row mb-3 col-md-8 "
-              controlId="formBirthdate"
-            >
+            <Form.Group className="row mb-3 col-md-8 " controlId="formBirthdate">
               <Form.Label>Birthdate</Form.Label>
               <Form.Control
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setUser({ ...user, birthdate: e.target.value })
-                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, birthdate: e.target.value })}
                 type="date"
                 placeholder="Enter Birthdate"
               />
@@ -116,15 +100,11 @@ export default function ManageProfile() {
             <Form.Group className="row mb-3 col-md-8 " controlId="formEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setUser({ ...user, email: e.target.value })
-                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, email: e.target.value })}
                 type="email"
                 placeholder="Enter email"
               />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
+              <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
             </Form.Group>
             {error && <div className="alert alert-danger">{error}</div>}
             <Button variant="dark" type="submit" className="primary col-8">

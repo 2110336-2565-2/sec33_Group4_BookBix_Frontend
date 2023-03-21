@@ -1,30 +1,33 @@
-import React, { createContext, FC, useContext, useMemo, useState } from "react";
-import { UserInterface } from "../interfaces/user.interfaces";
+import React, { createContext, FC, useContext, useMemo, useState } from 'react'
+import { AccessTokenInterface } from '../interfaces/authentication.interface'
+
 interface UserProviderProps extends React.PropsWithChildren<{}> {}
-
-interface IUserContext {
-    currentUser: UserInterface | null;
-    setCurrentUser: (user: UserInterface | null) => void;
+interface UserContextInterface {
+  currentToken: AccessTokenInterface | null
+  setCurrentToken: (token: AccessTokenInterface | null) => void
 }
-const UserContext = createContext<IUserContext | undefined>(undefined);
+const TokenContext = createContext<UserContextInterface | undefined>(undefined)
 
-export const UserProvider: FC<UserProviderProps> = ({children}) => {
-    const [currentUser, setCurrentUser] = useState<UserInterface | null>(null);
-    
-    const context = useMemo<IUserContext>(() => ({
-        currentUser,
-        setCurrentUser
-    }), [currentUser])
-    
-    return <UserContext.Provider value={context}>{children}</UserContext.Provider>
+export const UserProvider: FC<UserProviderProps> = ({ children }) => {
+  const [currentToken, setCurrentToken] = useState<AccessTokenInterface | null>(null)
+
+  const context = useMemo<UserContextInterface>(
+    () => ({
+      currentToken: currentToken,
+      setCurrentToken: setCurrentToken,
+    }),
+    [currentToken],
+  )
+
+  return <TokenContext.Provider value={context}>{children}</TokenContext.Provider>
 }
 
-export const useUserContext = () => {
-    const context = useContext(UserContext);
-    
-    if(context === undefined) {
-        throw new Error("Cannot use useUserContext outside of UserProvider")
-    }
-    
-    return context;
+export const useTokenContext = () => {
+  const context = useContext(TokenContext)
+
+  if (context === undefined) {
+    throw new Error('Cannot use useTokenContext outside of UserProvider')
+  }
+
+  return context
 }

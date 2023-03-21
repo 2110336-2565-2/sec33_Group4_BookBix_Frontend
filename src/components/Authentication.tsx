@@ -1,21 +1,15 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import login_costume from '../assets/images/login-costume.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
-import { useUserContext } from '../hooks/CustomProvider'
-
-interface Data {
-  token?: string | undefined
-  username?: string
-  email?: string
-  password?: string
-  confirmPassword?: string
-  type?: string
-}
+import { useTokenContext } from '../hooks/CustomProvider'
+import { UserEnum, AuthDataInterface, RespondInterface } from '../interfaces/authentication.interface'
+import { registerRequest, loginRequest } from '../utils/authentication.utils'
+import { RoutePath } from '../interfaces/route.interface'
 
 const URL = import.meta.env.VITE_API_URL
 
-export const WebInform = () => {
+export const IconContainer = () => {
   return (
     <>
       <h1 className="text-start d-inline bookbix-logo">BookBix</h1>
@@ -26,51 +20,22 @@ export const WebInform = () => {
   )
 }
 
-export const Registration = () => {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [userType, setUserType] = useState('')
+export const RegisterContainer = () => {
+  const [authData, setAuthData] = useState<AuthDataInterface>({
+    username: undefined,
+    email: undefined,
+    password: undefined,
+    confirmPassword: undefined,
+    userType: undefined,
+  })
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!username || !email || !password || !confirmPassword || !userType) {
-      setError('Please fill in all fields')
-      return
-    }
-    if (password !== confirmPassword) {
-      setError('Password and Confirm Password must be the same')
-      return
-    }
-    setError(null)
-    console.log(userType)
-    try {
-      const url = `${URL}/auth/register`
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          userType,
-        }),
-      })
-      const data = await response.json()
-      if (!response.ok) {
-        setError(data.message)
-        return
-      }
-      localStorage.setItem('user', JSON.stringify(data.user))
-      navigate('/')
-    } catch (error) {
-      setError('Something went wrong, please try again later')
-    }
+    const respond: RespondInterface = await registerRequest(authData)
+    if (respond.ok) navigate(RoutePath.Login)
+    setError(respond.message)
   }
   return (
     <>
@@ -78,7 +43,7 @@ export const Registration = () => {
         <Button className="m-1 px-4 current-page-tag active" variant="light" style={{ color: '#db5461' }}>
           Register
         </Button>
-        <Link to="/login" className="nav-link d-flex align-items-center">
+        <Link to={RoutePath.Login} className="nav-link d-flex align-items-center">
           <div className="text-light ms-1 px-3">Login</div>
         </Link>
       </div>
@@ -94,8 +59,10 @@ export const Registration = () => {
           <Form.Label className="fs-4">Username</Form.Label>
           <Form.Control
             type="text"
-            value={username}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+            value={authData.username}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAuthData({ ...authData, username: e.target.value })
+            }
             placeholder="Enter Username"
           />
         </Form.Group>
@@ -103,8 +70,8 @@ export const Registration = () => {
           <Form.Label className="fs-4">Email</Form.Label>
           <Form.Control
             type="email"
-            value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            value={authData.email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthData({ ...authData, email: e.target.value })}
             placeholder="Enter Email"
           />
         </Form.Group>
@@ -112,8 +79,10 @@ export const Registration = () => {
           <Form.Label className="fs-4">Password</Form.Label>
           <Form.Control
             type="password"
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            value={authData.password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAuthData({ ...authData, password: e.target.value })
+            }
             placeholder="Password"
           />
         </Form.Group>
@@ -121,19 +90,21 @@ export const Registration = () => {
           <Form.Label className="fs-4">Confirm Password</Form.Label>
           <Form.Control
             type="password"
-            value={confirmPassword}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+            value={authData.confirmPassword}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAuthData({ ...authData, confirmPassword: e.target.value })
+            }
             placeholder="Confirm Password"
           />
         </Form.Group>
         <Form.Group
           className="form-group"
           controlId="registerType"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserType(e.target.id)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthData({ ...authData, userType: e.target.id })}
         >
           <div key="radio" className="mb-3 fs-5">
-            <Form.Check inline label="Customer" name="type" type="radio" id="customer" />
-            <Form.Check inline label="Provider" name="type" type="radio" id="provider" />
+            <Form.Check inline label="Customer" name="type" type="radio" id={UserEnum.CUSTOMER} />
+            <Form.Check inline label="Provider" name="type" type="radio" id={UserEnum.PROVIDER} />
           </div>
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
@@ -143,50 +114,28 @@ export const Registration = () => {
   )
 }
 
-export const LoginForm = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+export const LoginContainer = () => {
+  const [authData, setAuthData] = useState<AuthDataInterface>({
+    email: undefined,
+    password: undefined,
+  })
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
-  const { setCurrentUser } = useUserContext()
+  const { setCurrentToken: setCurrentUser } = useTokenContext()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!email || !password) return setError('Please fill in all fields')
-
-    try {
-      const response = await fetch(`${URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ email, password }),
-      })
-      const data = await response.json()
-      if (!response.ok) {
-        switch (response.status) {
-          case 403:
-            console.log(response.status)
-            return setError('Invalid email or password')
-          default:
-            return setError(data.message)
-        }
-      }
-      // Save the user information in local storage or in the state
-      if (data.user) {
-        setCurrentUser({ _id: data.user._id, username: data.user.username, role: data.user.role })
-      }
-      // Redirect the user to the homepage
-      navigate('/')
-    } catch (error) {
-      setError('Something went wrong, please try again later')
+    const respond: RespondInterface = await loginRequest(authData)
+    if (respond.ok) {
+      setCurrentUser(JSON.parse(respond.message))
+      navigate(RoutePath.SearchPage)
     }
+    setError(respond.message)
   }
   return (
     <>
       <div className="d-flex switch-page-btn border border-1 rounded justify-content-between align-self-end">
-        <Link to="/register" className="nav-link d-flex align-items-center">
+        <Link to={RoutePath.Register} className="nav-link d-flex align-items-center">
           <div className="text-light ms-1 px-3">Register</div>
         </Link>
         <Button className="m-1 px-4 current-page-tag active" variant="light">
@@ -203,8 +152,8 @@ export const LoginForm = () => {
           <Form.Label className="fs-4">Email</Form.Label>
           <Form.Control
             type="email"
-            value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            value={authData.email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthData({ ...authData, email: e.target.value })}
             placeholder="Enter email"
           />
           <Form.Text className="ms-3 fs-7 text-white">We'll never share your email with anyone else.</Form.Text>
@@ -213,14 +162,16 @@ export const LoginForm = () => {
           <Form.Label className="fs-4">Password</Form.Label>
           <Form.Control
             type="password"
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            value={authData.password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAuthData({ ...authData, password: e.target.value })
+            }
             placeholder="Password"
           />
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
         <p className="text-end mt-5 mb-5">
-          <Link to="../resetpassword" className="text-decoration-none fw-bold text-white">
+          <Link to={RoutePath.ResetPassword} className="text-decoration-none fw-bold text-white">
             forget password ?
           </Link>
         </p>
@@ -266,7 +217,7 @@ export const ForgetPasswordRequest = () => {
         onSubmit={handleSubmit}
       >
         <div className="border border-1 rounded align-self-end switch-page-btn btn">
-          <Link to="/login" className="nav-link d-flex align-items-center ">
+          <Link to={RoutePath.Login} className="nav-link d-flex align-items-center ">
             <div className="text-light ms-1 px-3">Back</div>
           </Link>
         </div>
@@ -312,14 +263,14 @@ export const ResetPasswordForm = () => {
       setError('Password and Confirm Password must be the same')
       return
     }
-    const send: Data = {
-      token: window.location.pathname.split('/').pop(),
+    const send: AuthDataInterface = {
+      _id: window.location.pathname.split('/').pop(),
       password: password,
       confirmPassword: confirmPassword,
     }
     setError(null)
     try {
-      const response = await fetch(`${URL}/auth/reset-password/${send.token}`, {
+      const response = await fetch(`${URL}/auth/reset-password/${send._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -337,7 +288,7 @@ export const ResetPasswordForm = () => {
       // Save the user information in local storage or in the state
       localStorage.setItem('user', JSON.stringify(data.user))
       // Redirect the user to the homepage
-      window.location.href = '/'
+      window.location.href = '/login'
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -349,7 +300,7 @@ export const ResetPasswordForm = () => {
         onSubmit={handleSubmit}
       >
         <div className="border border-1 rounded align-self-end switch-page-btn btn">
-          <Link to="/login" className="nav-link d-flex align-items-center ">
+          <Link to={RoutePath.Login} className="nav-link d-flex align-items-center ">
             <div className="text-light ms-1 px-3">Back</div>
           </Link>
         </div>

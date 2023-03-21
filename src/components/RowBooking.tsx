@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { Button, Modal, Col, Container, Row } from 'react-bootstrap'
+import React from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import { BookingInterface } from '../interfaces/booking.interfaces'
 import { calculateDays, formatBookingPeriod } from '../utils/Time.utils'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { StatusSelector, ComponentType } from '../utils/Booking.utils'
-import { Link } from 'react-router-dom'
+import { ComponentType } from '../interfaces/booking.interfaces'
+import { StatusSelector } from '../utils/Booking.utils'
 
 const URL = import.meta.env.VITE_API_URL
 

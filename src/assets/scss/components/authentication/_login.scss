@@ -1,4 +1,4 @@
-@use '../abstracts' as *;
+@use '../../abstracts' as *;
 
 .bookbix-logo {
   font-family: 'MuseoModerno', sans-serif !important;
@@ -43,7 +43,7 @@
     background-color: $red-magenta;
     border-top-left-radius: 91px;
     border-bottom-left-radius: 91px;
-    .form-group label:not(.chackboxLabel)  {
+    .form-group label:not(.chackboxLabel) {
       display: inline-block;
       font-size: medium;
       color: $white;

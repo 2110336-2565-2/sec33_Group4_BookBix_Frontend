@@ -1,22 +1,8 @@
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ButtonReview } from '../components/CustomButton'
-
-export enum StatusType {
-  BUTTON_PENDING = 'pending',
-  BUTTON_CANCEL = 'canceled',
-  BUTTON_CONFIRMED = 'confirmed',
-}
-export enum ComponentType {
-  PROGRESS_CIRCLE = 'progress-circle',
-  ACTION_BUTTON = 'action-btn',
-}
-interface StatusSelectorInterface {
-  status: string
-  component: string
-  locationId: string
-}
-
+import { StatusType, ComponentType, StatusSelectorInterface } from '../interfaces/booking.interfaces'
+import { RoutePath } from '../interfaces/route.interface'
 /**
  * Return various React.FC<StatusSelectorInterface> which is separated by component
  * @param status StatusType of booking
@@ -42,7 +28,7 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({ status, comp
           return <div></div>
         case StatusType.BUTTON_PENDING:
           return (
-            <Link to={`/payment`}>
+            <Link to={RoutePath.Payment}>
               <Button className={`action-btn ${status} text-dark`}>Payment</Button>
             </Link>
           )

@@ -1,17 +1,17 @@
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { WebInform, Registration } from '../components/LoginRegister'
+import { IconContainer, RegisterContainer } from '../components/Authentication'
 
 const Register: React.FC = () => {
   return (
     <Container fluid className="register fill bg-dark">
       <Row className="fill">
         <Col md="6" className="d-none d-md-flex flex-column ">
-          <WebInform />
+          <IconContainer />
         </Col>
         <Col md="6" className="wrapper">
-          <Registration />
+          <RegisterContainer />
         </Col>
       </Row>
     </Container>
