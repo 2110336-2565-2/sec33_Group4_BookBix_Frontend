@@ -1,4 +1,4 @@
-import BookLocation from './BookLocation'
+import BookLocation from './customer/BookLocation'
 import ForgetPassword from './ForgetPassword'
 import Home from './Home'
 import LoggedInHistory from './LoggedInHistory'
@@ -8,7 +8,7 @@ import Profile from './Profile'
 import Register from './Register'
 import ResetPassword from './ResetPassword'
 import ManageLocation from './provider/ManageLocation'
-import Bookings from './BookingsSummary'
+import Bookings from './customer/BookingsSummary'
 import SearchPage from './customer/Search'
 
 export {

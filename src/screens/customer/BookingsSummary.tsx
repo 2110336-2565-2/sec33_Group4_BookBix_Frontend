@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { RowBooking } from '../components/RowBooking'
-import { TicketBooking } from '../components/TicketBooking'
-import { BookingInterface } from '../interfaces/booking.interfaces'
+import { RowBooking } from '../../components/RowBooking'
+import { TicketBooking } from '../../components/TicketBooking'
+import { BookingInterface } from '../../interfaces/booking.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
 const mockBookings: BookingInterface[] = [

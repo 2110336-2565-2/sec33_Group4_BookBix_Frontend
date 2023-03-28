@@ -32,14 +32,15 @@ export function formatTime(date: Date | null) {
  * @param available_days - array of available days
  * @returns array of unavailable days
  */
-export const getDisableDate = (available_days: string[]) => {
+export const getDisableDate = (available_days: string[] | undefined): number[] => {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const disableDate = []
-  for (let i = 0; i < days.length; i++) {
-    if (!available_days.includes(days[i])) {
-      disableDate.push(i)
+  if(available_days)
+    for (let i = 0; i < days.length; i++) {
+      if (!available_days.includes(days[i])) {
+        disableDate.push(i)
+      }
     }
-  }
   return disableDate
 }
 

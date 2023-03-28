@@ -1,20 +1,18 @@
-export interface locationInterface {
-  _id: string
+import { ReviewInterface } from "./booking.interfaces"
+
+export interface LocationInterface {
+  _id: object
   name: string
-  address: string
-  description: string
-  url: string
-  images: string[]
-  reviews: {
-    username: string
-    rating: number
-    text: string
-  }[]
-  time: {
+  address?: string
+  description?: string
+  url?: string
+  images?: string[]
+  reviews?: ReviewInterface[]
+  time?: {
     open_time: string
     close_time: string
   }
-  available_days: string[]
-  price: number
-  avg_rating: 4.3
+  available_days?: string[]
+  price?: number
+  avg_rating?: number
 }
