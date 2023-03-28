@@ -4,7 +4,7 @@ export enum RoutePath {
   ManageLocation = '/location-management',
   Bookings = '/me/bookings',
   BookLocation = '/location-booking/:locationId',
-  Home = '*',
+  NotFound = '*',
   Register = '/register',
   Login = '/login',
   ForgetPassword = '/resetpassword',
