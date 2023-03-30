@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Dropdown, Row } from 'react-bootstrap'
+import { Button, Col, Container, Dropdown, Form, Modal, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 
 // Import Swiper React components
@@ -25,8 +25,10 @@ const BookLocation: React.FC = () => {
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null)
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null)
   const [location, setLocation] = useState<LocationInterface | null>(null)
-  const { currentToken: currentUser} = useTokenContext()
+  const { currentToken: currentUser } = useTokenContext()
   const [error, setError] = useState<string | null>(null)
+  const [show, setShow] = useState(false)
+  const [takeReceipt, setTakeReceipt] = useState<boolean>(false)
 
   const disableDate = getDisableDate(location?.available_days)
   // <[[booked start time,booked end time, booked dates]]> must get from booked times in database
@@ -82,15 +84,15 @@ const BookLocation: React.FC = () => {
   }, [])
 
   // fetch payment page with stripe API
-  const fetchPaymentPage = async (customer_id: string, provider_id: string, location_id: string, price: number) => {
+  const fetchPaymentPage = async (provider_id: string, location_id: string, duration: number, takeReceipt: boolean) => {
     try {
       const url = `http://${URL}/stripe/create-checkout-session`
 
       const bodyData = {
-        customer_id: customer_id,
         provider_id: provider_id,
         location_id: location_id,
-        price: price
+        duration: duration,
+        takeReceipt: takeReceipt,
       }
 
       const requestOptions = {
@@ -117,15 +119,17 @@ const BookLocation: React.FC = () => {
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
-  } 
+  }
 
+  // create handleSubmit function to send POST request with body of selected start date, end date, and location id
+  console.log("selectedStartDate: ", selectedStartDate)
   const createBooking = async () => {
     try {
       const bodyData = {
         customer_email: currentUser?.id,
         location_id: locationId,
         start_date: selectedStartDate,
-        duration: calculateDays(formatDate(selectedStartDate),formatDate(selectedEndDate))
+        duration: calculateDays([formatTime(selectedStartDate), formatDate(selectedStartDate)], [ formatTime(selectedEndDate), formatDate(selectedEndDate)]),
       }
       const response = await fetch(`${URL}/bookings`, {
         method: 'POST',
@@ -141,16 +145,19 @@ const BookLocation: React.FC = () => {
         return
       }
       setLocation(data)
-      fetchPaymentPage(data.customer_id, data.provider_id, data.location_id, data.price)
+      if (takeReceipt) {
+        fetchPaymentPage(data.provider_id, data.location_id, data.duration, true)
+      } else fetchPaymentPage(data.provider_id, data.location_id, data.duration, false)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
   }
 
-  // create handleSubmit function to send POST request with body of selected start date, end date, and location id
-  const handleSubmit = async () => {
-    createBooking()
+  const handleClose = () => {
+    setShow(false)
   }
+
+  const handleShow = () => setShow(true)
 
   const renderReviews = (reviews: ReviewInterface[] | undefined) => {
     if (reviews) {
@@ -179,7 +186,7 @@ const BookLocation: React.FC = () => {
           <SwiperSlide>
             <img src={image} />
           </SwiperSlide>
-        ) 
+        )
       })
     }
   }
@@ -232,13 +239,13 @@ const BookLocation: React.FC = () => {
             <p>{location?.description}</p>
             <div className="iframe-container">
               {location?.url ? (
-                <div></div>
-              ) : (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: location!.url as string,
+                    __html: location.url,
                   }}
                 />
+              ) : (
+                <div></div>
               )}
             </div>
           </div>
@@ -246,14 +253,46 @@ const BookLocation: React.FC = () => {
         <Col md="4">
           <h3 className="text-center">Reviews</h3>
           <div className="rounded review-box bg-light bg-opacity-25 p-3 h-75 overflow-auto">
-            {location?.reviews ? <div></div> : renderReviews(location?.reviews)}
+            {location?.reviews ? renderReviews(location?.reviews) : <div></div>}
           </div>
         </Col>
       </Row>
       <div className="row d-flex flex-column">
-        <button onClick={() => handleSubmit()} className="col-md-4 mb-5 booking-btn p-2 align-self-center">
+        <Button className="col-md-4 mb-5 booking-btn p-2 align-self-center w-25" onClick={handleShow}>
           Booking
-        </button>
+        </Button>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to create the booking and payment?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                label="Would you like to take receipt after payment?"
+                onChange={(e) => {
+                  setTakeReceipt(e.target.checked)
+                }}
+              />
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={createBooking}>
+              Continue to payment
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </Container>
   )
