@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ButtonReview } from './CustomButton'
 import { StatusType, ComponentType, StatusSelectorInterface } from '../interfaces/booking.interfaces'
@@ -23,16 +23,24 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
 }) => {
   const { currentToken } = useTokenContext()
   const [error, setError] = useState<string | null>(null)
+  const [show, setShow] = useState(false)
+  const [takeReceipt, setTakeReceipt] = useState<boolean>(false)
+
   // fetch payment page with stripe API
-  const fetchPaymentPage = async (customer_id: string, provider_id: string, location_id: string, price: number) => {
+  const fetchPaymentPage = async (
+    provider_id: string,
+    location_id: string,
+    price: number,
+    takeReceipt: boolean,
+  ) => {
     try {
       const url = `http://${URL}/stripe/create-checkout-session`
 
       const bodyData = {
-        customer_id: customer_id,
         provider_id: provider_id,
         location_id: location_id,
         price: price,
+        takeReceipt: takeReceipt,
       }
 
       const requestOptions = {
@@ -61,6 +69,18 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
     }
   }
 
+  const handleClose = () => {
+    setShow(false)
+  }
+
+  const handlePayment = () => {
+    if (takeReceipt) {
+      fetchPaymentPage(providerId, locationId, price, true)
+    } else fetchPaymentPage(providerId, locationId, price, false)
+  }
+
+  const handleShow = () => setShow(true)
+
   switch (component) {
     case ComponentType.PROGRESS_CIRCLE:
       return (
@@ -77,12 +97,43 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
           return <div></div>
         case StatusType.BUTTON_PENDING:
           return (
-            <Button
-              className={`action-btn ${status} text-dark`}
-              onClick={() => fetchPaymentPage(currentToken!.id, providerId, locationId, price)}
-            >
-              Payment
-            </Button>
+            <>
+              <Button className={`action-btn ${status} text-dark`} onClick={handleShow}>
+                Payment
+              </Button>
+              <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Are you sure you want to make the payment?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label="Would you like to take receipt ?"
+                      onChange={(e) => {
+                        setTakeReceipt(e.target.checked)
+                      }}
+                    />
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handlePayment}>
+                    Continue to payment
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </>
           )
         case StatusType.BUTTON_CONFIRMED:
           return <ButtonReview locationId={locationId} />

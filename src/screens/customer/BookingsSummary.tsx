@@ -30,7 +30,7 @@ const BookingSummary: React.FC = () => {
     }
   }
 
-   //fetch bookings data when component mount
+  //  fetch bookings data when component mount
    useEffect(() => {
     fetchBookings()
   }, [])
