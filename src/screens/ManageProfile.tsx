@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { useState } from 'react'
+import { useTokenContext } from '../hooks/CustomProvider'
+import { useState, useEffect } from 'react'
+import { useCookies } from 'react-cookie'
+import jwt_decode from 'jwt-decode'
+import { AccessTokenInterface, UserEnum } from '../interfaces/authentication.interface'
 const url = import.meta.env.VITE_API_URL
 
 // page for update user info firstname, lastname, sex, birthdate, email
@@ -12,6 +16,8 @@ export default function ManageProfile() {
     birthdate: string
     email: string
   }
+  const [cookies, setCookie] = useCookies(['access_token'])
+  const { currentToken, setCurrentToken } = useTokenContext()
   const [error, setError] = useState<string>('')
   const [user, setUser] = useState<User>({
     firstname: '',
@@ -20,10 +26,24 @@ export default function ManageProfile() {
     birthdate: '',
     email: '',
   })
+
+  let accessToken: AccessTokenInterface
+
+  useEffect(() => {
+    try {
+      accessToken = jwt_decode(cookies.access_token)
+    } catch (error) {
+      return
+    }
+    if (accessToken) {
+      setCurrentToken(accessToken)
+    }
+  }, [])
+  // console.log(currentToken)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const response = await fetch(`${url}/customers/manage-profile`, {
+      const response = await fetch(`${url}/customers/update/${currentToken?.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
