@@ -28,7 +28,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
         <Row className="p-3 flex-row align-items-center justify-content-between">
           <Col md="3">{locationName}</Col>
           <Col md="1" className="d-xl-none">
-            {calculateDays(startTime![1], endTime![1])} days
+            {calculateDays(startTime!, endTime!)} hours
           </Col>
           <Col md="3" className="d-none d-xl-block">
             <div className="d-flex flex-row flex-nowrap justify-content-center">

@@ -49,8 +49,8 @@ export const TicketBooking: React.FC<BookingInterface> = ({
         <Row className="p-3 d-flex flex-nowrap justify-content-between">
           <Col xs="4" sm="4" className="d-none d-sm-block">
             <div className="d-flex flex-column row justify-content-center">
-              <div className="text-start">From &nbsp;{startTime![1]}</div>
-              <div className="text-start">To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{endTime![1]}</div>
+              <div className="text-start">{startTime![1]}</div>
+              <div className="text-start">From &nbsp;{startTime![0]} &nbsp;To &nbsp;{endTime![0]}</div>
             </div>
           </Col>
           <Col xs="4" sm="3" className="text-start">
