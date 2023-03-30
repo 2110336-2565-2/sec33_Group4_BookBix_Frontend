@@ -82,12 +82,15 @@ const BookLocation: React.FC = () => {
   }, [])
 
   // fetch payment page with stripe API
-  const fetchPaymentPage = async () => {
+  const fetchPaymentPage = async (customer_id: string, provider_id: string, location_id: string, price: number) => {
     try {
       const url = `http://${URL}/stripe/create-checkout-session`
 
       const bodyData = {
-        priceId: 'price_1Mh6ShLx9QcUn2bQSje143ye',
+        customer_id: customer_id,
+        provider_id: provider_id,
+        location_id: location_id,
+        price: price
       }
 
       const requestOptions = {
@@ -138,6 +141,7 @@ const BookLocation: React.FC = () => {
         return
       }
       setLocation(data)
+      fetchPaymentPage(data.customer_id, data.provider_id, data.location_id, data.price)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -146,7 +150,6 @@ const BookLocation: React.FC = () => {
   // create handleSubmit function to send POST request with body of selected start date, end date, and location id
   const handleSubmit = async () => {
     createBooking()
-    fetchPaymentPage()
   }
 
   const renderReviews = (reviews: ReviewInterface[] | undefined) => {
