@@ -5,12 +5,11 @@ import { mockup1 } from './mock_location'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export const SearchCard = () => {
-  // console.log(state)
+export const SearchCard = ({ data }: { data: locationInterface[] }) => {
   const LocationCard = () => {
     return (
       <Row className="g-4">
-        {mockup1.map((location, idx) => (
+        {data.map((location, idx) => (
           <Card key={idx}>
             <Link to={`/location-booking/${location._id}`}>
               <Card.Img variant="top cropped-ofp" className="card-location-img" src={location.images[0]} />

@@ -4,15 +4,16 @@ import { SearchCard } from '../../components/SearchCard'
 import { Button, Form, Row, Col, Container } from 'react-bootstrap'
 import { useState } from 'react'
 import { SearchInterface } from '../../interfaces/search.interfaces'
+import { locationInterface } from '../../interfaces/location.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
-
 const SearchPage: React.FC = () => {
+  const [locations, setLocations] = useState<locationInterface[]>([])
   const [formData, setFormData] = useState<SearchInterface>({
     location: '',
     location_function: '',
     location_type: '',
-    max_price: 0,
+    max_price: 1000,
     min_price: 0,
     onChange: () => {},
   })
@@ -21,7 +22,6 @@ const SearchPage: React.FC = () => {
     setFormData({ ...formData, ...newData })
   }
 
-  console.log(formData)
   return (
     <Container fluid className="search-page bg-dark">
       <div className="align-content-center fill">
@@ -36,13 +36,26 @@ const SearchPage: React.FC = () => {
           type="submit"
           className="search-btn to_center"
           onClick={(e) => {
-            console.log(formData)
+            e.preventDefault()
+            fetch(
+              `${URL}/locations/search?location_name=${formData.location}&location_type=${formData.location_type}&location_function=${formData.location_function}&min_price=${formData.min_price}&max_price=${formData.max_price}`,
+              {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                setLocations(data.location)
+              })
           }}
         >
           Search
         </Button>
         <div className="to_center">
-          <SearchCard />
+          <SearchCard data={locations} />
         </div>
       </div>
     </Container>
