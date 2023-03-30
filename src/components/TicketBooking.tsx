@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { BookingInterface } from '../interfaces/booking.interfaces'
 import { formatBookingPeriod } from '../utils/Time.utils'
 import { ComponentType } from '../interfaces/booking.interfaces'
-import { StatusSelector } from '../utils/Booking.utils'
+import { StatusSelector } from './StatusSelector'
 
 import { Link } from 'react-router-dom'
 
@@ -11,6 +11,7 @@ const URL = import.meta.env.VITE_API_URL
 
 export const TicketBooking: React.FC<BookingInterface> = ({
   id = '',
+  provider_id = '',
   locationName = '',
   locationId = '',
   price = 0,
@@ -36,7 +37,13 @@ export const TicketBooking: React.FC<BookingInterface> = ({
             {id}
           </Col>
           <Col xs="5" sm="3">
-            <StatusSelector status={status} component={ComponentType.PROGRESS_CIRCLE} locationId={locationId} />
+            <StatusSelector
+              status={status}
+              component={ComponentType.PROGRESS_CIRCLE}
+              locationId={locationId}
+              providerId={provider_id}
+              price={price}
+            />
           </Col>
         </Row>
         <Row className="p-3 d-flex flex-nowrap justify-content-between">
@@ -51,7 +58,13 @@ export const TicketBooking: React.FC<BookingInterface> = ({
           </Col>
           <Col xs="5" sm="3">
             <div className="ticket-action-btn">
-              <StatusSelector status={status} component={ComponentType.ACTION_BUTTON} locationId={locationId} />
+              <StatusSelector
+                status={status}
+                component={ComponentType.ACTION_BUTTON}
+                locationId={locationId}
+                providerId={provider_id}
+                price={price}
+              />
             </div>
           </Col>
         </Row>

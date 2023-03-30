@@ -10,5 +10,4 @@ export enum RoutePath {
   ForgetPassword = '/resetpassword',
   ResetPassword = '/auth/reset-password/:id',
   LoggedInHistory = '/customers/:customerId/history',
-  Payment = '/payment',
 }
