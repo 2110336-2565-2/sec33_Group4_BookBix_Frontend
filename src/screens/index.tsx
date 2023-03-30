@@ -10,6 +10,7 @@ import ResetPassword from './ResetPassword'
 import ManageLocation from './provider/ManageLocation'
 import Bookings from './BookingsSummary'
 import SearchPage from './customer/Search'
+import CreatePromotion from './provider/CreatePromotion'
 
 export {
   NotFound,
@@ -24,4 +25,5 @@ export {
   ManageLocation,
   Bookings,
   SearchPage,
+  CreatePromotion,
 }
