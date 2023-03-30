@@ -4,14 +4,16 @@ import {
   NotFound,
   Login,
   BookLocation,
+  ManageProfile,
   Bookings,
   Register,
-  ManageProfile,
-  ManageLocation,
   ForgetPassword,
   ResetPassword,
   LoggedInHistory,
   SearchPage,
+  ProfileProvider,
+  CreateLocation,
+  ChangeLocation,
 } from '../screens/index'
 import { UserProvider } from '../hooks/CustomProvider'
 import { RoutePath } from '../interfaces/route.interface'
@@ -23,9 +25,13 @@ function App() {
         <Route element={<Navbar />}>
           <Route path={RoutePath.SearchPage} element={<SearchPage />} />
           <Route path={RoutePath.ManageProfile} element={<ManageProfile />} />
-          <Route path={RoutePath.ManageLocation} element={<ManageLocation />} />
           <Route path={RoutePath.Bookings} element={<Bookings />} />
           <Route path={RoutePath.BookLocation} element={<BookLocation />} />
+          <Route>
+            <Route path={RoutePath.ProfileProvider} element={<ProfileProvider />} />
+            <Route path={RoutePath.CreateLocation} element={<CreateLocation />} />
+            <Route path={RoutePath.ChangeLocation} element={<ChangeLocation />} />
+          </Route>
         </Route>
         <Route path={RoutePath.Register} element={<Register />} />
         <Route path={RoutePath.Login} element={<Login />} />

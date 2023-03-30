@@ -7,7 +7,9 @@ import ManageProfile from './ManageProfile'
 import Profile from './Profile'
 import Register from './Register'
 import ResetPassword from './ResetPassword'
-import ManageLocation from './provider/ManageLocation'
+import ProfileProvider from './provider/ProfileProvider'
+import CreateLocation from './provider/CreateLocation'
+import ChangeLocation from './provider/ChangeLocation'
 import Bookings from './BookingsSummary'
 import SearchPage from './customer/Search'
 
@@ -21,7 +23,9 @@ export {
   Profile,
   Register,
   ResetPassword,
-  ManageLocation,
+  ProfileProvider,
+  CreateLocation,
+  ChangeLocation,
   Bookings,
   SearchPage,
 }

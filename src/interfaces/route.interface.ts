@@ -1,7 +1,6 @@
 export enum RoutePath {
   SearchPage = '/',
   ManageProfile = '/profile-management',
-  ManageLocation = '/location-management',
   Bookings = '/me/bookings',
   BookLocation = '/location-booking/:locationId',
   NotFound = '*',
@@ -11,4 +10,7 @@ export enum RoutePath {
   ResetPassword = '/auth/reset-password/:id',
   LoggedInHistory = '/customers/:customerId/history',
   Payment = '/payment',
+  ProfileProvider = '/locations',
+  CreateLocation = '/locations/create',
+  ChangeLocation = '/locations/:locationId',
 }
