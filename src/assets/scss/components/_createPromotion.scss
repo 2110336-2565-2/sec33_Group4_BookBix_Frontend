@@ -1,0 +1,23 @@
+@use '../abstracts' as *;
+
+.promotion {
+  .managePromotion {
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    background-color: $shadow-red-magenta;
+    border-top-left-radius: 91px;
+    border-bottom-left-radius: 91px;
+    border-top-right-radius: 91px;
+    border-bottom-right-radius: 91px;
+    img {
+      width: 80%;
+    }
+    // min-height: 1;
+    height: 100%;
+  }
+  .fill {
+    min-height: 100vh;
+    height: 100%;
+  }
+}

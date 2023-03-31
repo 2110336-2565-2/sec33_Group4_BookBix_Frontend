@@ -46,14 +46,14 @@ export default function CreatePromotion() {
   }
 
   return (
-    <div className="manage">
+    <div className="promotion">
       <div className="container-fluid text-light fill bg-dark">
         <div className=" d-flex align-items-center justify-content-center pt-5">
-          <Form className="row col-8 col-md-6 profile-manage py-5 mb-5" onSubmit={handleSubmit}>
+          <Form className="row col-8 col-md-6 managePromotion py-5 mb-5" onSubmit={handleSubmit}>
             <h1 className="d-flex align-items-center justify-content-center">
               Create Promotion
             </h1>
-            <Form.Group className="row mb-3 col-md-8 " controlId="formPromotionCode">
+            <Form.Group className="justify-content-center " controlId="formPromotionCode">
               <Form.Label>Promotion Code</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, PromotionCode: e.target.value })}
@@ -64,7 +64,7 @@ export default function CreatePromotion() {
 
             
 
-            <Form.Group className="row mb-3 col-md-8 " controlId="formDiscount">
+            <Form.Group className="justify-content-center "  controlId="formDiscount">
               <Form.Label>Discount</Form.Label>
               <Form.Select
                 onChange={(e) => {
@@ -79,7 +79,7 @@ export default function CreatePromotion() {
               </Form.Select>
             </Form.Group>
 
-            <Form.Group className="row mb-3 col-md-8 " controlId="formLastname">
+            <Form.Group className="justify-content-center" controlId="formLastname">
               <Form.Label>Amount of Discount</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, AmountOfDiscount: e.target.value })}
@@ -88,7 +88,7 @@ export default function CreatePromotion() {
               />
             </Form.Group>
 
-            <Form.Group className="row mb-3 col-md-8 " controlId="formLocation">
+            <Form.Group className="justify-content-center " controlId="formLocation">
               <Form.Label>Location</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, Location: e.target.value })}
@@ -97,7 +97,7 @@ export default function CreatePromotion() {
               />
             </Form.Group>
 
-            <Form.Group className="row mb-3 col-md-8 " controlId="formMaxRedemptions">
+            <Form.Group className="justify-content-center  " controlId="formMaxRedemptions">
               <Form.Label>Max Redemptions</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, MaxRedemptions: e.target.value })}
@@ -107,7 +107,7 @@ export default function CreatePromotion() {
               <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
             </Form.Group>
             {error && <div className="alert alert-danger">{error}</div>}
-            <Button variant="dark" type="submit" className="primary col-8">
+            <Button variant="dark" type="submit" className="justify-content-center ">
               Create
             </Button>
           </Form>
