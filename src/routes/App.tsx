@@ -11,7 +11,7 @@ import {
   ResetPassword,
   LoggedInHistory,
   SearchPage,
-  ProfileProvider,
+  LocationsManage,
   CreateLocation,
   ChangeLocation,
 } from '../screens/index'
@@ -28,9 +28,9 @@ function App() {
           <Route path={RoutePath.Bookings} element={<Bookings />} />
           <Route path={RoutePath.BookLocation} element={<BookLocation />} />
           <Route>
-            <Route path={RoutePath.ProfileProvider} element={<ProfileProvider />} />
-            <Route path={RoutePath.CreateLocation} element={<CreateLocation />} />
-            <Route path={RoutePath.ChangeLocation} element={<ChangeLocation />} />
+            <Route path="/locations" element={<LocationsManage />} />
+            <Route path="/locations/create" element={<CreateLocation />} />
+            <Route path="/locations/:locationId" element={<ChangeLocation />} />
           </Route>
         </Route>
         <Route path={RoutePath.Register} element={<Register />} />

@@ -1,7 +1,7 @@
 import LocationCard from '../../components/CustomCard'
 import { locationInterface } from '../../interfaces/location.interfaces'
 
-export default function ProfileProvider() {
+export default function LocationsManage() {
   const testLocations: locationInterface[] = [
     {
       name: 'CU Sport complex',
