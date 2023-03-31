@@ -1,5 +1,5 @@
 export interface ReviewInterface {
-  title: string
+  title?: string
   username: string
   rating: number
   text: string
