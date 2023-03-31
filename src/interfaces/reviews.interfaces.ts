@@ -1,4 +1,4 @@
-export interface ReviewRequestInterface {
+export interface ReviewInterface {
   title: string
   username: string
   rating: number
