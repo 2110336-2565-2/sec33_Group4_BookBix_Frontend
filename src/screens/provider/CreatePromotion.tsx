@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Row } from 'react-bootstrap'
 import { useState } from 'react'
 const url = import.meta.env.VITE_API_URL
 
@@ -50,10 +50,10 @@ export default function CreatePromotion() {
       <div className="container-fluid text-light fill bg-dark">
         <div className=" d-flex align-items-center justify-content-center pt-5">
           <Form className="row col-8 col-md-6 managePromotion py-5 mb-5" onSubmit={handleSubmit}>
-            <h1 className="d-flex align-items-center justify-content-center">
+            <h1 className=" row mb-3 col-md-8 justify-content-center  d-flex align-items-center justify-content-center">
               Create Promotion
             </h1>
-            <Form.Group className="justify-content-center " controlId="formPromotionCode">
+            <Form.Group className=" row mb-3 col-md-8 justify-content-center  justify-content-center " controlId="formPromotionCode">
               <Form.Label>Promotion Code</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, PromotionCode: e.target.value })}
@@ -63,8 +63,8 @@ export default function CreatePromotion() {
             </Form.Group>
 
             
-
-            <Form.Group className="justify-content-center "  controlId="formDiscount">
+            
+            <Form.Group className=" row mb-3 col-md-8 justify-content-center "  controlId="formDiscount">
               <Form.Label>Discount</Form.Label>
               <Form.Select
                 onChange={(e) => {
@@ -78,8 +78,8 @@ export default function CreatePromotion() {
                 <option value="Percantage">Percentage</option>
               </Form.Select>
             </Form.Group>
-
-            <Form.Group className="justify-content-center" controlId="formLastname">
+            
+            <Form.Group className=" row mb-3 col-md-8 justify-content-center justify-content-center" controlId="formLastname">
               <Form.Label>Amount of Discount</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, AmountOfDiscount: e.target.value })}
@@ -87,8 +87,9 @@ export default function CreatePromotion() {
                 placeholder="Enter Amount of Discount"
               />
             </Form.Group>
+            
 
-            <Form.Group className="justify-content-center " controlId="formLocation">
+            <Form.Group className=" row mb-3 col-md-8 justify-content-center justify-content-center " controlId="formLocation">
               <Form.Label>Location</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, Location: e.target.value })}
@@ -97,7 +98,7 @@ export default function CreatePromotion() {
               />
             </Form.Group>
 
-            <Form.Group className="justify-content-center  " controlId="formMaxRedemptions">
+            <Form.Group className=" row mb-3 col-md-8 justify-content-center justify-content-center  " controlId="formMaxRedemptions">
               <Form.Label>Max Redemptions</Form.Label>
               <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, MaxRedemptions: e.target.value })}
@@ -107,7 +108,7 @@ export default function CreatePromotion() {
               <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
             </Form.Group>
             {error && <div className="alert alert-danger">{error}</div>}
-            <Button variant="dark" type="submit" className="justify-content-center ">
+            <Button variant="dark" type="submit" className="primary col-5 ">
               Create
             </Button>
           </Form>
