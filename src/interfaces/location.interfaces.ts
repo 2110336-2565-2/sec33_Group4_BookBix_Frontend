@@ -12,5 +12,5 @@ export interface locationInterface {
   time: TimeInterface
   available_days: string[]
   price: number
-  avg_rating?: 4.3
+  avg_rating?: number
 }
