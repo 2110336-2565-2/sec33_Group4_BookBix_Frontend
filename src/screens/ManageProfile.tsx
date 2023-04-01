@@ -84,7 +84,7 @@ export default function ManageProfile() {
     <div className="manage">
       <div className="container-fluid text-light fill bg-dark">
         <div className=" d-flex align-items-center justify-content-center pt-5">
-          <Form className="row col-8 col-md-6 profile-manage py-5 mb-5" onSubmit={handleSubmit}>
+          <Form className="row col-11 col-md-6 profile-manage py-5 mb-5" onSubmit={handleSubmit}>
             <h1 className="d-flex align-items-center justify-content-center">
               <br></br>
               <span className="text-black fw-bold">Manage</span> Profile
@@ -136,7 +136,7 @@ export default function ManageProfile() {
               />
             </Form.Group>
 
-            <Form.Group className="row mb-3 col-md-8 " controlId="formUsername">
+            <Form.Group className="row mb-5 col-md-8 " controlId="formUsername">
               <Form.Label>username</Form.Label>
               <Form.Control
                 value={user?.username}
@@ -144,9 +144,8 @@ export default function ManageProfile() {
                 type="username"
                 placeholder="Enter username"
               />
-              <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
             </Form.Group>
-            {error && <div className="alert alert-danger">{error}</div>}
+            {error && <div className="row col-9 col-md-8 alert alert-danger">{error}</div>}
             <Button variant="dark" type="submit" className="primary col-8">
               Submit
             </Button>
