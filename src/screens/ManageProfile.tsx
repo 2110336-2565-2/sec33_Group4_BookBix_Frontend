@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Row, Col } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import { useTokenContext } from '../hooks/CustomProvider'
 import { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
@@ -98,6 +98,7 @@ export default function ManageProfile() {
                 placeholder="Enter firstname"
               />
             </Form.Group>
+
             <Form.Group className="row mb-3 col-md-8 " controlId="formLastname">
               <Form.Label>Lastname</Form.Label>
               <Form.Control
@@ -107,47 +108,41 @@ export default function ManageProfile() {
                 placeholder="Enter lastname"
               />
             </Form.Group>
-            <Row className="col-md-8">
-              <Col className="">
-                <Form.Group className="row mb-3 col-md-8 " controlId="formSex">
-                  <Form.Label>Sex</Form.Label>
-                  <Form.Select
-                    value={user?.sex}
-                    onChange={(e) => {
-                      setUser({ ...user, sex: e.target.value })
-                    }}
-                    aria-label="Default select example"
-                    placeholder="Enter Sex"
-                  >
-                    <option value="">Choose...</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="LGBTQ+">LGBTQ+</option>
-                  </Form.Select>
-                </Form.Group>
-              </Col>
-              <Col className="">
-                <Form.Group className="row mb-3 col-md-8 " controlId="formBirthdate">
-                  <Form.Label>Birthdate</Form.Label>
-                  <Form.Control
-                    value={user?.birthdate}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUser({ ...user, birthdate: e.target.value })
-                    }
-                    type="date"
-                    placeholder="Enter Birthdate"
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
 
-            <Form.Group className="row mb-3 col-md-8 " controlId="formEmail">
-              <Form.Label>Email address</Form.Label>
+            <Form.Group className="row mb-3 col-md-8 " controlId="formSex">
+              <Form.Label>Sex</Form.Label>
+              <Form.Select
+                value={user?.sex}
+                onChange={(e) => {
+                  setUser({ ...user, sex: e.target.value })
+                }}
+                aria-label="Default select example"
+                placeholder="Enter Sex"
+              >
+                <option value="">Choose...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="LGBTQ+">LGBTQ+</option>
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="row mb-3 col-md-8 " controlId="formBirthdate">
+              <Form.Label>Birthdate</Form.Label>
               <Form.Control
-                value={user?.email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, email: e.target.value })}
-                type="email"
-                placeholder="Enter email"
+                value={user?.birthdate}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, birthdate: e.target.value })}
+                type="date"
+                placeholder="Enter Birthdate"
+              />
+            </Form.Group>
+
+            <Form.Group className="row mb-3 col-md-8 " controlId="formUsername">
+              <Form.Label>username</Form.Label>
+              <Form.Control
+                value={user?.username}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({ ...user, username: e.target.value })}
+                type="username"
+                placeholder="Enter username"
               />
               <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
             </Form.Group>
