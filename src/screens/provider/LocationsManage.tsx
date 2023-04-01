@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap'
 export default function LocationsManage() {
   const testLocations: locationInterface[] = [
     {
+      _id: '000000000004000000000001',
       name: 'CU Sport complex',
       address: 'จุฬาลงกรณ์มหาวิทยาลัย ซอย จุฬาลงกรณ์ 5 Wang Mai',
       description: 'Designed for sport activity',
@@ -22,6 +23,7 @@ export default function LocationsManage() {
       price: 200,
     },
     {
+      _id: '000000000004000000000002',
       name: 'Eiffel Tower',
       address: 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France',
       description:
@@ -33,9 +35,10 @@ export default function LocationsManage() {
       ],
       time: { open_time: '08:00', close_time: '16:00' },
       available_days: ['Monday', 'Wednesday', 'Friday', 'Sunday'],
-      price: 200,
+      price: 150,
     },
     {
+      _id: '000000000004000000000003',
       name: 'Central Park',
       address: 'New York, NY 10022',
       description: 'A large urban park in the heart of New York City',
@@ -50,28 +53,33 @@ export default function LocationsManage() {
       price: 250,
     },
   ]
+
+  const LocationCards = testLocations.map(
+    ({ _id, name, address, description, url, images, time, available_days, price }) => {
+      return (
+        <LocationCard
+          _id={_id}
+          name={name}
+          address={address}
+          description={description}
+          url={url}
+          images={images}
+          time={time}
+          available_days={available_days}
+          price={price}
+        />
+      )
+    },
+  )
+
   return (
     <>
       <section className="location-manage bg-dark">
-        <Container className="py-4">
-          <h1 className="h1 text-center fw-bold" id="header">
+        <Container className="py-1">
+          <h1 className="h1 text-center fw-bold text-uppercase" id="header">
             Your locations
           </h1>
-          {testLocations.map(({ name, address, description, url, images, time, available_days, price }, idx) => {
-            return (
-              <LocationCard
-                key={idx}
-                name={name}
-                address={address}
-                description={description}
-                url={url}
-                images={images}
-                time={time}
-                available_days={available_days}
-                price={price}
-              />
-            )
-          })}
+          {LocationCards}
         </Container>
       </section>
     </>

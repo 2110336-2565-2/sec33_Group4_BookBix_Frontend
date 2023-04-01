@@ -1,6 +1,7 @@
 @use '../../abstracts' as *;
 
 .location-manage {
+  min-height: calc(100lvh - $navbar);
   color: $white;
   text-rendering: optimizeLegibility;
 
@@ -12,7 +13,6 @@
 
   #header {
     margin: 2rem 0;
-    text-transform: uppercase;
   }
 
   /* Cards */
@@ -25,25 +25,18 @@
     margin: 0 0 2rem 0;
     overflow: hidden;
     position: relative;
-    color: #ffffff;
+    color: $white;
 
     &.dark {
       background-color: #18151f;
-    }
-
-    .t-dark {
-      color: #18151f;
     }
 
     a {
       color: inherit;
     }
 
-    h1,
-    .h1 {
+    h1 {
       margin-bottom: 0.5rem;
-      font-weight: 500;
-      line-height: 1.2;
     }
 
     .small {
@@ -70,7 +63,7 @@
       height: 10px;
       margin: 10px 0;
       border-radius: 5px;
-      background-color: #424242;
+      background-color: $dark-grey;
       transition: width 0.2s ease;
     }
 
@@ -91,7 +84,7 @@
     .postcard__tagbox {
       display: flex;
       flex-flow: row wrap;
-      font-size: 14px;
+      font-size: 87%;
       margin: 20px 0 0 0;
       padding: 0;
       justify-content: center;
@@ -109,6 +102,10 @@
         &:hover {
           background: rgba(83, 83, 83, 0.8);
         }
+      }
+      &:nth-child(2n) {
+        margin: 5px 0 0 0;
+        font-size: 105%;
       }
     }
 
@@ -134,7 +131,7 @@
       flex-wrap: inherit;
 
       .postcard__title {
-        font-size: 2rem;
+        font-size: $font-h3;
       }
 
       .postcard__tagbox {
