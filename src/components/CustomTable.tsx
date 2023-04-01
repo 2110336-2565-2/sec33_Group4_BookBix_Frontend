@@ -5,8 +5,8 @@ export const HistoryTable = ({ histories }: HistoriesInterface) => {
   return (
     <Table borderless responsive="md">
       <HistoryTableHeader />
-      {histories.map((history) => {
-        return <HistoryTableBody key={history.date} date={history.date} device={history.device} ip={history.ip} />
+      {histories.map((history, idx) => {
+        return <HistoryTableBody key={idx} date={history.date} device={history.device} ip={history.ip} />
       })}
     </Table>
   )
