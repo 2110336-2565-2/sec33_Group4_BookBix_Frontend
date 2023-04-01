@@ -11,6 +11,7 @@ import {
   ResetPassword,
   LoggedInHistory,
   SearchPage,
+  CreatePromotion,
   LocationsManage,
   CreateLocation,
   ChangeLocation,
@@ -27,6 +28,7 @@ function App() {
           <Route path={RoutePath.ManageProfile} element={<ManageProfile />} />
           <Route path={RoutePath.Bookings} element={<Bookings />} />
           <Route path={RoutePath.BookLocation} element={<BookLocation />} />
+          <Route path={RoutePath.CreatePromotion} element={<CreatePromotion />} />
           <Route>
             <Route path="/locations" element={<LocationsManage />} />
             <Route path="/locations/create" element={<CreateLocation />} />
@@ -39,6 +41,7 @@ function App() {
         <Route path={RoutePath.ResetPassword} element={<ResetPassword />} />
         <Route path={RoutePath.LoggedInHistory} element={<LoggedInHistory />} />
         <Route path={RoutePath.NotFound} element={<NotFound />} />
+
       </Routes>
     </UserProvider>
   )

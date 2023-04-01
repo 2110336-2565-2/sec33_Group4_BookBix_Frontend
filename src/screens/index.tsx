@@ -12,6 +12,7 @@ import CreateLocation from './provider/CreateLocation'
 import ChangeLocation from './provider/ChangeLocation'
 import Bookings from './BookingsSummary'
 import SearchPage from './customer/Search'
+import CreatePromotion from './provider/CreatePromotion'
 
 export {
   NotFound,
@@ -28,4 +29,5 @@ export {
   ChangeLocation,
   Bookings,
   SearchPage,
+  CreatePromotion,
 }
