@@ -30,24 +30,7 @@ const LoggedInHistory = () => {
     }
   }
   useEffect(() => {
-    // fetchUser()
-    setHistories([
-      {
-        device: 'POSTMAN - POSTMAN DESKTOP',
-        ip: '111.11.0.1',
-        date: '11/03/2023 21:11:25',
-      },
-      {
-        device: 'POSTMAN - POSTMAN DESKTOP',
-        ip: '111.11.0.1',
-        date: '11/03/2023 21:11:27',
-      },
-      {
-        device: 'POSTMAN - POSTMAN DESKTOP',
-        ip: '111.11.0.1',
-        date: '11/03/2023 21:11:31',
-      },
-    ])
+    fetchUser()
   }, [])
 
   return (
