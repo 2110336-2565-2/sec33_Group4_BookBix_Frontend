@@ -54,7 +54,7 @@ export const TicketBooking: React.FC<BookingInterface> = ({
             </div>
           </Col>
           <Col xs="4" sm="3" className="text-start">
-            Price {price} THB
+            Price {price} BAHT
           </Col>
           <Col xs="5" sm="3">
             <div className="ticket-action-btn">

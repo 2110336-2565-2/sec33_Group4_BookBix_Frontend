@@ -49,7 +49,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
             {id}
           </Col>
           <Col md="2" lg="1" className="text-center">
-            {price} THB
+            {price} BAHT
           </Col>
           <Col md="1" className="status-body">
             <StatusSelector
