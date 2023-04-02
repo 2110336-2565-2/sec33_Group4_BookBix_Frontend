@@ -1,7 +1,11 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
-import { Modal, Form, Button, Container, FloatingLabel } from 'react-bootstrap'
+import { Modal, Form, Button, Container, FloatingLabel, Row, Col } from 'react-bootstrap'
 import { Rating } from '@mui/material'
+import { DeleteLocationRespondInterface } from '../interfaces/location.interfaces'
+import { deleteLocation } from '../utils/location.utils'
+import { useNavigate } from 'react-router'
 
+//Review Modal
 interface ReviewModalInterface {
   show: boolean
   reviewRespond: reviewRespondInterface
@@ -137,6 +141,54 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({
         </Button>
       </Modal.Footer>
       {error && <p className="error">{error}</p>}
+    </Modal>
+  )
+}
+
+// Delete Location Modal
+interface DeleteLocationModal {
+  show: boolean
+  locationID: string | undefined
+  name: string
+  handleCancel: () => void
+}
+export const DeleteLocationModal: React.FC<DeleteLocationModal> = ({ show, handleCancel, locationID, name }) => {
+  const navigate = useNavigate()
+  const fetchDeleteLocation = async () => {
+    const respond: DeleteLocationRespondInterface = await deleteLocation(locationID)
+    if (respond.ok) {
+      navigate(0)
+    }
+  }
+
+  const handleDelete = () => {
+    fetchDeleteLocation()
+  }
+  return (
+    <Modal show={show} onHide={handleCancel} centered size="lg" className="deleteLocationModal ">
+      <Modal.Header>
+        <h2>Delete {name}</h2>
+      </Modal.Header>
+      <Modal.Body>
+        <h5>Are you sure you want to delete {name}?</h5>
+        <p>This action cannot be undone and all data associated with it will be permanently removed.</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <div className="card-body px-sm-4 mb-2 pt-1 pb-0">
+          <Row className="justify-content-end no-gutters">
+            <Col className="col-auto">
+              <Button className="btn-light text-muted" onClick={handleCancel}>
+                Cancel
+              </Button>
+            </Col>
+            <Col className="col-auto">
+              <Button className="btn-danger px-4" onClick={handleDelete}>
+                Delete
+              </Button>
+            </Col>
+          </Row>
+        </div>
+      </Modal.Footer>
     </Modal>
   )
 }

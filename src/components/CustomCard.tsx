@@ -2,6 +2,8 @@ import { locationInterface } from '../interfaces/location.interfaces'
 import { FaMoneyBillAlt, FaBuilding, FaClock, FaPlus, FaStar } from 'react-icons/fa'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { DeleteLocationModal } from '../components/CustomModal'
+import { useState } from 'react'
 
 export const LocationCard: React.FC<locationInterface> = ({
   id,
@@ -15,6 +17,8 @@ export const LocationCard: React.FC<locationInterface> = ({
   price,
   avg_rating,
 }) => {
+  const [show, setShow] = useState<boolean>(false)
+
   const availableDays = available_days.map((day, idx) => {
     return (
       <li key={idx} className="tag__item">
@@ -62,12 +66,26 @@ export const LocationCard: React.FC<locationInterface> = ({
               </Link>
             </li>
             <li className="tag__item play red">
-              <Link to={`#`} className="nav-link">
+              <Link
+                to={`#`}
+                className="nav-link"
+                onClick={() => {
+                  setShow(true)
+                }}
+              >
                 <MdDelete /> Delete
               </Link>
             </li>
           </ul>
         </div>
+        <DeleteLocationModal
+          show={show}
+          handleCancel={() => {
+            setShow(false)
+          }}
+          locationID={id}
+          name={name}
+        />
       </article>
     </>
   )

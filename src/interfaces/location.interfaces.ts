@@ -19,3 +19,8 @@ export interface GetLocationsByProviderRespondInterface {
   ok: boolean
   message: locationInterface[]
 }
+
+export interface DeleteLocationRespondInterface {
+  ok: boolean
+  message: string
+}
