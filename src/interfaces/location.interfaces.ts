@@ -2,7 +2,7 @@ import { ReviewInterface } from './reviews.interfaces'
 import { TimeInterface } from './time.interfaces'
 
 export interface locationInterface {
-  _id?: string
+  id?: string
   name: string
   address: string
   description: string
@@ -13,4 +13,9 @@ export interface locationInterface {
   available_days: string[]
   price: number
   avg_rating?: number
+}
+
+export interface GetLocationsByProviderRespondInterface {
+  ok: boolean
+  message: locationInterface[]
 }
