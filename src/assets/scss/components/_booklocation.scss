@@ -9,21 +9,26 @@
     padding-top: 25px;
     padding-bottom: 50px;
   }
-  
+
   .swiper-slide {
     background-position: center;
     background-size: cover;
     width: 300px;
-    height: auto;
     max-height: 200px;
     margin-bottom: 2%;
   }
-  
+
   .swiper-slide img {
     display: block;
+    object-fit: cover;
     width: 100%;
+    height: 100%;
   }
-  
+
+  .booking-form {
+    margin: 0 10% 0 10%
+  }
+
   .booking-btn {
     border-radius: 63px;
     background: $red-magenta;
@@ -37,7 +42,7 @@
       background: $shadow-red-magenta;
     }
   }
-  
+
   .iframe-container {
     overflow: hidden;
     padding-top: 56.25%;
