@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { RowBooking } from '../../components/RowBooking'
 import { TicketBooking } from '../../components/TicketBooking'
+import { useTokenContext } from '../../hooks/CustomProvider'
 import { BookingInterface } from '../../interfaces/booking.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
 
 const BookingSummary: React.FC = () => {
   const [bookings, setBookings] = useState<BookingInterface[] | null>(null)
+  const { currentToken } = useTokenContext()
   const [error, setError] = useState<string | null>(null)
 
   const fetchBookings = async () => {
@@ -18,6 +20,7 @@ const BookingSummary: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify(currentToken?.id)
       })
       const data = await response.json()
       if (!response.ok) {
