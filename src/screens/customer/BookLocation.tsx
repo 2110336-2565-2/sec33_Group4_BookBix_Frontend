@@ -33,7 +33,6 @@ const BookLocation: React.FC = () => {
   const disableDate = getDisableDate(location?.available_days)
   // <[[booked start time,booked end time, booked dates]]> must get from booked times in database
   const [disableTimeSlots, setDisbleTimeSlots] = useState<String[][] | null>(null)
-
   // fetch booking time slot from backend endpoint
   const fetchBookingTimeSlot = async () => {
     try {
@@ -42,7 +41,6 @@ const BookLocation: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ locationId }),
       })
 
       const data = await response.json()
@@ -63,7 +61,6 @@ const BookLocation: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ locationId }),
       })
 
       const data = await response.json()
@@ -79,14 +76,14 @@ const BookLocation: React.FC = () => {
 
   // fetch booking time slot and location data when component mount
   useEffect(() => {
-    fetchBookingTimeSlot()
     fetchLocation()
+    fetchBookingTimeSlot()
   }, [])
 
   // fetch payment page with stripe API
   const fetchPaymentPage = async (provider_id: string, location_id: string, duration: number, takeReceipt: boolean) => {
     try {
-      const url = `http://${URL}/stripe/create-checkout-session`
+      const url = `${URL}/stripe/create-checkout-session`
 
       const bodyData = {
         provider_id: provider_id,
@@ -122,14 +119,16 @@ const BookLocation: React.FC = () => {
   }
 
   // create handleSubmit function to send POST request with body of selected start date, end date, and location id
-  console.log("selectedStartDate: ", selectedStartDate)
   const createBooking = async () => {
     try {
       const bodyData = {
         customer_email: currentUser?.id,
         location_id: locationId,
         start_date: selectedStartDate,
-        duration: calculateDays([formatTime(selectedStartDate), formatDate(selectedStartDate)], [ formatTime(selectedEndDate), formatDate(selectedEndDate)]),
+        duration: calculateDays(
+          [formatTime(selectedStartDate), formatDate(selectedStartDate)],
+          [formatTime(selectedEndDate), formatDate(selectedEndDate)],
+        ),
       }
       const response = await fetch(`${URL}/bookings`, {
         method: 'POST',
@@ -157,20 +156,32 @@ const BookLocation: React.FC = () => {
     setShow(false)
   }
 
-  const handleShow = () => setShow(true)
+  const handleShow = () => {
+    setShow(true)
+    if (formatDate(selectedStartDate) != formatDate(selectedEndDate)) {
+      setError('Please select start and end dates on the same day.')
+      return
+    } else if (selectedStartDate == null || selectedEndDate == null) {
+      setError('Please select start and end dates.')
+      return
+    } else {
+      setError(null)
+      return
+    }
+  }
 
   const renderReviews = (reviews: ReviewInterface[] | undefined) => {
     if (reviews) {
-      return reviews.map((review: ReviewInterface) => {
+      return reviews.map((review: ReviewInterface, index: any) => {
         return (
           //Create Review from Review components
-          <div>
+          <div key={index}>
             <Review
               title={review.title}
               username={review.username}
               rating={review.rating}
               text={review.text}
-              dateCreate={review.dateCreate}
+              dateCreated={review.dateCreated}
             />
             <hr />
           </div>
@@ -183,7 +194,7 @@ const BookLocation: React.FC = () => {
     if (images) {
       return images.map((image: string, index: any) => {
         return (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             <img src={image} />
           </SwiperSlide>
         )
@@ -216,24 +227,28 @@ const BookLocation: React.FC = () => {
           {renderImages(location?.images)}
         </Swiper>
       </Row>
-      <Row className="d-flex mx-auto">
+      <Row className="d-flex booking-form">
         <Col md="4">
-          <h3 className="text-center">Time slot</h3>
+          <h3 className="text-center mb-3">Time slot</h3>
           <div className="rounded bg-light bg-opacity-25 p-3 h-75 overflow-auto">
-            <DateTimePickerForm
-              disableDate={disableDate}
-              disableTime={disableTimeSlots}
-              selectedStartDate={selectedStartDate}
-              setSelectedStartDate={setSelectedStartDate}
-              selectedEndDate={selectedEndDate}
-              setSelectedEndDate={setSelectedEndDate}
-              location={location}
-            />
+            {location ? (
+              <DateTimePickerForm
+                disableDate={disableDate}
+                disableTime={disableTimeSlots}
+                selectedStartDate={selectedStartDate}
+                setSelectedStartDate={setSelectedStartDate}
+                selectedEndDate={selectedEndDate}
+                setSelectedEndDate={setSelectedEndDate}
+                location={location}
+              />
+            ) : (
+              <div></div>
+            )}
           </div>
         </Col>
         <Col md="4">
-          <h3 className="text-center d-none d-xl-block">Location information</h3>
-          <h3 className="text-center d-xl-none">Location info.</h3>
+          <h3 className="text-center d-none d-xl-block mb-3">Location information</h3>
+          <h3 className="text-center d-xl-none mb-3">Location info.</h3>
           <div className="rounded bg-light bg-opacity-25 p-3 h-75 overflow-auto">
             <p>{location?.address}</p>
             <p>{location?.description}</p>
@@ -251,7 +266,7 @@ const BookLocation: React.FC = () => {
           </div>
         </Col>
         <Col md="4">
-          <h3 className="text-center">Reviews</h3>
+          <h3 className="text-center mb-3">Reviews</h3>
           <div className="rounded review-box bg-light bg-opacity-25 p-3 h-75 overflow-auto">
             {location?.reviews ? renderReviews(location?.reviews) : <div></div>}
           </div>
@@ -283,14 +298,21 @@ const BookLocation: React.FC = () => {
                 }}
               />
             </Form>
+            {error && <div className="alert alert-danger mt-2 mb-0">{error}</div>}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={createBooking}>
-              Continue to payment
-            </Button>
+            {error ? (
+              <Button variant="primary" disabled onClick={createBooking}>
+                Continue to payment
+              </Button>
+            ) : (
+              <Button variant="primary" onClick={createBooking}>
+                Continue to payment
+              </Button>
+            )}
           </Modal.Footer>
         </Modal>
       </div>
@@ -310,7 +332,7 @@ const DateTimePickerForm: React.FC<any> = ({
   return (
     <Container>
       <div className="row mt-4">
-        <p>From</p>
+        <h6 className="mb-2">From</h6>
         <DateTimePicker
           disableDates={disableDate}
           disableTime={disableTime}
@@ -321,7 +343,7 @@ const DateTimePickerForm: React.FC<any> = ({
         />
       </div>
       <div className="row mt-5">
-        <p>To</p>
+        <h6 className="mb-2">To</h6>
         <DateTimePicker
           disableDates={disableDate}
           disableTime={disableTime}
@@ -330,6 +352,9 @@ const DateTimePickerForm: React.FC<any> = ({
           selectedDate={selectedEndDate}
           setSelectedDate={setSelectedEndDate}
         />
+      </div>
+      <div className="row mt-5">
+        <h6>Price per hour: {location?.price} BAHT</h6>
       </div>
     </Container>
   )
