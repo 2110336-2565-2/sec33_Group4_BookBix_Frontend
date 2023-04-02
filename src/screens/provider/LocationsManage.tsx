@@ -3,12 +3,18 @@ import { LocationCard, NewLocationCard } from '../../components/CustomCard'
 import { locationInterface, GetLocationsByProviderRespondInterface } from '../../interfaces/location.interfaces'
 import { Container } from 'react-bootstrap'
 import { fetchProviderLocations } from '../../utils/location.utils'
+import { AccessTokenInterface } from '../../interfaces/authentication.interface'
+import { useCookies } from 'react-cookie'
+import jwt_decode from 'jwt-decode'
 
 export default function LocationsManage() {
   const [locations, setLocations] = useState<locationInterface[]>([])
+  const [cookies, setCookie] = useCookies(['access_token'])
 
   const fetchLocation = async () => {
-    const respond: GetLocationsByProviderRespondInterface = await fetchProviderLocations('000000000004000000000000')
+    const accessToken: AccessTokenInterface = jwt_decode(cookies.access_token)
+    const providerId = accessToken.id
+    const respond: GetLocationsByProviderRespondInterface = await fetchProviderLocations(providerId)
     setLocations([])
     if (respond.ok) {
       setLocations(respond.message)

@@ -1,4 +1,4 @@
-import { locationInterface, GetLocationsByProviderRespondInterface } from '../interfaces/location.interfaces'
+import { GetLocationsByProviderRespondInterface } from '../interfaces/location.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
 
