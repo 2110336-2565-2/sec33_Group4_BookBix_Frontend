@@ -9,7 +9,7 @@ const Review: React.FC<ReviewInterface> = ({
   username,
   rating = 0,
   text = '',
-  dateCreate,
+  dateCreated,
 }) => {
   return (
     <Container>
@@ -26,7 +26,7 @@ const Review: React.FC<ReviewInterface> = ({
           <Rating name="read-only" value={rating} readOnly precision={0.5} />
         </Col>
         <Col sm="5" md="7" lg="5" className='text-center'>
-          <p>{dateCreate.toDateString()}</p>
+          <p>{dateCreated?.toLocaleString()}</p>
         </Col>
       </Row>
       <Row>
