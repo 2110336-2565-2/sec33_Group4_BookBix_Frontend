@@ -4,7 +4,7 @@ import { ReviewModal, reviewRespondInterface } from './CustomModal'
 import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
 import { AccessTokenInterface } from '../interfaces/authentication.interface'
-import { ReviewRequestInterface } from '../interfaces/reviews.interfaces'
+import { ReviewInterface } from '../interfaces/reviews.interfaces'
 
 //For testing
 const URL = 'http://localhost:3001'
@@ -51,7 +51,7 @@ export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) =
           username: reviewRespond.username,
           rating: reviewRespond.rating,
           text: reviewRespond.review,
-        } as ReviewRequestInterface),
+        } as ReviewInterface),
       })
       // const data = await response.json()
       if (!response.ok) {

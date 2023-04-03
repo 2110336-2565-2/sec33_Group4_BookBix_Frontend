@@ -1,6 +1,6 @@
 import { Card, CardGroup, Row, Col } from 'react-bootstrap'
 import star from '../assets/images/star.png'
-import { locationInterface } from '../interfaces/location.interfaces'
+import { LocationInterface } from '../interfaces/location.interfaces'
 import { mockup1 } from './mock_location'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'

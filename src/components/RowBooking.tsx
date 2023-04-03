@@ -3,12 +3,13 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { BookingInterface } from '../interfaces/booking.interfaces'
 import { calculateDays, formatBookingPeriod } from '../utils/Time.utils'
 import { ComponentType } from '../interfaces/booking.interfaces'
-import { StatusSelector } from '../utils/Booking.utils'
+import { StatusSelector } from './StatusSelector'
 
 const URL = import.meta.env.VITE_API_URL
 
 export const RowBooking: React.FC<BookingInterface> = ({
   id = '',
+  provider_id = '',
   locationName = '',
   locationId = '',
   price = 0,
@@ -27,7 +28,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
         <Row className="p-3 flex-row align-items-center justify-content-between">
           <Col md="3">{locationName}</Col>
           <Col md="1" className="d-xl-none">
-            {calculateDays(startTime![1], endTime![1])} days
+            {calculateDays(startTime!, endTime!)} hours
           </Col>
           <Col md="3" className="d-none d-xl-block">
             <div className="d-flex flex-row flex-nowrap justify-content-center">
@@ -48,13 +49,25 @@ export const RowBooking: React.FC<BookingInterface> = ({
             {id}
           </Col>
           <Col md="2" lg="1" className="text-center">
-            {price} THB
+            {price} BAHT
           </Col>
           <Col md="1" className="status-body">
-            <StatusSelector status={status} component={ComponentType.PROGRESS_CIRCLE} locationId={locationId} />
+            <StatusSelector
+              status={status}
+              component={ComponentType.PROGRESS_CIRCLE}
+              locationId={locationId}
+              providerId={provider_id}
+              price={price}
+            />
           </Col>
           <Col md="2" xl="1" className="action p-0">
-            <StatusSelector status={status} component={ComponentType.ACTION_BUTTON} locationId={locationId} />
+            <StatusSelector
+              status={status}
+              component={ComponentType.ACTION_BUTTON}
+              locationId={locationId}
+              providerId={provider_id}
+              price={price}
+            />
           </Col>
         </Row>
       </Container>

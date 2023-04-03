@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: s1xz/bookbix-frontend
     restart: unless-stopped
     ports:
       - '${CLIENT_PORT}:${SERVER_PORT}'
