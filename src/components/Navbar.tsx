@@ -93,7 +93,7 @@ export default function MyNavbar() {
                     </NavDropdown.Item>
                   ) : currentToken?.type === 'provider' ? (
                     <NavDropdown.Item>
-                      <div className="nav-link" onClick={() => navigate(RoutePath.ManageLocation)}>
+                      <div className="nav-link" onClick={() => navigate('/locations')}>
                         My locations
                       </div>
                     </NavDropdown.Item>
