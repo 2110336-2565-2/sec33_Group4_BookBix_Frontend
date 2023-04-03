@@ -1,6 +1,8 @@
 @use '../../abstracts' as *;
 
 .create {
+  min-height: calc(100vh - $navbar);
+
   .profile-manage {
     background-color: $red-magenta;
     border-top-left-radius: 91px;
@@ -10,8 +12,5 @@
     img {
       width: 80%;
     }
-  }
-  .fill {
-    min-height: calc(100vh - $navbar);
   }
 }
