@@ -228,7 +228,7 @@ const BookLocation: React.FC = () => {
         </Swiper>
       </Row>
       <Row className="d-flex booking-form">
-        <Col md="4">
+        <Col lg="4">
           <h3 className="text-center mb-3">Time slot</h3>
           <div className="rounded bg-light bg-opacity-25 p-3 h-75 overflow-auto">
             {location ? (
@@ -246,9 +246,9 @@ const BookLocation: React.FC = () => {
             )}
           </div>
         </Col>
-        <Col md="4">
-          <h3 className="text-center d-none d-xl-block mb-3">Location information</h3>
-          <h3 className="text-center d-xl-none mb-3">Location info.</h3>
+        <Col lg="4">
+          <h3 className="text-center mb-3 information-long">Location information</h3>
+          <h3 className="text-center mb-3 information-short">Location info.</h3>
           <div className="rounded bg-light bg-opacity-25 p-3 h-75 overflow-auto">
             <p>{location?.address}</p>
             <p>{location?.description}</p>
@@ -265,7 +265,7 @@ const BookLocation: React.FC = () => {
             </div>
           </div>
         </Col>
-        <Col md="4">
+        <Col lg="4">
           <h3 className="text-center mb-3">Reviews</h3>
           <div className="rounded review-box bg-light bg-opacity-25 p-3 h-75 overflow-auto">
             {location?.reviews ? renderReviews(location?.reviews) : <div></div>}
@@ -284,7 +284,7 @@ const BookLocation: React.FC = () => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton>  
             <Modal.Title>Are you sure you want to create the booking and payment?</Modal.Title>
           </Modal.Header>
           <Modal.Body>

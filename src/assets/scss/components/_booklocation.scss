@@ -26,7 +26,20 @@
   }
 
   .booking-form {
-    margin: 0 10% 0 10%
+    margin: 0 10% 0 10%;
+
+    .information-long {
+      @media (min-width: 1326px) {
+        display: block !important;
+      }
+      display: none;
+    }
+
+    .information-short {
+      @media (min-width: 1326px) {
+        display: none !important;
+      }
+    }
   }
 
   .booking-btn {
