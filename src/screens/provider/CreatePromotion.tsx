@@ -11,7 +11,7 @@ export default function CreatePromotion() {
     name: '',
     percentOff: '50',
     amountOff: '',
-    locationName: '',
+    locationName: 'all',
     maxRedemptions: '',
   })
   const initialRange = '50'
@@ -42,7 +42,7 @@ export default function CreatePromotion() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPromotion({ ...promotion, amountOff: e.target.value, percentOff: null })
           }
-          type="text"
+          type="number"
           placeholder="Enter Amount of Discount"
         />
       </>
@@ -118,13 +118,25 @@ export default function CreatePromotion() {
               controlId="formLocation"
             >
               <Form.Label>Location</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setPromotion({ ...promotion, locationName: e.target.value })
                 }
                 type="text"
                 placeholder="Enter Location"
-              />
+              /> */}
+              <Form.Select
+                onChange={(e) => {
+                  setPromotion({ ...promotion, locationName: e.target.value })
+                }}
+                aria-label="Default select example"
+                placeholder="Enter Discount Type"
+              >
+                <option value="">Choose ...</option>
+                <option value="CU Centenary Park">CU Centenary Park</option>
+                <option value="Eiffel Tower">Eiffel Tower</option>
+                <option value="Big Ben">Big Ben</option>
+              </Form.Select>
             </Form.Group>
 
             <Form.Group
@@ -136,13 +148,17 @@ export default function CreatePromotion() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setPromotion({ ...promotion, maxRedemptions: e.target.value })
                 }
-                type="text"
+                type="number"
                 placeholder="Enter Max Redemptions"
               />
-              <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
             </Form.Group>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <Button variant="dark" type="submit" className="primary col-5 ">
+            {error && (
+              <div className="alert alert-danger row mb-3 col-md-8 justify-content-center justify-content-center">
+                {error}
+              </div>
+            )}
+            <br></br>
+            <Button variant="dark" type="submit" className="primary col-5 CreateButton">
               Create
             </Button>
           </Form>
