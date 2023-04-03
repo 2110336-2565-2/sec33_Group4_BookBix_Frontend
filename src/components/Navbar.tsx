@@ -1,32 +1,24 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
-import { useEffect } from 'react'
+import { Navbar, Container, Nav, NavDropdown, Offcanvas, Form, Row, Col } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
 import { Link, Outlet, redirect, useNavigate } from 'react-router-dom'
 import { useTokenContext } from '../hooks/CustomProvider'
 import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
 import { AccessTokenInterface, UserEnum } from '../interfaces/authentication.interface'
 import { RoutePath } from '../interfaces/route.interface'
+import { NotificationInterface } from '../interfaces/customer.interfaces'
+import FormCheckLabel from 'react-bootstrap/esm/FormCheckLabel'
 
 export default function MyNavbar() {
-  const { currentToken, setCurrentToken } = useTokenContext()
   const direction = 'down-centered'
   const navigate = useNavigate()
-  const [cookies, setCookie] = useCookies(['access_token'])
-  const URL = import.meta.env.VITE_API_URL
   let accessToken: AccessTokenInterface
-
-  console.log('token', currentToken)
-  console.log('cookies', cookies)
-  useEffect(() => {
-    try {
-      accessToken = jwt_decode(cookies.access_token)
-    } catch (error) {
-      return
-    }
-    if (accessToken) {
-      setCurrentToken(accessToken)
-    }
-  }, [])
+  const { currentToken, setCurrentToken } = useTokenContext()
+  const [cookies, setCookie] = useCookies(['access_token'])
+  const [show, setShow] = useState(false)
+  const [error, setError] = useState<string>('')
+  const [notifications, setNotifications] = useState<NotificationInterface>()
+  const URL = import.meta.env.VITE_API_URL
 
   const handleLogout = () => {
     sessionStorage.clear()
@@ -34,6 +26,65 @@ export default function MyNavbar() {
     setCookie('access_token', '', { path: '/', expires: new Date(0) })
     navigate(RoutePath.SearchPage)
   }
+
+  const putNotification = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    try {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentToken?.id),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.message)
+        return
+      }
+    } catch (error) {
+      setError('Something went wrong, please try again later')
+    }
+  }
+
+  const getNotification = async () => {
+    try {
+      const response = await fetch(`${URL}/notifications`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentToken?.id),
+      })
+
+      const currentNotification = await response.json()
+      if (!response.ok) {
+        setError(currentNotification.message)
+        return
+      }
+      setNotifications(currentNotification)
+    } catch (error) {
+      setError('Something went wrong, please try again later')
+    }
+  }
+
+  const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setShow(false)
+    putNotification(e)
+  }
+  const handleShow = () => setShow(true)
+
+      const response = await fetch(`${URL}/notifications`, {
+  useEffect(() => {
+    try {
+      accessToken = jwt_decode(cookies.access_token)
+      getNotification()
+    } catch (error) {
+      return
+    }
+    if (accessToken) {
+      setCurrentToken(accessToken)
+    }
+  }, [])
 
   return (
     <>
@@ -89,11 +140,45 @@ export default function MyNavbar() {
                     </div>
                   </NavDropdown.Item>
                   {currentToken?.type === 'customer' ? (
-                    <NavDropdown.Item>
-                      <div className="nav-link" onClick={() => navigate(RoutePath.Bookings)}>
-                        My Bookings
-                      </div>
-                    </NavDropdown.Item>
+                    <>
+                      <NavDropdown.Item>
+                        <div className="nav-link" onClick={() => navigate(RoutePath.Bookings)}>
+                          My Bookings
+                        </div>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item>
+                        <div className="nav-link" onClick={() => handleShow()}>
+                          Notifications
+                        </div>
+                      </NavDropdown.Item>
+                      <Offcanvas show={show} onHide={handleClose}>
+                        <Offcanvas.Header closeButton>
+                          <Offcanvas.Title>Notifications</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                          <Form>
+                            <Row className="d-flex align-items-center">
+                              <Col>
+                                <Form.Check.Label >
+                                  <p>News & Promotions</p>
+                                </Form.Check.Label>
+                              </Col>
+                              <Col>
+                                <Form.Check
+                                  checked={notifications?.subscription}
+                                  type="switch"
+                                  id="custom-switch"
+                                  className="text-end"
+                                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    setNotifications({ ...notifications, subscription: !notifications?.subscription })
+                                  }}
+                                />
+                              </Col>
+                            </Row>
+                          </Form>
+                        </Offcanvas.Body>
+                      </Offcanvas>
+                    </>
                   ) : currentToken?.type === 'provider' ? (
                     <>
                       <NavDropdown.Item>
