@@ -19,7 +19,7 @@ export function formatDate(date: Date | null) {
 }
 
 /**
- * Format a date as a string in the format "hh:mm:ss"
+ * Format a date as a string in the format "hh:mm"
  * @param date the date to format
  * @returns the formatted time as a string
  */
@@ -32,14 +32,15 @@ export function formatTime(date: Date | null) {
  * @param available_days - array of available days
  * @returns array of unavailable days
  */
-export const getDisableDate = (available_days: string[]) => {
+export const getDisableDate = (available_days: string[] | undefined): number[] => {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const disableDate = []
-  for (let i = 0; i < days.length; i++) {
-    if (!available_days.includes(days[i])) {
-      disableDate.push(i)
+  if(available_days)
+    for (let i = 0; i < days.length; i++) {
+      if (!available_days.includes(days[i])) {
+        disableDate.push(i)
+      }
     }
-  }
   return disableDate
 }
 
@@ -58,15 +59,21 @@ export function formatBookingPeriod(start: string | null, end: string | null, se
 
 /**
  * Calculate the number of days between two dates
- * @param start the start date of the booking
- * @param end the end date of the booking
- * @returns the number of days between the two dates
+ * @param start the start date of the booking in format of [HH:mm, yyyy-mm-DD]
+ * @param end the end date of the booking in format of [HH:mm, yyyy-mm-DD]
+ * @returns the number of hours between the two dates
  */
-export function calculateDays(start: string | null, end: string | null) {
-  var startTime = start?.split('-')
-  var endTime = end?.split('-')
-  var startDay = new Date(parseInt(startTime![0]), parseInt(startTime![1]), parseInt(startTime![2]))
-  var endDay = new Date(parseInt(endTime![0]), parseInt(endTime![1]), parseInt(endTime![2]))
-  var days = (endDay.getTime() - startDay.getTime()) / (1000 * 60 * 60 * 24)
-  return days
+export function calculateDays(start: string[] | null, end: string[] | null) {
+  var startTime = start![0]
+  var endTime = end![0]
+  var startDate = start![1]?.split('-')
+  var endDate = end![1]?.split('-')
+  var startDateTime = new Date(parseInt(startDate![0]), parseInt(startDate![1])-1, parseInt(startDate![2]), parseInt(startTime!.split(':')[0]), parseInt(startTime!.split(':')[1]))
+  var endDateTime = new Date(parseInt(endDate![0]), parseInt(endDate![1])-1, parseInt(endDate![2]), parseInt(endTime!.split(':')[0]), parseInt(endTime!.split(':')[1]))
+  var milliseconds = endDateTime.getTime() - startDateTime.getTime()
+  var seconds = milliseconds / 1000
+  var minutes = seconds / 60
+  var hours = minutes / 60
+  return hours
 }
+

@@ -1,23 +1,23 @@
-import { ReviewInterface } from './reviews.interfaces'
+import { ReviewInterface } from "./booking.interfaces"
 import { TimeInterface } from './time.interfaces'
 
-export interface locationInterface {
+export interface LocationInterface {
   _id?: string
   name: string
-  address: string
-  description: string
-  url: string
-  images: string[]
+  address?: string
+  description?: string
+  url?: string
+  images?: string[]
   reviews?: ReviewInterface[]
-  time: TimeInterface
-  available_days: string[]
-  price: number
+  available_days?: string[]
+  price?: number
   avg_rating?: number
+  time: TimeInterface
 }
 
 export interface GetLocationsByProviderRespondInterface {
   ok: boolean
-  message: locationInterface[]
+  message: LocationInterface[]
 }
 
 export interface DeleteLocationRespondInterface {
