@@ -5,6 +5,7 @@ import { createLocation } from '../../utils/location.utils'
 import { AccessTokenInterface } from '../../interfaces/authentication.interface'
 import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 
 const url = import.meta.env.VITE_API_URL
 
@@ -29,6 +30,7 @@ export default function CreateLocation() {
     price: 0,
   })
   const [cookies, setCookie] = useCookies(['access_token'])
+  const navigate = useNavigate()
   let providerId = ''
 
   useEffect(() => {
@@ -40,7 +42,8 @@ export default function CreateLocation() {
     const response = await createLocation(location, providerId)
     setError(response.message)
     if (response.ok) {
-      return
+      navigate('/locations')
+      navigate(0)
     }
   }
 
@@ -164,7 +167,7 @@ export default function CreateLocation() {
             </div>
           </Form.Group>
 
-          {error && <div className="alert alert-danger">{error}</div>}
+          {error && <Row className="col-md-10 mt-1 alert alert-danger">{error}</Row>}
           <div className="d-flex row justify-content-center col-md-8 pt-4 pb-5">
             <Button variant="dark" type="submit" className="primary col-md-8" size="lg">
               Submit

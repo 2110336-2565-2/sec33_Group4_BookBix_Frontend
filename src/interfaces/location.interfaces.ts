@@ -24,3 +24,8 @@ export interface DeleteLocationRespondInterface {
   ok: boolean
   message: string
 }
+
+export interface CreateLocationRespondInterface {
+  ok: boolean
+  message: string
+}

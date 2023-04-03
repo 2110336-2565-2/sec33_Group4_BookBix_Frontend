@@ -26,7 +26,7 @@ export const LocationCard: React.FC<locationInterface> = ({
       </li>
     )
   })
-  const imagePath = `https://picsum.photos/1000/${1000 + Math.floor(Math.random() * price)}`
+  const imagePath = `https://picsum.photos/1000/${Math.floor(Math.random() * 100)}`
 
   return (
     <>
