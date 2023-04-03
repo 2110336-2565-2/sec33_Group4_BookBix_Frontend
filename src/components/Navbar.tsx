@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import { useEffect } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet, redirect, useNavigate } from 'react-router-dom'
 import { useTokenContext } from '../hooks/CustomProvider'
 import { useCookies } from 'react-cookie'
 import jwt_decode from 'jwt-decode'
@@ -12,8 +12,11 @@ export default function MyNavbar() {
   const direction = 'down-centered'
   const navigate = useNavigate()
   const [cookies, setCookie] = useCookies(['access_token'])
+  const URL = import.meta.env.VITE_API_URL
   let accessToken: AccessTokenInterface
 
+  console.log('token', currentToken)
+  console.log('cookies', cookies)
   useEffect(() => {
     try {
       accessToken = jwt_decode(cookies.access_token)
@@ -92,11 +95,39 @@ export default function MyNavbar() {
                       </div>
                     </NavDropdown.Item>
                   ) : currentToken?.type === 'provider' ? (
-                    <NavDropdown.Item>
-                      <div className="nav-link" onClick={() => navigate('/locations')}>
-                        My locations
-                      </div>
-                    </NavDropdown.Item>
+                    <>
+                      <NavDropdown.Item>
+                        <div className="nav-link" onClick={() => navigate('/locations')}>
+                          My locations
+                        </div>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item>
+                        <div
+                          className="nav-link"
+                          onClick={async () => {
+                            const response = await fetch(`${URL}/stripe/create-provider-account`, {
+                              method: 'POST',
+                              credentials: 'include',
+                              headers: {
+                                Cookie: cookies.access_token,
+                                'Content-Type': 'application/json',
+                              },
+                            })
+                            const data = await response.json()
+                            console.log(response.headers.get('cookies'))
+                            console.log(data)
+                            if (!response.ok) {
+                              alert('You are already verified a Stripe account')
+                              return
+                            } else {
+                              window.location.href = data.accountLinkUrl
+                            }
+                          }}
+                        >
+                          Verify Account
+                        </div>
+                      </NavDropdown.Item>
+                    </>
                   ) : (
                     ''
                   )}
