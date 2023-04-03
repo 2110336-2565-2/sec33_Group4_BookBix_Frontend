@@ -6,7 +6,7 @@ import { DeleteLocationModal } from '../components/CustomModal'
 import { useState } from 'react'
 
 export const LocationCard: React.FC<locationInterface> = ({
-  id,
+  _id,
   name,
   address,
   description,
@@ -36,7 +36,7 @@ export const LocationCard: React.FC<locationInterface> = ({
         </Link>
         <div className="postcard__text">
           <h1 className="postcard__title blue">
-            <Link to={`/location-booking/${id}`} className="nav-link">
+            <Link to={`/location-booking/${_id}`} className="nav-link">
               {name}
             </Link>
           </h1>
@@ -61,7 +61,7 @@ export const LocationCard: React.FC<locationInterface> = ({
           </ul>
           <ul className="postcard__tagbox">
             <li className="tag__item play blue">
-              <Link to={`${id}`} className="nav-link">
+              <Link to={`${_id}`} className="nav-link">
                 <MdEdit /> Edit
               </Link>
             </li>
@@ -83,7 +83,7 @@ export const LocationCard: React.FC<locationInterface> = ({
           handleCancel={() => {
             setShow(false)
           }}
-          locationID={id}
+          locationID={_id}
           name={name}
         />
       </article>

@@ -24,7 +24,7 @@ export const SearchCard: React.FC<MyPropsInterface> = ({ state }) => {
       <Row className="g-4">
         {mockup1.map((location, idx) => (
           <Card key={idx}>
-            <Link to={`/location-booking/${location.id}`}>
+            <Link to={`/location-booking/${location._id}`}>
               <Card.Img variant="top cropped-ofp" className="card-location-img" src={location.images[0]} />
             </Link>
             <Card.Body className="pb-0">

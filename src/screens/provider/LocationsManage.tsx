@@ -26,11 +26,11 @@ export default function LocationsManage() {
   }, [])
 
   const LocationCards = locations.map(
-    ({ id, name, address, description, url, images, time, available_days, price, avg_rating }) => {
+    ({ _id, name, address, description, url, images, time, available_days, price, avg_rating }) => {
       return (
         <LocationCard
-          key={id}
-          id={id}
+          key={_id}
+          _id={_id}
           name={name}
           address={address}
           description={description}

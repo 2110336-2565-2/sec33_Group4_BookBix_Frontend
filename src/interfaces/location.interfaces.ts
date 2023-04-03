@@ -2,7 +2,7 @@ import { ReviewInterface } from './reviews.interfaces'
 import { TimeInterface } from './time.interfaces'
 
 export interface locationInterface {
-  id?: string
+  _id?: string
   name: string
   address: string
   description: string

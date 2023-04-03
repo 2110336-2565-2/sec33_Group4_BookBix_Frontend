@@ -8,7 +8,7 @@ export default function ManageLocation() {
   const dayInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   const [error, setError] = useState<string>('')
   const [location, setLocation] = useState<locationInterface>({
-    id: '',
+    _id: '',
     name: '',
     address: '',
     description: '',

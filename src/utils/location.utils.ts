@@ -8,10 +8,9 @@ import {
 const URL = import.meta.env.VITE_API_URL
 
 //API Request
-export async function fetchProviderLocations(providerID: string): Promise<GetLocationsByProviderRespondInterface> {
+export async function fetchProviderLocations(providerId: string): Promise<GetLocationsByProviderRespondInterface> {
   try {
-    // const url = `${URL}/providers/locations/${providerID}`
-    const url = `${URL}/locations`
+    const url = `${URL}/providers/locations/${providerId}`
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -30,9 +29,9 @@ export async function fetchProviderLocations(providerID: string): Promise<GetLoc
   }
 }
 
-export async function deleteLocation(locationID: string | undefined): Promise<DeleteLocationRespondInterface> {
+export async function deleteLocation(locationId: string | undefined): Promise<DeleteLocationRespondInterface> {
   try {
-    const url = `${URL}/locations/${locationID}`
+    const url = `${URL}/locations/${locationId}`
     const response = await fetch(url, {
       method: 'DELETE',
       headers: {
@@ -51,18 +50,20 @@ export async function deleteLocation(locationID: string | undefined): Promise<De
 
 export async function createLocation(
   location: locationInterface,
-  providerID: string,
+  providerId: string,
 ): Promise<CreateLocationRespondInterface> {
   const validation = validateLocation(location)
   if (!validation.ok) return validation
   try {
     const url = `${URL}/locations/`
+    const body = JSON.stringify({ providerId: providerId, ...location })
+    console.log(body)
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: JSON.stringify(location),
+      body: body,
     })
     const data = await response.json()
     if (!response.ok) {

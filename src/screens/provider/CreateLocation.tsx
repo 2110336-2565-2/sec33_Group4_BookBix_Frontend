@@ -31,14 +31,11 @@ export default function CreateLocation() {
   })
   const [cookies, setCookie] = useCookies(['access_token'])
   const navigate = useNavigate()
-  let providerId = ''
-
-  useEffect(() => {
-    const accessToken: AccessTokenInterface = jwt_decode(cookies.access_token)
-    providerId = accessToken.id
-  }, [])
+  const accessToken: AccessTokenInterface = jwt_decode(cookies.access_token)
+  let providerId = accessToken.id
 
   const fetchCreateLocation = async () => {
+    console.log(location, providerId)
     const response = await createLocation(location, providerId)
     setError(response.message)
     if (response.ok) {
