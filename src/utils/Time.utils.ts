@@ -19,7 +19,7 @@ export function formatDate(date: Date | null) {
 }
 
 /**
- * Format a date as a string in the format "hh:mm:ss"
+ * Format a date as a string in the format "hh:mm"
  * @param date the date to format
  * @returns the formatted time as a string
  */
@@ -32,14 +32,15 @@ export function formatTime(date: Date | null) {
  * @param available_days - array of available days
  * @returns array of unavailable days
  */
-export const getDisableDate = (available_days: string[]) => {
+export const getDisableDate = (available_days: string[] | undefined): number[] => {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const disableDate = []
-  for (let i = 0; i < days.length; i++) {
-    if (!available_days.includes(days[i])) {
-      disableDate.push(i)
+  if(available_days)
+    for (let i = 0; i < days.length; i++) {
+      if (!available_days.includes(days[i])) {
+        disableDate.push(i)
+      }
     }
-  }
   return disableDate
 }
 
@@ -60,7 +61,7 @@ export function formatBookingPeriod(start: string | null, end: string | null, se
  * Calculate the number of days between two dates
  * @param start the start date of the booking in format of [HH:mm, yyyy-mm-DD]
  * @param end the end date of the booking in format of [HH:mm, yyyy-mm-DD]
- * @returns the number of days between the two dates
+ * @returns the number of hours between the two dates
  */
 export function calculateDays(start: string[] | null, end: string[] | null) {
   var startTime = start![0]
@@ -75,3 +76,4 @@ export function calculateDays(start: string[] | null, end: string[] | null) {
   var hours = minutes / 60
   return hours
 }
+

@@ -9,12 +9,12 @@ const Review: React.FC<ReviewInterface> = ({
   username,
   rating = 0,
   text = '',
-  dateCreate,
+  dateCreated,
 }) => {
   return (
     <Container>
       <Row className="d-flex justify-content-between">
-        <Col sm="8" md="12" lg="8">
+        <Col sm="8">
           <p>{title}</p>
         </Col>
         <Col sm="4" className='text-center'>
@@ -22,15 +22,15 @@ const Review: React.FC<ReviewInterface> = ({
         </Col>
       </Row>
       <Row className="d-flex justify-content-between">
-        <Col sm="7" md="12" lg="7">
+        <Col sm="7">
           <Rating name="read-only" value={rating} readOnly precision={0.5} />
         </Col>
-        <Col sm="5" md="7" lg="5" className='text-center'>
-          <p>{dateCreate.toDateString()}</p>
+        <Col sm="5" className='text-center'>
+          <p>{dateCreated?.toLocaleString()}</p>
         </Col>
       </Row>
       <Row>
-        <p className='d-none d-lg-block'>{text}</p>
+        <p className='d-none d-sm-block'>{text}</p>
       </Row>
     </Container>
   )

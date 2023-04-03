@@ -1,16 +1,8 @@
 import { useState } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import { SearchInterface } from '../interfaces/search.interfaces'
 
-// interface locationProps {
-//   locationName: string
-//   locationType: string
-//   locationFunction: string
-// }
-
-export const SearchForm = () => {
-  const [locationName, setLocationName] = useState<string>('')
-  const [locationType, setLocationType] = useState<string>('')
-  const [locationFunction, setLocationFunction] = useState<string>('')
+export const SearchForm = ({ onChange }: SearchInterface) => {
   return (
     <div>
       <h1>Let us help you find your place</h1>
@@ -18,9 +10,8 @@ export const SearchForm = () => {
         <Row>
           <Form.Group controlId="formLocationName">
             <Form.Control
-              onChange={(e) => {
-                setLocationName(e.target.value)
-              }}
+              // value={location}
+              onChange={(e) => onChange({ location: e.target.value })}
               type="text"
               placeholder="Enter location"
             />
@@ -30,9 +21,8 @@ export const SearchForm = () => {
           <Col>
             <Form.Group controlId="formLocationType">
               <Form.Control
-                onChange={(e) => {
-                  setLocationType(e.target.value)
-                }}
+                // value={location_type}
+                onChange={(e) => onChange({ location_type: e.target.value })}
                 as="select"
               >
                 <option>Location type</option>
@@ -46,9 +36,8 @@ export const SearchForm = () => {
           <Col>
             <Form.Group controlId="formLocationFunction">
               <Form.Control
-                onChange={(e) => {
-                  setLocationFunction(e.target.value)
-                }}
+                // value={location_function}
+                onChange={(e) => onChange({ location_function: e.target.value })}
                 as="select"
               >
                 <option>Location function</option>
@@ -65,7 +54,7 @@ export const SearchForm = () => {
   )
 }
 
-export const PriceSlider = () => {
+export const PriceSlider = ({ onChange }: SearchInterface) => {
   const [value, setValue] = useState<{ min: number; max: number }>({ min: 10, max: 1000 })
   // Create a range slider
   const fromSlider = document.querySelector('#fromSlider') as HTMLInputElement
@@ -170,6 +159,7 @@ export const PriceSlider = () => {
           min="0"
           max="1000"
           onInput={(e: React.FormEvent) => controlFromSlider(e)}
+          onChange={(e) => onChange({ min_price: Number(e.target.value) })}
         />
         <input
           id="toSlider"
@@ -178,6 +168,7 @@ export const PriceSlider = () => {
           min="0"
           max="1000"
           onInput={(e: React.FormEvent) => controlToSlider(e)}
+          onChange={(e) => onChange({ max_price: Number(e.target.value) })}
         />
       </div>
       <div className="form_control">
@@ -191,6 +182,7 @@ export const PriceSlider = () => {
             min="0"
             max="1000"
             onInput={(e: React.FormEvent) => controlFromInput(e)}
+            onChange={(e) => onChange({ min_price: Number(e.target.value) })}
           />
         </div>
         <div className="form_control_container">
@@ -203,6 +195,7 @@ export const PriceSlider = () => {
             min="0"
             max="1000"
             onInput={(e: React.FormEvent) => controlToInput(e)}
+            onChange={(e) => onChange({ max_price: Number(e.target.value) })}
           />
         </div>
       </div>

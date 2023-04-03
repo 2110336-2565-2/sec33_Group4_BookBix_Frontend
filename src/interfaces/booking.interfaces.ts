@@ -3,7 +3,7 @@ export interface ReviewInterface {
   username: string
   rating?: number
   text?: string
-  dateCreate: Date
+  dateCreated?: Date
 }
 
 export interface DatePickerInterface {

@@ -1,19 +1,30 @@
 import { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { HistoryInterface } from '../interfaces/history.interface'
 import { HistoryTable } from '../components/CustomTable'
 import { RoutePath } from '../interfaces/route.interface'
+import { useCookies } from 'react-cookie'
+import jwt_decode from 'jwt-decode'
+import { AccessTokenInterface, UserEnum } from '../interfaces/authentication.interface'
+
+const URL = import.meta.env.VITE_API_URL
 
 const LoggedInHistory = () => {
-  const { customerId } = useParams()
   const [histories, setHistories] = useState<HistoryInterface[]>([])
   const navigate = useNavigate()
-  const URL = `${import.meta.env.VITE_API_URL}/customers/${customerId}/history`
+  const [cookies, setCookie] = useCookies(['access_token'])
+  let accessToken: AccessTokenInterface
 
   const fetchUser = async () => {
+    accessToken = jwt_decode(cookies.access_token)
+    //Check if token is expired
+    if (!accessToken) navigate(RoutePath.Login)
+    if (accessToken.type !== UserEnum.CUSTOMER) navigate(RoutePath.SearchPage)
+    const url = `${URL}/customers/${accessToken.id}/history`
+    //Fetch user data
     try {
-      const response = await fetch(URL, {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -30,24 +41,7 @@ const LoggedInHistory = () => {
     }
   }
   useEffect(() => {
-    // fetchUser()
-    setHistories([
-      {
-        device: 'POSTMAN - POSTMAN DESKTOP',
-        ip: '111.11.0.1',
-        date: '11/03/2023 21:11:25',
-      },
-      {
-        device: 'POSTMAN - POSTMAN DESKTOP',
-        ip: '111.11.0.1',
-        date: '11/03/2023 21:11:27',
-      },
-      {
-        device: 'POSTMAN - POSTMAN DESKTOP',
-        ip: '111.11.0.1',
-        date: '11/03/2023 21:11:31',
-      },
-    ])
+    fetchUser()
   }, [])
 
   return (

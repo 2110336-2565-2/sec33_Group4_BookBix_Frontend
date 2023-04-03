@@ -16,6 +16,10 @@ const DateTimePicker: React.FC<DatePickerInterface> = ({
   const [minHours, minMinutes] = minTime?.split(':') || [0, 0]
   const [maxHours, maxMinutes] = maxTime?.split(':') || [23, 59]
 
+  if(!disableTime){
+    disableTime = [[]]
+  }
+
   // Check if the date is available such as weekend or holiday
   const isAvailiabledDate = (date: Date) => {
     // format disableDates -> index of the day
