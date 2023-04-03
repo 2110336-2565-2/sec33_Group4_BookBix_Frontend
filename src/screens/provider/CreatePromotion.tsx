@@ -4,38 +4,6 @@ import { useState } from 'react'
 import { PromotionInterface } from '../../interfaces/promotion.interface'
 const url = import.meta.env.VITE_API_URL
 
-// page for update user info firstname, lastname, sex, birthdate, email]
-
-// const DiscountForm: React.FC<>{} = ({ discountType = '', setPromotion = () => {} }) => {
-//   console.log(discountType)
-//   if (discountType == 'Percentage') {
-//     return (
-//       <>
-//         <Form.Label>Percentage</Form.Label>
-//         <Form.Control
-//           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-//             setPromotion({ ...promotion, amountOff: null, percentOff: e.target.value })
-//           }
-//           type="text"
-//           placeholder="Enter Percentage to discount"
-//         />
-//       </>
-//     )
-//   }
-//   return (
-//     <>
-//       <Form.Label>Amount of Discount</Form.Label>
-//       <Form.Control
-//         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-//           setPromotion({ ...promotion, amountOff: e.target.value, percentOff: null })
-//         }
-//         type="text"
-//         placeholder="Enter Amount of Discount"
-//       />
-//     </>
-//   )
-// }
-
 export default function CreatePromotion() {
   const [error, setError] = useState<string>('')
   const [promotion, setPromotion] = useState<PromotionInterface>({
