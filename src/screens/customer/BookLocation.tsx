@@ -22,8 +22,8 @@ const URL = import.meta.env.VITE_API_URL
 
 const BookLocation: React.FC = () => {
   const { locationId } = useParams()
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null)
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null)
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(new Date())
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(new Date())
   const [location, setLocation] = useState<LocationInterface | null>(null)
   const { currentToken: currentUser } = useTokenContext()
   const [error, setError] = useState<string | null>(null)
