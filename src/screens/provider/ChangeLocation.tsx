@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { locationInterface } from '../../interfaces/location.interfaces'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 const url = import.meta.env.VITE_API_URL
 
 export default function ManageLocation() {
@@ -22,6 +22,7 @@ export default function ManageLocation() {
     price: 0,
   })
   //get location id from url/:id
+  const navigate = useNavigate()
   const { locationId } = useParams()
 
   const fetchLocation = async () => {
@@ -60,7 +61,8 @@ export default function ManageLocation() {
         return
       }
       // Redirect the user to the homepage
-      window.location.href = '/locations'
+      navigate('/locations')
+      navigate(0)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
