@@ -1,12 +1,16 @@
 import React from 'react'
 import { Button, Form, Row } from 'react-bootstrap'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PromotionInterface } from '../../interfaces/promotion.interface'
-import { Controller } from 'swiper'
 const url = import.meta.env.VITE_API_URL
+import { AccessTokenInterface } from '../../interfaces/authentication.interface'
+import { useTokenContext } from '../../hooks/CustomProvider'
+import { setMaxIdleHTTPParsers } from 'http'
 
 export default function CreatePromotion() {
   const [error, setError] = useState<string>('')
+  let accessToken: AccessTokenInterface
+  const { currentToken, setCurrentToken } = useTokenContext()
   const [promotion, setPromotion] = useState<PromotionInterface>({
     name: '',
     percentOff: '50',
@@ -49,20 +53,66 @@ export default function CreatePromotion() {
     )
   }
 
+  const fetchLocationofProvider = async () => {
+    try {
+      const response = await fetch(`${URL}/locations/${currentToken?.id}/provider`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify({ currentToken?.id}),
+      })
+
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.message)
+        return
+      }
+    } catch (error) {
+      setError('Something went wrong, please try again later')
+    }
+  }
+
+  useEffect(() => {
+    fetchLocationofProvider()
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    let bodyData = {}
+    let newData1 = {
+      name: promotion.name,
+      percentOff: promotion.percentOff,
+      maxRedemptions: promotion.maxRedemptions,
+      locationName: promotion.locationName,
+    }
+    let newData2 = {
+      name: promotion.name,
+      amountOff: promotion.amountOff,
+      maxRedemptions: promotion.maxRedemptions,
+      locationName: promotion.locationName,
+    }
+    if (promotion.amountOff === null) {
+      bodyData = newData1
+    }
+    if (promotion.percentOff === null) {
+      bodyData = newData2
+    }
     try {
-      const response = await fetch(`${url}/stripe/create-promotion`, {
+      setError('')
+      const response = await fetch(`${url}/stripe/create-coupon`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(promotion),
+        body: JSON.stringify(bodyData),
       })
       const data = await response.json()
       if (!response.ok) {
         setError(data.message)
         return
+      } else {
+        window.alert('The promotion Created')
       }
     } catch (error) {
       setError('Something went wrong, please try again later')
@@ -89,6 +139,7 @@ export default function CreatePromotion() {
                 type="text"
                 placeholder="Enter Promotion Code"
               />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className=" row mb-3 col-md-8 justify-content-center " controlId="formDiscount">
@@ -128,6 +179,7 @@ export default function CreatePromotion() {
               <Form.Select
                 onChange={(e) => {
                   setPromotion({ ...promotion, locationName: e.target.value })
+                  console.log(promotion.locationName)
                 }}
                 aria-label="Default select example"
                 placeholder="Enter Discount Type"
