@@ -9,7 +9,7 @@ export enum RoutePath {
   Login = '/login',
   ForgetPassword = '/resetpassword',
   ResetPassword = '/auth/reset-password/:id',
-  LoggedInHistory = '/customers/:customerId/history',
+  LoggedInHistory = '/customers/history',
   Payment = '/payment',
   CreatePromotion = '/createPromotion',
 }
