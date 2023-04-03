@@ -1,6 +1,6 @@
 import BookLocation from './customer/BookLocation'
 import ForgetPassword from './ForgetPassword'
-import Home from './Home'
+import NotFound from './NotFound'
 import LoggedInHistory from './LoggedInHistory'
 import Login from './Login'
 import ManageProfile from './ManageProfile'
@@ -10,9 +10,10 @@ import ResetPassword from './ResetPassword'
 import ManageLocation from './provider/ManageLocation'
 import Bookings from './customer/BookingsSummary'
 import SearchPage from './customer/Search'
+import CreatePromotion from './provider/CreatePromotion'
 
 export {
-  Home,
+  NotFound,
   BookLocation,
   ForgetPassword,
   LoggedInHistory,
@@ -24,4 +25,5 @@ export {
   ManageLocation,
   Bookings,
   SearchPage,
+  CreatePromotion,
 }

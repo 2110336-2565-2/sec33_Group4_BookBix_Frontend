@@ -1,11 +1,11 @@
 @use '../abstracts' as *;
 
-.manage {
-  .profile-manage {
+.promotion {
+  .managePromotion {
     display: flex;
     justify-content: center;
     // align-items: center;
-    background-color: $red-magenta;
+    background-color: $shadow-red-magenta;
     border-top-left-radius: 91px;
     border-bottom-left-radius: 91px;
     border-top-right-radius: 91px;
@@ -17,12 +17,7 @@
     height: 100%;
   }
   .fill {
-    min-height: calc(100vh - $navbar);
+    min-height: 100vh;
     height: 100%;
-  }
-  @media only screen and (max-width: 476px) {
-    h1 {
-      font-size: $font-h3;
-    }
   }
 }

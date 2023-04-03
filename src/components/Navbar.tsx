@@ -81,7 +81,7 @@ export default function MyNavbar() {
                     </div>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <div className="nav-link" onClick={() => navigate('/customers/000000000001000000000001/history')}>
+                    <div className="nav-link" onClick={() => navigate(RoutePath.LoggedInHistory)}>
                       Logged-in history
                     </div>
                   </NavDropdown.Item>

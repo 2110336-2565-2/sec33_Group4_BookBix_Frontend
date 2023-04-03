@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import {
-  Home,
+  NotFound,
   Login,
   BookLocation,
   Bookings,
@@ -12,6 +12,8 @@ import {
   ResetPassword,
   LoggedInHistory,
   SearchPage,
+  CreatePromotion,
+
 } from '../screens/index'
 import { UserProvider } from '../hooks/CustomProvider'
 import { RoutePath } from '../interfaces/route.interface'
@@ -26,13 +28,15 @@ function App() {
           <Route path={RoutePath.ManageLocation} element={<ManageLocation />} />
           <Route path={RoutePath.Bookings} element={<Bookings />} />
           <Route path={RoutePath.BookLocation} element={<BookLocation />} />
-          <Route path={RoutePath.Home} element={<Home />} />
+          <Route path={RoutePath.CreatePromotion} element={<CreatePromotion />} />
         </Route>
         <Route path={RoutePath.Register} element={<Register />} />
         <Route path={RoutePath.Login} element={<Login />} />
         <Route path={RoutePath.ForgetPassword} element={<ForgetPassword />} />
         <Route path={RoutePath.ResetPassword} element={<ResetPassword />} />
         <Route path={RoutePath.LoggedInHistory} element={<LoggedInHistory />} />
+        <Route path={RoutePath.NotFound} element={<NotFound />} />
+
       </Routes>
     </UserProvider>
   )
