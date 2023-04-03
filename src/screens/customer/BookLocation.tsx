@@ -48,7 +48,7 @@ const BookLocation: React.FC = () => {
         setError(data.message)
         return
       }
-      setDisbleTimeSlots(data)
+      setDisbleTimeSlots(data.time_list)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -122,7 +122,7 @@ const BookLocation: React.FC = () => {
   const createBooking = async () => {
     try {
       const bodyData = {
-        customer_email: currentUser?.id,
+        customer_id: currentUser?.id,
         location_id: locationId,
         start_date: selectedStartDate,
         duration: calculateDays(
@@ -143,7 +143,6 @@ const BookLocation: React.FC = () => {
         setError(data.message)
         return
       }
-      setLocation(data)
       if (takeReceipt) {
         fetchPaymentPage(data.provider_id, data.location_id, data.duration, true)
       } else fetchPaymentPage(data.provider_id, data.location_id, data.duration, false)
@@ -284,7 +283,7 @@ const BookLocation: React.FC = () => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>  
+          <Modal.Header closeButton>
             <Modal.Title>Are you sure you want to create the booking and payment?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
