@@ -2,17 +2,19 @@ import React from 'react'
 import { Button, Form, Row } from 'react-bootstrap'
 import { useState } from 'react'
 import { PromotionInterface } from '../../interfaces/promotion.interface'
+import { Controller } from 'swiper'
 const url = import.meta.env.VITE_API_URL
 
 export default function CreatePromotion() {
   const [error, setError] = useState<string>('')
   const [promotion, setPromotion] = useState<PromotionInterface>({
     name: '',
-    percentOff: '',
+    percentOff: '50',
     amountOff: '',
     locationName: '',
     maxRedemptions: '',
   })
+  const initialRange = '50'
 
   const [discountType, setDiscountType] = useState<string>('')
 
@@ -22,13 +24,14 @@ export default function CreatePromotion() {
       return (
         <>
           <Form.Label>Percentage</Form.Label>
-          <Form.Control
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          <Form.Range
+            defaultValue={initialRange}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPromotion({ ...promotion, amountOff: null, percentOff: e.target.value })
-            }
-            type="text"
-            placeholder="Enter Percentage to discount"
+              console.log(promotion.percentOff)
+            }}
           />
+          <h6>{promotion.percentOff}%</h6>
         </>
       )
     }
