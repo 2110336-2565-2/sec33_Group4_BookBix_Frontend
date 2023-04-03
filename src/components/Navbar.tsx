@@ -164,6 +164,7 @@ export default function MyNavbar() {
                               </Col>
                               <Col>
                                 <Form.Check
+                                  checked={notifications?.subscription}
                                   type="switch"
                                   id="custom-switch"
                                   className="text-end"
