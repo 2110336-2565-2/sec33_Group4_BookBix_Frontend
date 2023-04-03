@@ -1,81 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { RowBooking } from '../../components/RowBooking'
 import { TicketBooking } from '../../components/TicketBooking'
+import { useTokenContext } from '../../hooks/CustomProvider'
 import { BookingInterface } from '../../interfaces/booking.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
-const mockBookings: BookingInterface[] = [
-  {
-    id: 'b000000001',
-    locationName: 'Luxury Suite at Grand Hotel',
-    locationId: 'l000000001',
-    price: 350.0,
-    period: {
-      start: '15:00/2023-03-01',
-      end: '11:00/2023-03-05',
-    },
-    status: 'confirmed',
-  },
-  {
-    id: 'b000000002',
-    locationName: 'Cozy Cabin in the Woods',
-    locationId: 'l000000002',
-    price: 120.5,
-    period: {
-      start: '14:00/2023-03-10',
-      end: '10:00/2023-03-14',
-    },
-    status: 'pending',
-  },
-  {
-    id: 'b000000003',
-    locationName: 'Beachfront Villa',
-    locationId: 'l000000003',
-    price: 750.0,
-    period: {
-      start: '12:00/2023-03-20',
-      end: '10:00/2023-03-25',
-    },
-    status: 'canceled',
-  },
-  {
-    id: 'b000000004',
-    locationName: 'City Apartment with View',
-    locationId: 'l000000004',
-    price: 180.0,
-    period: {
-      start: '16:00/2023-04-02',
-      end: '10:00/2023-04-07',
-    },
-    status: 'confirmed',
-  },
-  {
-    id: 'b000000005',
-    locationName: 'Central park',
-    locationId: 'l000000005',
-    price: 1800,
-    period: {
-      start: '16:00/2023-06-02',
-      end: '10:00/2023-06-07',
-    },
-    status: 'confirmed',
-  },
-  {
-    id: 'b000000006',
-    locationName: 'Central park',
-    locationId: 'l000000006',
-    price: 1800,
-    period: {
-      start: '16:00/2023-06-02',
-      end: '10:00/2023-06-07',
-    },
-    status: 'confirmed',
-  },
-]
 
 const BookingSummary: React.FC = () => {
-  const [data, setData] = useState<BookingInterface[] | null>(mockBookings)
+  const [bookings, setBookings] = useState<BookingInterface[] | null>(null)
+  const { currentToken } = useTokenContext()
   const [error, setError] = useState<string | null>(null)
 
   const fetchBookings = async () => {
@@ -86,26 +20,33 @@ const BookingSummary: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify(currentToken?.id)
       })
       const data = await response.json()
       if (!response.ok) {
         setError(data.message)
         return
       }
-      setData(data)
+      setBookings(data)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
   }
 
+  //  fetch bookings data when component mount
+   useEffect(() => {
+    fetchBookings()
+  }, [])
+
   const renderBookings = () => {
-    if (data) {
-      return data.map((booking) => {
+    if (bookings) {
+      return bookings.map((booking) => {
         return (
           <Row key={booking.id}>
             <RowBooking
               key={'R' + booking.id}
               id={booking.id}
+              provider_id={booking.provider_id}
               locationName={booking.locationName}
               locationId={booking.locationId}
               price={booking.price}
@@ -115,6 +56,7 @@ const BookingSummary: React.FC = () => {
             <TicketBooking
               key={'T' + booking.id}
               id={booking.id}
+              provider_id={booking.provider_id}
               locationName={booking.locationName}
               locationId={booking.locationId}
               price={booking.price}
@@ -126,6 +68,7 @@ const BookingSummary: React.FC = () => {
       })
     }
   }
+
   return (
     <Container fluid className="booking-summary fill bg-dark">
       <Row>
