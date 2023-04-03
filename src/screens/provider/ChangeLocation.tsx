@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { locationInterface } from '../../interfaces/location.interfaces'
+import { useParams } from 'react-router-dom'
 const url = import.meta.env.VITE_API_URL
 
 export default function ManageLocation() {
@@ -21,28 +22,27 @@ export default function ManageLocation() {
     price: 0,
   })
   //get location id from url/:id
-  const locationId = window.location.pathname.split('/')[2]
+  const { locationId } = useParams()
+
+  const fetchLocation = async () => {
+    try {
+      const response = await fetch(`${url}/locations/${locationId}`)
+      const data = await response.json()
+      if (!response.ok) {
+        setError('Something went wrong, please try again later')
+        return
+      }
+
+      setLocation(data)
+    } catch (error) {
+      setError('Something went wrong, please try again later')
+    }
+  }
 
   // Set location information from database
   useEffect(() => {
-    const fetchLocation = async () => {
-      try {
-        const response = await fetch(`${url}/locations/${locationId}`)
-        const data = await response.json()
-        if (!response.ok) {
-          setError('Something went wrong, please try again later')
-          return
-        }
-
-        setLocation(data)
-      } catch (error) {
-        setError('Something went wrong, please try again later')
-      }
-    }
     fetchLocation()
-  }),
-    []
-  // console.log(location)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -54,17 +54,13 @@ export default function ManageLocation() {
         },
         body: JSON.stringify(location),
       })
-      console.log(response)
       const data = await response.json()
       if (!response.ok) {
         setError(data.message)
         return
       }
-      // Save the user information in local storage or in the state
-      // localStorage.setItem('user', JSON.stringify(data.user))
-
       // Redirect the user to the homepage
-      // window.location.href = '/locations'
+      window.location.href = '/locations'
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -149,9 +145,8 @@ export default function ManageLocation() {
                 {dayInWeek.map((type) => (
                   <div key={`${type}`} className="col-md-6">
                     <Form.Check
-                      // type={type}
-                      // checked can toggle to uncheck
-                      // checked={location.available_days.includes(type)}
+                      checked={location.available_days.includes(type)}
+                      type="checkbox"
                       id={`${type}`}
                       label={`${type}`}
                       onChange={(e) => {
