@@ -11,9 +11,8 @@ const URL = import.meta.env.VITE_API_URL
 
 export const TicketBooking: React.FC<BookingInterface> = ({
   id = '',
-  provider_id = '',
-  locationName = '',
-  locationId = '',
+  location_name = '',
+  location_id = '',
   price = 0,
   period = {
     start: '',
@@ -29,7 +28,7 @@ export const TicketBooking: React.FC<BookingInterface> = ({
       <Container className="booking my-3 text-white d-lg-none overflow-scroll">
         <Row className="p-3 d-flex flex-nowrap justify-content-between">
           <Col xs="4" sm="4">
-            {locationName}
+            {location_name}
           </Col>
           <Col xs="2" sm="3" className="d-none d-sm-block">
             booking_id
@@ -40,8 +39,7 @@ export const TicketBooking: React.FC<BookingInterface> = ({
             <StatusSelector
               status={status}
               component={ComponentType.PROGRESS_CIRCLE}
-              locationId={locationId}
-              providerId={provider_id}
+              locationId={location_id}
               price={price}
             />
           </Col>
@@ -50,7 +48,9 @@ export const TicketBooking: React.FC<BookingInterface> = ({
           <Col xs="4" sm="4" className="d-none d-sm-block">
             <div className="d-flex flex-column row justify-content-center">
               <div className="text-start">{startTime![1]}</div>
-              <div className="text-start">From &nbsp;{startTime![0]} &nbsp;To &nbsp;{endTime![0]}</div>
+              <div className="text-start">
+                From &nbsp;{startTime![0]} &nbsp;To &nbsp;{endTime![0]}
+              </div>
             </div>
           </Col>
           <Col xs="4" sm="3" className="text-start">
@@ -61,8 +61,7 @@ export const TicketBooking: React.FC<BookingInterface> = ({
               <StatusSelector
                 status={status}
                 component={ComponentType.ACTION_BUTTON}
-                locationId={locationId}
-                providerId={provider_id}
+                locationId={location_id}
                 price={price}
               />
             </div>

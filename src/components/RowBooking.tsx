@@ -9,9 +9,8 @@ const URL = import.meta.env.VITE_API_URL
 
 export const RowBooking: React.FC<BookingInterface> = ({
   id = '',
-  provider_id = '',
-  locationName = '',
-  locationId = '',
+  location_name = '',
+  location_id = '',
   price = 0,
   period = {
     start: '',
@@ -26,7 +25,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
     <div className="booking-outside d-flex">
       <Container className="booking my-2 text-white d-none d-lg-block">
         <Row className="p-3 flex-row align-items-center justify-content-between">
-          <Col md="3">{locationName}</Col>
+          <Col md="3">{location_name}</Col>
           <Col md="1" className="d-xl-none">
             {calculateDays(startTime!, endTime!)} hours
           </Col>
@@ -55,8 +54,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
             <StatusSelector
               status={status}
               component={ComponentType.PROGRESS_CIRCLE}
-              locationId={locationId}
-              providerId={provider_id}
+              locationId={location_id}
               price={price}
             />
           </Col>
@@ -64,8 +62,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
             <StatusSelector
               status={status}
               component={ComponentType.ACTION_BUTTON}
-              locationId={locationId}
-              providerId={provider_id}
+              locationId={location_id}
               price={price}
             />
           </Col>

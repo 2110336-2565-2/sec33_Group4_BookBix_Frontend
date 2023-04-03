@@ -18,7 +18,6 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
   status,
   component,
   locationId,
-  providerId,
   price,
 }) => {
   const { currentToken } = useTokenContext()
@@ -28,7 +27,6 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
 
   // fetch payment page with stripe API
   const fetchPaymentPage = async (
-    provider_id: string,
     location_id: string,
     price: number,
     takeReceipt: boolean,
@@ -37,7 +35,6 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
       const url = `http://${URL}/stripe/create-checkout-session`
 
       const bodyData = {
-        provider_id: provider_id,
         location_id: location_id,
         price: price,
         takeReceipt: takeReceipt,
@@ -75,8 +72,8 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
 
   const handlePayment = () => {
     if (takeReceipt) {
-      fetchPaymentPage(providerId, locationId, price, true)
-    } else fetchPaymentPage(providerId, locationId, price, false)
+      fetchPaymentPage(locationId, price, true)
+    } else fetchPaymentPage(locationId, price, false)
   }
 
   const handleShow = () => setShow(true)
