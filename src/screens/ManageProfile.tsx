@@ -35,8 +35,6 @@ export default function ManageProfile() {
         setError(data.message)
         return
       }
-      // Save the user information in local storage or in the state
-      localStorage.setItem('user', JSON.stringify(data.user))
 
       // Redirect the user to the homepage
       window.location.href = '/home'
