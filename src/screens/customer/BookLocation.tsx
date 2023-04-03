@@ -143,7 +143,6 @@ const BookLocation: React.FC = () => {
         setError(data.message)
         return
       }
-      setLocation(data)
       if (takeReceipt) {
         fetchPaymentPage(data.provider_id, data.location_id, data.duration, true)
       } else fetchPaymentPage(data.provider_id, data.location_id, data.duration, false)
