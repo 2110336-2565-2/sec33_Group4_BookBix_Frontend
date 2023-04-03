@@ -36,7 +36,7 @@ export const LocationCard: React.FC<locationInterface> = ({
         </Link>
         <div className="postcard__text">
           <h1 className="postcard__title blue">
-            <Link to="#" className="nav-link">
+            <Link to={`/location-booking/${id}`} className="nav-link">
               {name}
             </Link>
           </h1>
