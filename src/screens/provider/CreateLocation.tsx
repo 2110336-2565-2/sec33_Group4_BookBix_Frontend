@@ -18,7 +18,7 @@ export default function CreateLocation() {
     description: '',
     url: '',
     images: [
-      'https://lh5.googleusercontent.com',
+      'https://img.peerspace.com/image/upload/w_1200,c_limit/c_crop,g_custom,f_auto,q_auto,dpr_auto/l_PS-logo,g_south_east,x_20,y_20,w_175,o_75/uwn0cgiuddbkiwftrha7',
       'https://lh5.googleusercontent.com',
       'https://lh5.googleusercontent.com',
     ],

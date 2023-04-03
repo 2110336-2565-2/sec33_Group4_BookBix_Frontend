@@ -26,8 +26,7 @@ export const LocationCard: React.FC<locationInterface> = ({
       </li>
     )
   })
-  const imagePath = `https://picsum.photos/1000/${Math.floor(Math.random() * 100)}`
-
+  const imagePath = `${images[0]}`
   return (
     <>
       <article className="postcard dark blue">
@@ -92,7 +91,7 @@ export const LocationCard: React.FC<locationInterface> = ({
 }
 
 export const NewLocationCard: React.FC = () => {
-  const imagePath = `https://picsum.photos/1000/${1000 + Math.floor(Math.random() * 5)}`
+  const imagePath = `https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.peerspace.com%2Fpages%2Flistings%2F6007407fe7bcbe000c9ef96d&psig=AOvVaw3Nebt0Xgm-bPvSWvFkkvOL&ust=1680618067985000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOC8s6n0jf4CFQAAAAAdAAAAABAE`
   const availableDays = ['Tuesday', 'Friday', 'Saturday'].map((day, idx) => {
     return (
       <li key={idx} className="tag__item">
