@@ -30,6 +30,7 @@ export default function MyNavbar() {
   const putNotification = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     try {
+      const response = await fetch(`${URL}/notifications`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +74,6 @@ export default function MyNavbar() {
   }
   const handleShow = () => setShow(true)
 
-      const response = await fetch(`${URL}/notifications`, {
   useEffect(() => {
     try {
       accessToken = jwt_decode(cookies.access_token)
@@ -159,7 +159,7 @@ export default function MyNavbar() {
                           <Form>
                             <Row className="d-flex align-items-center">
                               <Col>
-                                <Form.Check.Label >
+                                <Form.Check.Label>
                                   <p>News & Promotions</p>
                                 </Form.Check.Label>
                               </Col>
