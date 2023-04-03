@@ -1,7 +1,7 @@
 import { locationInterface } from '../interfaces/location.interfaces'
 export const mockup1: locationInterface[] = [
   {
-    _id: '000000000004000000000001',
+    id: '000000000004000000000001',
     name: 'CU Centenary Park ',
     address: 'จุฬาลงกรณ์มหาวิทยาลัย ซอย จุฬาลงกรณ์ 5 Wang Mai, Pathum Wan, Bangkok 10330',
     description: 'Designed to absorb flooding, this peaceful, modern park has cascading ponds & sloped walkways.',
@@ -32,7 +32,7 @@ export const mockup1: locationInterface[] = [
     avg_rating: 4.3,
   },
   {
-    _id: '000000000004000000000002',
+    id: '000000000004000000000002',
     name: 'Eiffel Tower',
     address: 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France',
     description:
@@ -61,7 +61,7 @@ export const mockup1: locationInterface[] = [
     avg_rating: 4.3,
   },
   {
-    _id: '000000000004000000000003',
+    id: '000000000004000000000003',
     name: 'Big Ben',
     address: 'Westminster, London SW1A 0AA, UK',
     description:
@@ -90,7 +90,7 @@ export const mockup1: locationInterface[] = [
     avg_rating: 4.3,
   },
   {
-    _id: '000000000004000000000004',
+    id: '000000000004000000000004',
     name: 'Central Park',
     address: 'New York, NY 10022',
     description: 'A large urban park in the heart of New York City',
@@ -118,7 +118,7 @@ export const mockup1: locationInterface[] = [
     avg_rating: 4.3,
   },
   {
-    _id: '000000000004000000000005',
+    id: '000000000004000000000005',
     name: 'CU Centenary Park',
     address: 'จุฬาลงกรณ์มหาวิทยาลัย ซอย จุฬาลงกรณ์ 5 Wang Mai, Pathum Wan, Bangkok 10330',
     description: 'Designed to absorb flooding, this peaceful, modern park has cascading ponds & sloped walkways.',
@@ -149,7 +149,7 @@ export const mockup1: locationInterface[] = [
     avg_rating: 4.3,
   },
   {
-    _id: '000000000004000000000006',
+    id: '000000000004000000000006',
     name: 'Eiffel Tower',
     address: 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France',
     description:
@@ -178,7 +178,7 @@ export const mockup1: locationInterface[] = [
     avg_rating: 4.3,
   },
   {
-    _id: '000000000004000000000007',
+    id: '000000000004000000000007',
     name: 'Big Ben',
     address: 'Westminster , London SW1A 0AA, UK',
     description:
@@ -207,7 +207,7 @@ export const mockup1: locationInterface[] = [
     avg_rating: 4.3,
   },
   {
-    _id: '000000000004000000000008',
+    id: '000000000004000000000008',
     name: 'Central Park',
     address: 'New York, NY 10022',
     description: 'A large urban park in the heart of New York City',
