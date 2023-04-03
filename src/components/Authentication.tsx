@@ -258,7 +258,6 @@ export const ResetPasswordForm = () => {
       return
     }
     if (password !== confirmPassword) {
-      console.log(password, confirmPassword)
 
       setError('Password and Confirm Password must be the same')
       return

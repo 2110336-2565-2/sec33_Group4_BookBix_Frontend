@@ -38,7 +38,6 @@ export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) =
   }
 
   const handleSubmit = async () => {
-    // console.log('Submit', reviewRespond)
     try {
       // const response = await fetch(`${URL}/locations/${reviewRespond.locationId}/reviews`, {
       const response = await fetch(`${URL}/locations/000000000004000000000004/reviews`, {
@@ -63,7 +62,6 @@ export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) =
       console.log(error)
       setError('Something error, please try again later')
     }
-    // console.log('Submit', reviewRespond)
   }
 
   return (

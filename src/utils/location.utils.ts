@@ -57,7 +57,6 @@ export async function createLocation(
   try {
     const url = `${URL}/locations/`
     const body = JSON.stringify({ providerId: providerId, ...location })
-    console.log(body)
     const response = await fetch(url, {
       method: 'POST',
       headers: {

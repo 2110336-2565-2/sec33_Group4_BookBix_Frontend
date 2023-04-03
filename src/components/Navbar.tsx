@@ -199,8 +199,6 @@ export default function MyNavbar() {
                               },
                             })
                             const data = await response.json()
-                            console.log(response.headers.get('cookies'))
-                            console.log(data)
                             if (!response.ok) {
                               alert('You are already verified a Stripe account')
                               return

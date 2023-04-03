@@ -91,8 +91,6 @@ const BookLocation: React.FC = () => {
         takeReceipt: takeReceipt,
       }
 
-      console.log('body: ', bodyData)
-
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -131,7 +129,7 @@ const BookLocation: React.FC = () => {
           [formatTime(selectedEndDate), formatDate(selectedEndDate)],
         ),
       }
-      console.log(selectedStartDate)
+
       const response = await fetch(`${URL}/bookings`, {
         method: 'POST',
         headers: {
@@ -145,7 +143,7 @@ const BookLocation: React.FC = () => {
         setError(data.message)
         return
       }
-      console.log(data)
+      
       if (takeReceipt) {
         fetchPaymentPage(data.locationId, data.duration, true)
       } else fetchPaymentPage(data.locationId, data.duration, false)
