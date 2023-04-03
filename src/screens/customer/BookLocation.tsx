@@ -14,7 +14,7 @@ import { EffectCoverflow, Pagination } from 'swiper'
 import DateTimePicker from '../../components/DateTimePicker'
 import Review from '../../components/Review'
 import { calculateDays, formatDate, formatTime, getDisableDate } from '../../utils/Time.utils'
-import { ReviewInterface } from '../../interfaces/booking.interfaces'
+import { BookingInterface, ReviewInterface } from '../../interfaces/booking.interfaces'
 import { LocationInterface } from '../../interfaces/location.interfaces'
 import { useTokenContext } from '../../hooks/CustomProvider'
 
@@ -48,7 +48,7 @@ const BookLocation: React.FC = () => {
         setError(data.message)
         return
       }
-      setDisbleTimeSlots(data)
+      setDisbleTimeSlots(data.time_list)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -81,16 +81,17 @@ const BookLocation: React.FC = () => {
   }, [])
 
   // fetch payment page with stripe API
-  const fetchPaymentPage = async (provider_id: string, location_id: string, duration: number, takeReceipt: boolean) => {
+  const fetchPaymentPage = async (location_id: string, duration: number, takeReceipt: boolean) => {
     try {
       const url = `${URL}/stripe/create-checkout-session`
 
       const bodyData = {
-        provider_id: provider_id,
         location_id: location_id,
-        duration: duration,
+        quantity: duration,
         takeReceipt: takeReceipt,
       }
+
+      console.log('body: ', bodyData)
 
       const requestOptions = {
         method: 'POST',
@@ -122,7 +123,7 @@ const BookLocation: React.FC = () => {
   const createBooking = async () => {
     try {
       const bodyData = {
-        customer_email: currentUser?.id,
+        customer_id: currentUser?.id,
         location_id: locationId,
         start_date: selectedStartDate,
         duration: calculateDays(
@@ -130,6 +131,7 @@ const BookLocation: React.FC = () => {
           [formatTime(selectedEndDate), formatDate(selectedEndDate)],
         ),
       }
+      console.log(selectedStartDate)
       const response = await fetch(`${URL}/bookings`, {
         method: 'POST',
         headers: {
@@ -143,9 +145,10 @@ const BookLocation: React.FC = () => {
         setError(data.message)
         return
       }
+      console.log(data)
       if (takeReceipt) {
-        fetchPaymentPage(data.provider_id, data.location_id, data.duration, true)
-      } else fetchPaymentPage(data.provider_id, data.location_id, data.duration, false)
+        fetchPaymentPage(data.locationId, data.duration, true)
+      } else fetchPaymentPage(data.locationId, data.duration, false)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
@@ -162,6 +165,9 @@ const BookLocation: React.FC = () => {
       return
     } else if (selectedStartDate == null || selectedEndDate == null) {
       setError('Please select start and end dates.')
+      return
+    } else if (selectedStartDate.getTime() > selectedEndDate.getTime()) {
+      setError('Start date time should less than End date time.')
       return
     } else {
       setError(null)
@@ -283,7 +289,7 @@ const BookLocation: React.FC = () => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>  
+          <Modal.Header closeButton>
             <Modal.Title>Are you sure you want to create the booking and payment?</Modal.Title>
           </Modal.Header>
           <Modal.Body>

@@ -15,12 +15,11 @@ const BookingSummary: React.FC = () => {
   const fetchBookings = async () => {
     // fetch bookings from backend
     try {
-      const response = await fetch(`${URL}/bookings`, {
+      const response = await fetch(`${URL}/bookings/${currentToken?.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(currentToken?.id)
       })
       const data = await response.json()
       if (!response.ok) {
@@ -36,7 +35,7 @@ const BookingSummary: React.FC = () => {
   //  fetch bookings data when component mount
    useEffect(() => {
     fetchBookings()
-  }, [])
+  }, [currentToken])
 
   const renderBookings = () => {
     if (bookings) {
@@ -46,9 +45,8 @@ const BookingSummary: React.FC = () => {
             <RowBooking
               key={'R' + booking.id}
               id={booking.id}
-              provider_id={booking.provider_id}
-              locationName={booking.locationName}
-              locationId={booking.locationId}
+              location_name={booking.location_name}
+              location_id={booking.location_id}
               price={booking.price}
               period={booking.period}
               status={booking.status}
@@ -56,9 +54,8 @@ const BookingSummary: React.FC = () => {
             <TicketBooking
               key={'T' + booking.id}
               id={booking.id}
-              provider_id={booking.provider_id}
-              locationName={booking.locationName}
-              locationId={booking.locationId}
+              location_name={booking.location_name}
+              location_id={booking.location_id}
               price={booking.price}
               period={booking.period}
               status={booking.status}
