@@ -2,9 +2,6 @@
 
 .create {
   .profile-manage {
-    display: flex;
-    justify-content: center;
-    // align-items: center;
     background-color: $red-magenta;
     border-top-left-radius: 91px;
     border-bottom-left-radius: 91px;
@@ -13,11 +10,8 @@
     img {
       width: 80%;
     }
-    // min-height: 1;
-    height: 100%;
   }
   .fill {
     min-height: calc(100vh - $navbar);
-    height: 100%;
   }
 }
