@@ -5,11 +5,11 @@
     display: flex;
     justify-content: center;
     // align-items: center;
-    background-color: $shadow-red-magenta;
-    border-top-left-radius: 91px;
-    border-bottom-left-radius: 91px;
-    border-top-right-radius: 91px;
-    border-bottom-right-radius: 91px;
+    // background-color: $shadow-red-magenta;
+    // border-top-left-radius: 91px;
+    // border-bottom-left-radius: 91px;
+    // border-top-right-radius: 91px;
+    // border-bottom-right-radius: 91px;
     img {
       width: 80%;
     }
@@ -19,5 +19,8 @@
   .fill {
     min-height: 100vh;
     height: 100%;
+  }
+  .CreateButton {
+    background-color: $red-magenta;
   }
 }
