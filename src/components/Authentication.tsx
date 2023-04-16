@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import login_costume from '../assets/images/login-costume.svg'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
 import { useTokenContext } from '../hooks/CustomProvider'
 import { UserEnum, AuthDataInterface, RespondInterface } from '../interfaces/authentication.interface'
 import { registerRequest, loginRequest } from '../utils/authentication.utils'
@@ -29,13 +29,21 @@ export const RegisterContainer = () => {
     userType: undefined,
   })
   const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const respond: RespondInterface = await registerRequest(authData)
-    if (respond.ok) navigate(RoutePath.Login)
-    setError(respond.message)
+    if (!respond.ok) {
+      setError(respond.message)
+      return
+    }
+    setError(null)
+    setSuccess(respond.message)
+    setTimeout(function () {
+      navigate(RoutePath.Login)
+    }, 1000)
   }
   return (
     <>
@@ -108,6 +116,7 @@ export const RegisterContainer = () => {
           </div>
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
+        {success && <div className="alert alert-success">{success}</div>}
         <input type="submit" className="form-regis-btn mb-5" value="Register" />
       </Form>
     </>
@@ -258,7 +267,6 @@ export const ResetPasswordForm = () => {
       return
     }
     if (password !== confirmPassword) {
-
       setError('Password and Confirm Password must be the same')
       return
     }
