@@ -1,3 +1,3 @@
 *** Variables ***
-${WEB_URL}    https://www.jotform.com/212934779973474
+${WEB_URL_REGISTER}    http://localhost:3000/register
 ${WEB_BROWSER}    chrome
