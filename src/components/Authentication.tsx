@@ -111,8 +111,22 @@ export const RegisterContainer = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthData({ ...authData, userType: e.target.id })}
         >
           <div key="radio" className="mb-3 fs-5">
-            <Form.Check inline label="Customer" name="type" type="radio" id={UserEnum.CUSTOMER} />
-            <Form.Check inline label="Provider" name="type" type="radio" id={UserEnum.PROVIDER} />
+            <Form.Check
+              inline
+              label={UserEnum.CUSTOMER}
+              name="type"
+              type="radio"
+              id={UserEnum.CUSTOMER}
+              value={UserEnum.CUSTOMER}
+            />
+            <Form.Check
+              inline
+              label={UserEnum.PROVIDER}
+              name="type"
+              type="radio"
+              id={UserEnum.PROVIDER}
+              value={UserEnum.PROVIDER}
+            />
           </div>
         </Form.Group>
         {error && <div className="alert alert-danger">{error}</div>}
