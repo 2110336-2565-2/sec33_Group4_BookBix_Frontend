@@ -1,18 +1,22 @@
 *** Variables ***
-${test_data_form_name}    Student Registration Form
-${test_data_firstname}    studentFirstName
-${test_data_lastname}    studentLastName
-${test_data_gender}    Male
-${test_data_student_id}    6299999999
-${test_data_mobile_number}    0899999999
-${test_data_email}    studentName@chula.ac.th
-${test_data_courses}    English 101
-${test_data_error_message}    This field is required.
-${test_data_success_submit_message}    Your registration has been completed
-${test_data_unaccepted_form_message}    There are errors on this page. Please fix them before continuing.
+${test_data_register_form_name}    Sign Up to BookBix
+${test_data_username}    studentFirstName
+${test_data_password}    studentPassword123
+${test_data_account_type_customer}    customer
+${test_data_account_type_provider}    provider
+${test_data_email}    test@mail.com
 
-${test_data_invalid_firstname}   1234
-${test_data_invalid_lastname}    1234
-${test_data_invalid_email}    1234
-${test_data_invalid_student_id}    invalidStudentId
-${test_data_invalid_mobile_number}    invalidMobileNumber
+${test_data_success_submit_message}    Success Register
+${test_data_error_message}    Please fill in all fields
+${test_data_db_error_message}    User already exists
+${test_data_db_connection_error_message}    Couldn't register user
+${test_data_invalid_password_lenght_error_message}    Your password must be at least 8 characters
+${test_data_invalid_password_char_error_message}    Your password must contain at least one letter
+${test_data_invalid_password_digit_error_message}    Your password must contain at least one digit
+${test_data_invalid_password_check_error_message}    Password and Confirm Password must be the same
+
+${test_data_invalid_email}   1234
+${test_data_invalid_password_lenght}    lenght1
+${test_data_invalid_password_char}    12345678
+${test_data_invalid_password_digit}    studentPassword
+${test_data_invalid_password_check}    studentPassword1234
