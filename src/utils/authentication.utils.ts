@@ -38,10 +38,10 @@ function validatePassword(authData: AuthDataInterface): RespondInterface {
     return { ok: false, message: 'Your password must be at least 8 characters' }
   }
   if (authData.password.search(/[a-z]/i) < 0) {
-    return { ok: false, message: 'Your password must contain at least one letter.' }
+    return { ok: false, message: 'Your password must contain at least one letter' }
   }
   if (authData.password.search(/[0-9]/) < 0) {
-    return { ok: false, message: 'Your password must contain at least one digit.' }
+    return { ok: false, message: 'Your password must contain at least one digit' }
   }
   if (authData.password !== authData.confirmPassword)
     return { ok: false, message: 'Password and Confirm Password must be the same' }
