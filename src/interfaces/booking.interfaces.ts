@@ -21,8 +21,8 @@ export interface DatePickerInterface {
  */
 export interface BookingInterface {
   id: string
-  locationName: string
-  locationId: string
+  location_name: string
+  location_id: string
   price: number
   period: {
     start: string
@@ -44,4 +44,5 @@ export interface StatusSelectorInterface {
   status: string
   component: string
   locationId: string
+  price: number
 }

@@ -35,7 +35,6 @@ export default function CreateLocation() {
   let providerId = accessToken.id
 
   const fetchCreateLocation = async () => {
-    console.log(location, providerId)
     const response = await createLocation(location, providerId)
     setError(response.message)
     if (response.ok) {

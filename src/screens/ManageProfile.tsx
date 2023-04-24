@@ -47,14 +47,11 @@ export default function ManageProfile() {
         setError(data.message)
         return
       }
-      // console.log(data)
       setUser(data)
     }
     fetchUser()
   }, [])
-  console.log(user)
 
-  // console.log(currentToken)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {

@@ -17,7 +17,7 @@ const Review: React.FC<ReviewInterface> = ({
         <Col sm="8">
           <p>{title}</p>
         </Col>
-        <Col sm="4" className='text-center'>
+        <Col sm="4" className='text-end'>
           <p>{username}</p>
         </Col>
       </Row>
@@ -25,7 +25,7 @@ const Review: React.FC<ReviewInterface> = ({
         <Col sm="7">
           <Rating name="read-only" value={rating} readOnly precision={0.5} />
         </Col>
-        <Col sm="5" className='text-center'>
+        <Col sm="5" className='text-end'>
           <p>{dateCreated?.toLocaleString()}</p>
         </Col>
       </Row>
