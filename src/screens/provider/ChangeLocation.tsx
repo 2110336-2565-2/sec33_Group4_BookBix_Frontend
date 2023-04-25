@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { locationInterface } from '../../interfaces/location.interfaces'
+import { LocationInterface } from '../../interfaces/location.interfaces'
 import { useParams, useNavigate } from 'react-router-dom'
 const url = import.meta.env.VITE_API_URL
 
 export default function ManageLocation() {
   const dayInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   const [error, setError] = useState<string>('')
-  const [location, setLocation] = useState<locationInterface>({
+  const [location, setLocation] = useState<LocationInterface>({
     _id: '',
     name: '',
     address: '',
