@@ -4,11 +4,11 @@ import { SearchCard } from '../../components/SearchCard'
 import { Button, Form, Row, Col, Container } from 'react-bootstrap'
 import { useState } from 'react'
 import { SearchInterface } from '../../interfaces/search.interfaces'
-import { locationInterface } from '../../interfaces/location.interfaces'
+import { LocationInterface } from '../../interfaces/location.interfaces'
 
 const URL = import.meta.env.VITE_API_URL
 const SearchPage: React.FC = () => {
-  const [locations, setLocations] = useState<locationInterface[]>([])
+  const [locations, setLocations] = useState<LocationInterface[]>([])
   const [formData, setFormData] = useState<SearchInterface>({
     location: '',
     location_function: '',

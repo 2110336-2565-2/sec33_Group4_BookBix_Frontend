@@ -25,11 +25,11 @@ export const SearchForm = ({ onChange }: SearchInterface) => {
                 onChange={(e) => onChange({ location_type: e.target.value })}
                 as="select"
               >
-                <option>Location type</option>
-                <option>Hotel</option>
-                <option>Restaurant</option>
-                <option>Bar</option>
-                <option>Other</option>
+                <option value="">Location type</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Bar">Bar</option>
+                <option value="">Other</option>
               </Form.Control>
             </Form.Group>
           </Col>
@@ -40,11 +40,11 @@ export const SearchForm = ({ onChange }: SearchInterface) => {
                 onChange={(e) => onChange({ location_function: e.target.value })}
                 as="select"
               >
-                <option>Location function</option>
-                <option>Wedding</option>
-                <option>Party</option>
-                <option>Meeting</option>
-                <option>Other</option>
+                <option value="">Location function</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Party">Party</option>
+                <option value="Meeting">Meeting</option>
+                <option value="">Other</option>
               </Form.Control>
             </Form.Group>
           </Col>

@@ -1,5 +1,5 @@
-import { locationInterface } from '../interfaces/location.interfaces'
-export const mockup1: locationInterface[] = [
+import { LocationInterface } from '../interfaces/location.interfaces'
+export const mockup1: LocationInterface[] = [
   {
     _id: '000000000004000000000001',
     name: 'CU Centenary Park ',

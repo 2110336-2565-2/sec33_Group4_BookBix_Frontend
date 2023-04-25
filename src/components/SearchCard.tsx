@@ -5,7 +5,7 @@ import { mockup1 } from './mock_location'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export const SearchCard = ({ data }: { data: locationInterface[] }) => {
+export const SearchCard = ({ data }: { data: LocationInterface[] }) => {
   const LocationCard = () => {
     return (
       <Row className="g-4">
@@ -18,7 +18,7 @@ export const SearchCard = ({ data }: { data: locationInterface[] }) => {
               <Card.Title>{location.name}</Card.Title>
             </Card.Body>
             <Card.Body className="pt-0">
-              <Card.Text className="text-gray">{location.address.split(',')[0]}</Card.Text>
+              <Card.Text className="text-gray">{location.address?.split(',')[0]}</Card.Text>
             </Card.Body>
             <Card.Body>
               <Card.Text className="bottom-card">
