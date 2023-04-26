@@ -22,7 +22,17 @@ export interface reviewRespondInterface {
   rating: number | null
   review: string | undefined
 }
-const exampleLocations = {
+
+interface LocationExampleObject {
+  [key: string]: {
+    locationName: string;
+    price: number;
+    period: { start: string; end: string; };
+    status: string;
+  };
+}
+
+const exampleLocations: LocationExampleObject = {
   l000000001: {
     locationName: 'Luxury Suite at Grand Hotel',
     price: 350.0,

@@ -17,13 +17,22 @@ import { calculateDays, formatDate, formatTime, getDisableDate } from '../../uti
 import { BookingInterface, ReviewInterface } from '../../interfaces/booking.interfaces'
 import { LocationInterface } from '../../interfaces/location.interfaces'
 import { useTokenContext } from '../../hooks/CustomProvider'
+import { ToastContainer, toast, cssTransition } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const URL = import.meta.env.VITE_API_URL
+const currentDate = new Date()
+// set currentDate time to 12:00
+currentDate.setHours(12);
+currentDate.setMinutes(0);
+currentDate.setSeconds(0);
+currentDate.setMilliseconds(0);
 
 const BookLocation: React.FC = () => {
   const { locationId } = useParams()
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(new Date())
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(new Date())
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(currentDate)
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(currentDate)
   const [location, setLocation] = useState<LocationInterface | null>(null)
   const { currentToken: currentUser } = useTokenContext()
   const [error, setError] = useState<string | null>(null)
@@ -99,21 +108,22 @@ const BookLocation: React.FC = () => {
         body: JSON.stringify(bodyData),
       }
 
-      fetch(url, requestOptions)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok')
-          }
-          return response.json()
-        })
-        .then((data) => {
-          window.location.href = data.url
-        })
-        .catch((error) => {
-          console.error('There was a problem with the fetch operation:', error)
-        })
+      const response = await toast.promise(fetch(url, requestOptions), {
+        pending: 'Promise is pending',
+        success: 'Promise resolved 👌',
+        error: 'Promise rejected 🤯',
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(`${data.message}, please reload and try again later`)
+        return
+      } else if (response.ok) {
+        window.location.href = data.url
+      }
     } catch (error) {
-      setError('Something went wrong, please try again later')
+      setError('Something went wrong, please reload and try again later')
     }
   }
 
@@ -156,6 +166,19 @@ const BookLocation: React.FC = () => {
   }
 
   const handleShow = () => {
+    if (!currentUser) {
+      toast.error('Please login before create booking.', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
+      return
+    }
     setShow(true)
     if (formatDate(selectedStartDate) != formatDate(selectedEndDate)) {
       setError('Please select start and end dates on the same day.')
@@ -165,6 +188,9 @@ const BookLocation: React.FC = () => {
       return
     } else if (selectedStartDate.getTime() > selectedEndDate.getTime()) {
       setError('Start date time should less than End date time.')
+      return
+    } else if (selectedStartDate.getTime() == selectedEndDate.getTime()) {
+      setError('Start date time should not be equal to End date time.')
       return
     } else {
       setError(null)
@@ -275,6 +301,17 @@ const BookLocation: React.FC = () => {
         </Col>
       </Row>
       <div className="row d-flex flex-column">
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Button className="col-md-4 mb-5 booking-btn p-2 align-self-center w-25" onClick={handleShow}>
           Booking
         </Button>

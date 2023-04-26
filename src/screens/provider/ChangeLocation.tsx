@@ -147,7 +147,7 @@ export default function ManageLocation() {
                 {dayInWeek.map((type) => (
                   <div key={`${type}`} className="col-md-6">
                     <Form.Check
-                      checked={location.available_days.includes(type)}
+                      checked={location.available_days?.includes(type)}
                       type="checkbox"
                       id={`${type}`}
                       label={`${type}`}
@@ -155,12 +155,12 @@ export default function ManageLocation() {
                         if (e.target.checked) {
                           setLocation({
                             ...location,
-                            available_days: [...location.available_days, type],
+                            available_days: [...location.available_days!, type],
                           })
                         } else {
                           setLocation({
                             ...location,
-                            available_days: location.available_days.filter((day) => day !== type),
+                            available_days: location.available_days?.filter((day) => day !== type),
                           })
                         }
                       }}
