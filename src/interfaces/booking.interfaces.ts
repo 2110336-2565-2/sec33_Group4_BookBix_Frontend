@@ -23,6 +23,7 @@ export interface BookingInterface {
   id: string
   location_name: string
   location_id: string
+  booking_id: string
   price: number
   period: {
     start: string
@@ -44,5 +45,6 @@ export interface StatusSelectorInterface {
   status: string
   component: string
   locationId: string
+  bookingId: string
   price: number
 }
