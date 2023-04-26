@@ -110,9 +110,9 @@ const BookLocation: React.FC = () => {
       }
 
       const response = await toast.promise(fetch(url, requestOptions), {
-        pending: 'Promise is pending',
-        success: 'Promise resolved 👌',
-        error: 'Promise rejected 🤯',
+        pending: 'Payment is pending',
+        success: 'Payment resolved 👌',
+        error: 'Payment rejected 🤯',
       })
 
       const data = await response.json()
