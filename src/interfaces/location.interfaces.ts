@@ -1,4 +1,4 @@
-import { ReviewInterface } from "./booking.interfaces"
+import { ReviewInterface } from './booking.interfaces'
 import { TimeInterface } from './time.interfaces'
 
 export interface LocationInterface {
@@ -7,7 +7,7 @@ export interface LocationInterface {
   address?: string
   description?: string
   url?: string
-  images?: string[]
+  images: string[]
   reviews?: ReviewInterface[]
   available_days?: string[]
   price?: number

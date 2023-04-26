@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Form, Row } from 'react-bootstrap'
-import { locationInterface } from '../../interfaces/location.interfaces'
+import { LocationInterface } from '../../interfaces/location.interfaces'
 import { createLocation } from '../../utils/location.utils'
 import { AccessTokenInterface } from '../../interfaces/authentication.interface'
 import { useCookies } from 'react-cookie'
@@ -12,7 +12,7 @@ const url = import.meta.env.VITE_API_URL
 export default function CreateLocation() {
   const dayInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   const [error, setError] = useState('')
-  const [location, setLocation] = useState<locationInterface>({
+  const [location, setLocation] = useState<LocationInterface>({
     name: '',
     address: '',
     description: '',

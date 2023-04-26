@@ -1,11 +1,11 @@
-import { locationInterface } from '../interfaces/location.interfaces'
+import { LocationInterface } from '../interfaces/location.interfaces'
 import { FaMoneyBillAlt, FaBuilding, FaClock, FaPlus, FaStar } from 'react-icons/fa'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { DeleteLocationModal } from '../components/CustomModal'
 import { useState } from 'react'
 
-export const LocationCard: React.FC<locationInterface> = ({
+export const LocationCard: React.FC<LocationInterface> = ({
   _id,
   name,
   address,
