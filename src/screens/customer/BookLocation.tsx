@@ -14,10 +14,10 @@ import { EffectCoverflow, Pagination } from 'swiper'
 import DateTimePicker from '../../components/DateTimePicker'
 import Review from '../../components/Review'
 import { calculateDays, formatDate, formatTime, getDisableDate } from '../../utils/Time.utils'
-import { BookingInterface, ReviewInterface } from '../../interfaces/booking.interfaces'
+import { ReviewInterface } from '../../interfaces/booking.interfaces'
 import { LocationInterface } from '../../interfaces/location.interfaces'
 import { useTokenContext } from '../../hooks/CustomProvider'
-import { ToastContainer, toast, cssTransition } from 'react-toastify'
+import { ToastContainer, toast} from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
 

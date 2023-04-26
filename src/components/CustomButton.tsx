@@ -39,8 +39,7 @@ export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) =
 
   const handleSubmit = async () => {
     try {
-      // const response = await fetch(`${URL}/locations/${reviewRespond.locationId}/reviews`, {
-      const response = await fetch(`${URL}/locations/000000000004000000000004/reviews`, {
+      const response = await fetch(`${URL}/locations/${reviewRespond.locationId}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',

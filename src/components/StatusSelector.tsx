@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import { ButtonReview } from './CustomButton'
 import { StatusType, ComponentType, StatusSelectorInterface } from '../interfaces/booking.interfaces'
-import { RoutePath } from '../interfaces/route.interface'
 import { useTokenContext } from '../hooks/CustomProvider'
+import { ToastContainer, toast} from 'react-toastify'
 
 /**
  * Return various React.FC<StatusSelectorInterface> which is separated by component
@@ -14,29 +13,23 @@ import { useTokenContext } from '../hooks/CustomProvider'
  * @returns ComponentType.PROGRESS_CIRCLE which is separated by ComponentType
  *          ComponentType.ACTION_BUTTON which is separated by ComponentType and locationId
  */
-export const StatusSelector: React.FC<StatusSelectorInterface> = ({
-  status,
-  component,
-  locationId,
-  price,
-}) => {
+const URL = import.meta.env.VITE_API_URL
+
+export const StatusSelector: React.FC<StatusSelectorInterface> = ({ status, component, locationId, bookingId, price }) => {
   const { currentToken } = useTokenContext()
   const [error, setError] = useState<string | null>(null)
   const [show, setShow] = useState(false)
   const [takeReceipt, setTakeReceipt] = useState<boolean>(false)
 
   // fetch payment page with stripe API
-  const fetchPaymentPage = async (
-    location_id: string,
-    price: number,
-    takeReceipt: boolean,
-  ) => {
+  const fetchPaymentPage = async (location_id: string, duration: number, bookingId: string, takeReceipt: boolean) => {
     try {
-      const url = `http://${URL}/stripe/create-checkout-session`
+      const url = `${URL}/stripe/create-checkout-session`
 
       const bodyData = {
         location_id: location_id,
-        price: price,
+        booking_id: bookingId,
+        quantity: duration,
         takeReceipt: takeReceipt,
       }
 
@@ -48,21 +41,22 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
         body: JSON.stringify(bodyData),
       }
 
-      fetch(url, requestOptions)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok')
-          }
-          return response.json()
-        })
-        .then((data) => {
-          window.location.href = data.url
-        })
-        .catch((error) => {
-          console.error('There was a problem with the fetch operation:', error)
-        })
+      const response = await toast.promise(fetch(url, requestOptions), {
+        pending: 'Payment is pending',
+        success: 'Payment resolved 👌',
+        error: 'Payment rejected 🤯',
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(`${data.message}, please reload and try again later`)
+        return
+      } else if (response.ok) {
+        window.location.href = data.url
+      }
     } catch (error) {
-      setError('Something went wrong, please try again later')
+      setError('Something went wrong, please reload and try again later')
     }
   }
 
@@ -72,8 +66,8 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
 
   const handlePayment = () => {
     if (takeReceipt) {
-      fetchPaymentPage(locationId, price, true)
-    } else fetchPaymentPage(locationId, price, false)
+      fetchPaymentPage(locationId, price, bookingId, true)
+    } else fetchPaymentPage(locationId, price, bookingId, false)
   }
 
   const handleShow = () => setShow(true)
@@ -95,6 +89,17 @@ export const StatusSelector: React.FC<StatusSelectorInterface> = ({
         case StatusType.BUTTON_PENDING:
           return (
             <>
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
               <Button className={`action-btn ${status} text-dark`} onClick={handleShow}>
                 Payment
               </Button>

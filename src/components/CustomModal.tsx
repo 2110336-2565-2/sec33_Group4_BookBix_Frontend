@@ -1,7 +1,8 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
 import { Modal, Form, Button, Container, FloatingLabel, Row, Col } from 'react-bootstrap'
 import { Rating } from '@mui/material'
 import { DeleteLocationRespondInterface } from '../interfaces/location.interfaces'
+import { LocationInterface } from '../interfaces/location.interfaces'
 import { deleteLocation } from '../utils/location.utils'
 import { useNavigate } from 'react-router'
 
@@ -23,71 +24,6 @@ export interface reviewRespondInterface {
   review: string | undefined
 }
 
-interface LocationExampleObject {
-  [key: string]: {
-    locationName: string;
-    price: number;
-    period: { start: string; end: string; };
-    status: string;
-  };
-}
-
-const exampleLocations: LocationExampleObject = {
-  l000000001: {
-    locationName: 'Luxury Suite at Grand Hotel',
-    price: 350.0,
-    period: {
-      start: '15:00/2023-03-01',
-      end: '11:00/2023-03-05',
-    },
-    status: 'confirmed',
-  },
-  l000000002: {
-    locationName: 'Cozy Cabin in the Woods',
-    price: 120.5,
-    period: {
-      start: '14:00/2023-03-10',
-      end: '10:00/2023-03-14',
-    },
-    status: 'pending',
-  },
-  l000000003: {
-    locationName: 'Beachfront Villa',
-    price: 750.0,
-    period: {
-      start: '12:00/2023-03-20',
-      end: '10:00/2023-03-25',
-    },
-    status: 'canceled',
-  },
-  l000000004: {
-    locationName: 'City Apartment with View',
-    price: 180.0,
-    period: {
-      start: '16:00/2023-04-02',
-      end: '10:00/2023-04-07',
-    },
-    status: 'confirmed',
-  },
-  l000000005: {
-    locationName: 'Central park',
-    price: 1800,
-    period: {
-      start: '16:00/2023-06-02',
-      end: '10:00/2023-06-07',
-    },
-    status: 'confirmed',
-  },
-  l000000006: {
-    locationName: 'Central park',
-    price: 1800,
-    period: {
-      start: '16:00/2023-06-02',
-      end: '10:00/2023-06-07',
-    },
-    status: 'confirmed',
-  },
-}
 export const ReviewModal: React.FC<ReviewModalInterface> = ({
   show,
   reviewRespond,
@@ -98,6 +34,36 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({
   handleSubmit,
 }) => {
   const [validated, setValidated] = useState(false)
+  const [location, setLocation] = useState<LocationInterface>({
+    name: '',
+    price: 0,
+    time: { open_time: '', close_time: '' },
+    images: [],
+  })
+  useEffect(() => {
+    fetchLocation()
+  }, [])
+
+  const fetchLocation = async () => {
+    try {
+      const response = await fetch(`${URL}/locations/${reviewRespond.locationId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      })
+      if (!response.ok) {
+        setError('Something went wrong, please try again later')
+        return
+      }
+      const data = await response.json()
+      setLocation(data)
+    } catch (error) {
+      console.log(error)
+      setError('Something error, please try again later')
+    }
+  }
+
   return (
     <Modal show={show} onHide={handleCancel} centered size="lg" className="reviewModal">
       <Modal.Header>
@@ -105,8 +71,8 @@ export const ReviewModal: React.FC<ReviewModalInterface> = ({
       </Modal.Header>
       <Modal.Body>
         <div>
-          <h5 className="fw-bold">{exampleLocations[reviewRespond.locationId].locationName}</h5>
-          <h6 className="fw-bold">{exampleLocations[reviewRespond.locationId].price} Bath</h6>
+          <h5 className="fw-bold">{location.name}</h5>
+          <h6 className="fw-bold">{location.price} Bath</h6>
           <Rating
             value={reviewRespond.rating}
             precision={0.5}

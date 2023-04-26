@@ -11,6 +11,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
   id = '',
   location_name = '',
   location_id = '',
+  booking_id = '',
   price = 0,
   period = {
     start: '',
@@ -55,6 +56,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
               status={status}
               component={ComponentType.PROGRESS_CIRCLE}
               locationId={location_id}
+              bookingId={booking_id}
               price={price}
             />
           </Col>
@@ -63,6 +65,7 @@ export const RowBooking: React.FC<BookingInterface> = ({
               status={status}
               component={ComponentType.ACTION_BUTTON}
               locationId={location_id}
+              bookingId={booking_id}
               price={price}
             />
           </Col>

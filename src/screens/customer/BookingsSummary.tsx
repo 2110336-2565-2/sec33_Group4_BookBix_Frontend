@@ -48,6 +48,7 @@ const BookingSummary: React.FC = () => {
               location_name={booking.location_name}
               location_id={booking.location_id}
               price={booking.price}
+              booking_id={booking.booking_id}
               period={booking.period}
               status={booking.status}
             />
@@ -56,6 +57,7 @@ const BookingSummary: React.FC = () => {
               id={booking.id}
               location_name={booking.location_name}
               location_id={booking.location_id}
+              booking_id={booking.booking_id}
               price={booking.price}
               period={booking.period}
               status={booking.status}
