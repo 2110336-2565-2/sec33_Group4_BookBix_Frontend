@@ -22,7 +22,7 @@ const LoggedInHistory = () => {
     if (!accessToken) navigate(RoutePath.Login)
     // if (accessToken.type !== UserEnum.CUSTOMER) navigate(RoutePath.SearchPage)
     // const url = `${URL}/customers/${accessToken.id}/history`
-    const url = `${URL}/${accessToken.type}/${accessToken.id}/history`
+    const url = `${URL}/${accessToken.type}s/${accessToken.id}/history`
     //Fetch user data
     try {
       const response = await fetch(url, {
