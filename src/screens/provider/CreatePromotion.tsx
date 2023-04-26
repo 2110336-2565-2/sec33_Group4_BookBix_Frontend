@@ -6,11 +6,18 @@ const url = import.meta.env.VITE_API_URL
 import { AccessTokenInterface } from '../../interfaces/authentication.interface'
 import { useTokenContext } from '../../hooks/CustomProvider'
 import { setMaxIdleHTTPParsers } from 'http'
+import jwt_decode from 'jwt-decode'
+import { useCookies } from 'react-cookie'
+
+import { LocationInterface } from '../../interfaces/location.interfaces'
 
 export default function CreatePromotion() {
+  const [locations, setLocations] = useState<LocationInterface[]>([])
+
   const [error, setError] = useState<string>('')
   let accessToken: AccessTokenInterface
   const { currentToken, setCurrentToken } = useTokenContext()
+  const [cookies, setCookie] = useCookies(['access_token'])
   const [promotion, setPromotion] = useState<PromotionInterface>({
     name: '',
     percentOff: '50',
@@ -18,12 +25,22 @@ export default function CreatePromotion() {
     locationName: 'all',
     maxRedemptions: '',
   })
+  useEffect(() => {
+    try {
+      accessToken = jwt_decode(cookies.access_token)
+    } catch (error) {
+      return
+    }
+    if (accessToken) {
+      setCurrentToken(accessToken)
+    }
+  }, [])
   const initialRange = '50'
 
   const [discountType, setDiscountType] = useState<string>('')
 
   const discountForm = (discountType: string) => {
-    console.log(discountType)
+    // console.log(discountType)
     if (discountType == 'Percentage') {
       return (
         <>
@@ -55,15 +72,14 @@ export default function CreatePromotion() {
 
   const fetchLocationofProvider = async () => {
     try {
-      const response = await fetch(`${URL}/locations/${currentToken?.id}/provider`, {
+      const response = await fetch(`${url}/providers/locations/${currentToken?.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        // body: JSON.stringify({ currentToken?.id}),
       })
-
       const data = await response.json()
+      setLocations(data)
       if (!response.ok) {
         setError(data.message)
         return
@@ -76,6 +92,20 @@ export default function CreatePromotion() {
   useEffect(() => {
     fetchLocationofProvider()
   }, [])
+
+  const locationOption = (locations: LocationInterface[]) => {
+    if (locations) {
+      return (
+        <>
+          <option value="">Choose ...</option>
+          {locations.map((location, idx) => {
+            return <option value={location.name}>{location.name}</option>
+          })}
+        </>
+      )
+    }
+    return <div></div>
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -169,25 +199,14 @@ export default function CreatePromotion() {
               controlId="formLocation"
             >
               <Form.Label>Location</Form.Label>
-              {/* <Form.Control
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setPromotion({ ...promotion, locationName: e.target.value })
-                }
-                type="text"
-                placeholder="Enter Location"
-              /> */}
               <Form.Select
                 onChange={(e) => {
                   setPromotion({ ...promotion, locationName: e.target.value })
-                  console.log(promotion.locationName)
                 }}
                 aria-label="Default select example"
-                placeholder="Enter Discount Type"
+                placeholder="Enter Location name"
               >
-                <option value="">Choose ...</option>
-                <option value="CU Centenary Park">CU Centenary Park</option>
-                <option value="Eiffel Tower">Eiffel Tower</option>
-                <option value="Big Ben">Big Ben</option>
+                {locationOption(locations)}
               </Form.Select>
             </Form.Group>
 
@@ -201,6 +220,7 @@ export default function CreatePromotion() {
                   setPromotion({ ...promotion, maxRedemptions: e.target.value })
                 }
                 type="number"
+                min="0"
                 placeholder="Enter Max Redemptions"
               />
             </Form.Group>

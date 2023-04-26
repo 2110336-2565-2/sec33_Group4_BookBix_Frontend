@@ -187,6 +187,11 @@ export default function MyNavbar() {
                         </div>
                       </NavDropdown.Item>
                       <NavDropdown.Item>
+                        <div className="nav-link" onClick={() => navigate('/createPromotion')}>
+                          Create Promotion
+                        </div>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item>
                         <div
                           className="nav-link"
                           onClick={async () => {
