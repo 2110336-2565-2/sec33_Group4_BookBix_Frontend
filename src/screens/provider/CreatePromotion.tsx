@@ -3,11 +3,8 @@ import { Button, Form, Row } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { PromotionInterface } from '../../interfaces/promotion.interface'
 const url = import.meta.env.VITE_API_URL
-import { AccessTokenInterface } from '../../interfaces/authentication.interface'
 import { useTokenContext } from '../../hooks/CustomProvider'
 import { setMaxIdleHTTPParsers } from 'http'
-import jwt_decode from 'jwt-decode'
-import { useCookies } from 'react-cookie'
 
 import { LocationInterface } from '../../interfaces/location.interfaces'
 
@@ -15,9 +12,7 @@ export default function CreatePromotion() {
   const [locations, setLocations] = useState<LocationInterface[]>([])
 
   const [error, setError] = useState<string>('')
-  let accessToken: AccessTokenInterface
   const { currentToken, setCurrentToken } = useTokenContext()
-  const [cookies, setCookie] = useCookies(['access_token'])
   const [promotion, setPromotion] = useState<PromotionInterface>({
     name: '',
     percentOff: '50',
@@ -25,16 +20,6 @@ export default function CreatePromotion() {
     locationName: 'all',
     maxRedemptions: '',
   })
-  useEffect(() => {
-    try {
-      accessToken = jwt_decode(cookies.access_token)
-    } catch (error) {
-      return
-    }
-    if (accessToken) {
-      setCurrentToken(accessToken)
-    }
-  }, [])
   const initialRange = '50'
 
   const [discountType, setDiscountType] = useState<string>('')
@@ -49,7 +34,6 @@ export default function CreatePromotion() {
             defaultValue={initialRange}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPromotion({ ...promotion, amountOff: null, percentOff: e.target.value })
-              console.log(promotion.percentOff)
             }}
           />
           <h6>{promotion.percentOff}%</h6>
@@ -135,6 +119,7 @@ export default function CreatePromotion() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(bodyData),
       })
       const data = await response.json()

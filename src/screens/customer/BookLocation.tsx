@@ -151,7 +151,7 @@ const BookLocation: React.FC = () => {
 
       const data = await response.json()
       if (!response.ok) {
-        setError(data.message)
+        setError(data.msg)
         return
       }
       if (takeReceipt) {

@@ -13,6 +13,7 @@ const DateTimePicker: React.FC<DatePickerInterface> = ({
   selectedDate,
   setSelectedDate = () => {},
 }) => {
+  // get current Hours
   const [minHours, minMinutes] = minTime?.split(':') || [0, 0]
   const [maxHours, maxMinutes] = maxTime?.split(':') || [23, 59]
 
@@ -60,6 +61,7 @@ const DateTimePicker: React.FC<DatePickerInterface> = ({
       timeFormat="HH:mm"
       timeIntervals={30}
       dateFormat="dd-MM-yyyy HH:mm"
+      minDate={new Date()}
       minTime={new Date(0, 0, 0, +minHours, +minMinutes)}
       maxTime={new Date(0, 0, 0, +maxHours, +maxMinutes)}
       isClearable
