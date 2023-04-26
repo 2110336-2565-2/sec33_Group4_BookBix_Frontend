@@ -19,7 +19,7 @@ export const LocationCard: React.FC<locationInterface> = ({
 }) => {
   const [show, setShow] = useState<boolean>(false)
 
-  const availableDays = available_days.map((day, idx) => {
+  const availableDays = available_days?.map((day, idx) => {
     return (
       <li key={idx} className="tag__item">
         <FaClock /> {day}
@@ -30,7 +30,7 @@ export const LocationCard: React.FC<locationInterface> = ({
   return (
     <>
       <article className="postcard dark blue">
-        <Link to={url} className="nav-link postcard__img_link">
+        <Link to={url!} className="nav-link postcard__img_link">
           <img className="postcard__img" src={imagePath} alt={`${name} Image`} />
         </Link>
         <div className="postcard__text">

@@ -149,12 +149,12 @@ export default function CreateLocation() {
                     if (e.target.checked) {
                       setLocation({
                         ...location,
-                        available_days: [...location.available_days, type],
+                        available_days: [...location.available_days!, type],
                       })
                     } else {
                       setLocation({
                         ...location,
-                        available_days: location.available_days.filter((day) => day !== type),
+                        available_days: location.available_days?.filter((day) => day !== type),
                       })
                     }
                   }}
