@@ -7,7 +7,7 @@ import { AccessTokenInterface } from '../interfaces/authentication.interface'
 import { ReviewInterface } from '../interfaces/reviews.interfaces'
 
 //For testing
-const URL = 'http://localhost:3001'
+const URL = import.meta.env.VITE_API_URL
 
 export const ButtonReview: React.FC<{ locationId: string }> = ({ locationId }) => {
   const [show, setShow] = useState<boolean>(false)
