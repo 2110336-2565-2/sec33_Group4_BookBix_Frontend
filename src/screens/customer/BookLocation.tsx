@@ -90,12 +90,13 @@ const BookLocation: React.FC = () => {
   }, [])
 
   // fetch payment page with stripe API
-  const fetchPaymentPage = async (location_id: string, duration: number, takeReceipt: boolean) => {
+  const fetchPaymentPage = async (location_id: string, duration: number, bookingId: string, takeReceipt: boolean) => {
     try {
       const url = `${URL}/stripe/create-checkout-session`
 
       const bodyData = {
         location_id: location_id,
+        booking_id: bookingId,
         quantity: duration,
         takeReceipt: takeReceipt,
       }
@@ -154,8 +155,8 @@ const BookLocation: React.FC = () => {
         return
       }
       if (takeReceipt) {
-        fetchPaymentPage(data.locationId, data.duration, true)
-      } else fetchPaymentPage(data.locationId, data.duration, false)
+        fetchPaymentPage(data.locationId, data.duration, data.bookingId, true)
+      } else fetchPaymentPage(data.locationId, data.duration, data.bookingId, false)
     } catch (error) {
       setError('Something went wrong, please try again later')
     }
