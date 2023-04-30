@@ -1,0 +1,16 @@
+@use '../../abstracts' as *;
+
+.create {
+  min-height: calc(100vh - $navbar);
+
+  .profile-manage {
+    background-color: $red-magenta;
+    border-top-left-radius: 91px;
+    border-bottom-left-radius: 91px;
+    border-top-right-radius: 91px;
+    border-bottom-right-radius: 91px;
+    img {
+      width: 80%;
+    }
+  }
+}

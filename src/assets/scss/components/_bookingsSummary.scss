@@ -1,0 +1,122 @@
+@use '../abstracts' as *;
+
+.booking-summary {
+  &.fill {
+    min-height: 100vh;
+  }
+
+  .page-title {
+    line-height: 130%;
+    letter-spacing: 1px;
+    margin-top: 15%;
+    @media screen and (min-width: $mnw-laptop) {
+      margin-left: 30%;
+    }
+    @media screen and (max-width: $mxw-tablet) {
+      text-align: center;
+    }
+  }
+  .booking-panel {
+    background-color: $grey;
+    width: 80%;
+    max-height: 616px;
+    border-radius: 10px;
+    overflow: scroll;
+  }
+  .booking-summary-header {
+    width: 97%;
+  }
+}
+
+.booking {
+  background-color: $tint-black-09;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  width: 97%;
+  //create cirular progress bar
+  .status-text {
+    &.pending {
+      color: $yellow-pastel;
+    }
+    &.confirmed {
+      color: $green-pastel;
+    }
+    &.canceled {
+      color: $shadow-red-magenta;
+    }
+  }
+  .progress-circle {
+    .outer-progress-circle {
+      width: 40px;
+      height: 40px;
+      padding: 2.5px;
+      position: relative;
+      border-radius: 50%;
+      margin: 0 auto;
+      &.pending {
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          $white 0deg,
+          $yellow-pastel 179.65deg,
+          $white 180.02deg,
+          $white 360deg,
+          #ffffff 360deg
+        );
+      }
+      &.confirmed {
+        background: conic-gradient(from 0deg at 50% 50%, $white 0deg, $green-pastel 350.63deg, $white 360deg);
+      }
+      &.canceled {
+        background: $shadow-red-magenta;
+      }
+    }
+    .outer-progress-circle .inner-progress-circle {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: $tint-black;
+      margin: 0 auto;
+    }
+  }
+  .action-btn {
+    height: 35px;
+    padding: 0px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+    &.pending {
+      background: $yellow-pastel;
+      border-color: $yellow-pastel;
+    }
+    &.confirmed {
+      background: $purple-pastel;
+      border-color: $purple-pastel;
+    }
+  }
+  .ticket-action-btn {
+    border-radius: 5px;
+    width: 100%;
+  }
+}
+
+.booking-outside {
+  .cancel-btn {
+    width: 15px;
+    height: 15px;
+    background: $red-magenta;
+    border-radius: 3px;
+    &:hover {
+      cursor: pointer;
+      background: $shadow-red-magenta;
+      background-color: $shadow-red-magenta;
+    }
+    .icon-x {
+      color: $white;
+      background: $white;
+      background-color: $white;
+      width: 15px;
+      height: 15px;
+    }
+  }
+}

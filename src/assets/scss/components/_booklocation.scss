@@ -1,0 +1,72 @@
+@use '../abstracts' as *;
+
+.location-booking {
+  &.fill {
+    min-height: 100vh;
+  }
+  .swiper {
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 50px;
+  }
+
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    max-height: 200px;
+    margin-bottom: 2%;
+  }
+
+  .swiper-slide img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .booking-form {
+    margin: 0 10% 0 10%;
+
+    .information-long {
+      @media (min-width: 1326px) {
+        display: block !important;
+      }
+      display: none;
+    }
+
+    .information-short {
+      @media (min-width: 1326px) {
+        display: none !important;
+      }
+    }
+  }
+
+  .booking-btn {
+    border-radius: 63px;
+    background: $red-magenta;
+    color: white;
+    font-size: large;
+    font-weight: 700;
+    border: 1px solid $red-magenta;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    &:hover {
+      background: $shadow-red-magenta;
+    }
+  }
+
+  .iframe-container {
+    overflow: hidden;
+    padding-top: 56.25%;
+    position: relative;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

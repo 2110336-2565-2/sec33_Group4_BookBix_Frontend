@@ -1,0 +1,17 @@
+export enum RoutePath {
+  SearchPage = '/',
+  ManageProfile = '/profile-management',
+  Bookings = '/me/bookings',
+  BookLocation = '/location-booking/:locationId',
+  NotFound = '*',
+  Register = '/register',
+  Login = '/login',
+  ForgetPassword = '/resetpassword',
+  ResetPassword = '/auth/reset-password/:id',
+  LoggedInHistory = '/customers/history',
+  Payment = '/payment',
+  CreatePromotion = '/createPromotion',
+  // LocationsManage = '/locations',
+  // CreateLocation = '/locations/create',
+  // ChangeLocation = '/locations/:locationId',
+}

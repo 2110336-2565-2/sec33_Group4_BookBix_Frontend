@@ -1,0 +1,30 @@
+@use '../abstracts' as *;
+
+.history-page {
+  min-height: 100vh;
+  .main-container {
+    min-height: 80vh;
+    background-color: $red-magenta;
+    color: white;
+    padding: 30px;
+    margin-bottom: 50px;
+  }
+  tr {
+    height: 70px;
+    vertical-align: middle;
+  }
+  td,
+  th {
+    padding: 10px 40px;
+  }
+  .back-btn {
+    background-color: $white;
+    color: $red-magenta;
+    &:hover {
+      background-color: $grey-white;
+    }
+    h5 {
+      padding: 10px 50px;
+    }
+  }
+}

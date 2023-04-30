@@ -1,0 +1,31 @@
+$black: #000000;
+$tint-black: #2e2e2e;
+$tint-black-09: rgba(46, 46, 46, 0.9);
+$gunmetal: #212529;
+$dark-grey: #3d3d3d;
+$shadow-grey-dark: #6c757d;
+$grey-dark: #868e96;
+$grey: #dadada;
+$grey-white: #dad4d5;
+$base-white: #f1edee;
+$white: #ffffff;
+$shadow-red-magenta: #da4848;
+$red-magenta: #db5461;
+$salmon-orange: #eeac76;
+$yellow-pastel: #eedb76;
+$baby-pink: #ebc1c1;
+$purple-pastel: #ba5fe4;
+$green-pastel: #78ee76;
+// In CustomCard
+$main-green: #79dd09 !default;
+$main-green-rgb-015: rgba(121, 221, 9, 0.1) !default;
+$main-yellow: #bdbb49 !default;
+$main-yellow-rgb-015: rgba(189, 187, 73, 0.1) !default;
+$main-red: #bd150b !default;
+$main-red-rgb-015: rgba(189, 21, 11, 0.1) !default;
+$main-blue: #0076bd !default;
+$main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
+
+$theme-colors: (
+  'dark': $tint-black,
+);

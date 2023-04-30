@@ -8,9 +8,18 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+# Build files
 dist
+/dist/*
 dist-ssr
 *.local
+
+# Environment variables
+.env
+
+# Database files and Mongoscripts
+/data/*
+mongoscripts/*
 
 # Editor directories and files
 .vscode/*
